@@ -8,9 +8,7 @@
   <p align="center">
     Cross-Chain Multi-Chain Block Explorer
   </p>
-  <p align="center">
-      <a href="https://github.com/seniorblockchain/blockcore-explorer2/actions"><img src="https://github.com/seniorblockchain/blockcore-explorer2/workflows/Build%20and%20Release%20Binaries/badge.svg" /></a>
-      <a href="https://github.com/seniorblockchain/blockcore-explorer2/actions"><img src="https://github.com/seniorblockchain/blockcore-explorer2/workflows/Build%20and%20Release%20Docker%20Image/badge.svg" /></a>
+
   </p>
   <p align="center"><em>"This explorer is ... amazing man. So fast (by far the fastest for me) and complete"</em></p>
 </p>
