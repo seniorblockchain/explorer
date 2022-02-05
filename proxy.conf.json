@@ -1,0 +1,6 @@
+{
+    "/api": {
+    "target": "https://chains.blockcore.net/",
+    "secure": false
+    }
+    }

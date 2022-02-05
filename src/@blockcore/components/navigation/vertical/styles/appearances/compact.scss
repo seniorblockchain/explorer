@@ -1,0 +1,110 @@
+/* Variables */
+$blockcore-vertical-navigation-compact-width: 112px;
+
+blockcore-vertical-navigation {
+
+    /* Compact appearance overrides */
+    &.blockcore-vertical-navigation-appearance-compact {
+        width: $blockcore-vertical-navigation-compact-width;
+        min-width: $blockcore-vertical-navigation-compact-width;
+        max-width: $blockcore-vertical-navigation-compact-width;
+
+        /* Left positioned */
+        &.blockcore-vertical-navigation-position-left {
+
+            /* Side mode */
+            &.blockcore-vertical-navigation-mode-side {
+                margin-left: -$blockcore-vertical-navigation-compact-width;
+            }
+
+            /* Opened */
+            &.blockcore-vertical-navigation-opened {
+                margin-left: 0;
+            }
+        }
+
+        /* Right positioned */
+        &.blockcore-vertical-navigation-position-right {
+
+            /* Side mode */
+            &.blockcore-vertical-navigation-mode-side {
+                margin-right: -$blockcore-vertical-navigation-compact-width;
+            }
+
+            /* Opened */
+            &.blockcore-vertical-navigation-opened {
+                margin-right: 0;
+            }
+
+            /* Aside wrapper */
+            .blockcore-vertical-navigation-aside-wrapper {
+                left: auto;
+                right: $blockcore-vertical-navigation-compact-width;
+            }
+        }
+
+        /* Wrapper */
+        .blockcore-vertical-navigation-wrapper {
+
+            /* Content */
+            .blockcore-vertical-navigation-content {
+
+                > blockcore-vertical-navigation-aside-item,
+                > blockcore-vertical-navigation-basic-item {
+
+                    .blockcore-vertical-navigation-item-wrapper {
+                        margin: 4px 8px 0 8px;
+
+                        .blockcore-vertical-navigation-item {
+                            flex-direction: column;
+                            justify-content: center;
+                            padding: 12px;
+                            border-radius: 6px;
+
+                            .blockcore-vertical-navigation-item-icon {
+                                margin-right: 0;
+                            }
+
+                            .blockcore-vertical-navigation-item-title-wrapper {
+                                margin-top: 8px;
+
+                                .blockcore-vertical-navigation-item-title {
+                                    font-size: 12px;
+                                    font-weight: 500;
+                                    text-align: center;
+                                    line-height: 16px;
+                                }
+
+                                .blockcore-vertical-navigation-item-subtitle {
+                                    display: none !important;
+                                }
+                            }
+
+                            .blockcore-vertical-navigation-item-badge {
+                                position: absolute;
+                                top: 12px;
+                                left: 64px;
+                            }
+                        }
+                    }
+
+                    > blockcore-vertical-navigation-collapsable-item {
+                        display: none
+                    }
+
+                    > blockcore-vertical-navigation-group-item {
+
+                        > .blockcore-vertical-navigation-item-wrapper {
+                            display: none
+                        }
+                    }
+                }
+            }
+        }
+
+        /* Aside wrapper */
+        .blockcore-vertical-navigation-aside-wrapper {
+            left: $blockcore-vertical-navigation-compact-width;
+        }
+    }
+}
