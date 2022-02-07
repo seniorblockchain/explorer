@@ -3,93 +3,114 @@ import { blockcoreNavigationItem } from '@blockcore/components/navigation';
 
 export const defaultNavigation: blockcoreNavigationItem[] = [
     {
-        id   : 'home',
+        id: 'home',
         title: 'Home',
-        type : 'basic',
-        icon : 'heroicons_outline:home',
-        link : '/home'
+        type: 'basic',
+        icon: 'heroicons_outline:home',
+        link: '/home'
+    }
+    , {
+        id: 'Ticker',
+        title: 'Ticker',
+        type: 'basic',
+        icon: 'heroicons_outline:chart-pie',
+        link: '/ticker'
     },
     {
-        id   : 'explorer',
+        id: 'explorer',
         title: 'Explorer',
-        type : 'basic',
-        icon : 'heroicons_outline:chart-pie',
-        link : '/explorer'
+        type: 'basic',
+        icon: 'heroicons_outline:chart-pie',
+        link: '/explorer'
     },
     {
-        id   : 'about',
+        id: 'about',
         title: 'About',
-        type : 'basic',
-        icon : 'heroicons_outline:information-circle',
-        link : '/about'
+        type: 'basic',
+        icon: 'heroicons_outline:information-circle',
+        link: '/about'
     }
 ];
 export const compactNavigation: blockcoreNavigationItem[] = [
     {
-        id   : 'home',
+        id: 'home',
         title: 'home',
-        type : 'basic',
-        icon : 'heroicons_outline:home',
-        link : '/home'
+        type: 'basic',
+        icon: 'heroicons_outline:home',
+        link: '/home'
     },
     {
-        id   : 'explorer',
+        id: 'explorer',
         title: 'explorer',
-        type : 'basic',
-        icon : 'heroicons_outline:chart-pie',
-        link : '/explorer'
+        type: 'basic',
+        icon: 'heroicons_outline:chart-pie',
+        link: '/explorer'
     },
     {
-        id   : 'about',
+        id: 'about',
         title: 'About',
-        type : 'basic',
-        icon : 'heroicons_outline:information-circle',
-        link : '/about'
+        type: 'basic',
+        icon: 'heroicons_outline:information-circle',
+        link: '/about'
     }
 ];
 export const futuristicNavigation: blockcoreNavigationItem[] = [
     {
-        id   : 'home',
+        id: 'home',
         title: 'home',
-        type : 'basic',
-        icon : 'heroicons_outline:home',
-        link : '/home'
+        type: 'basic',
+        icon: 'heroicons_outline:home',
+        link: '/home'
     },
     {
-        id   : 'explorer',
+        id: 'Ticker',
+        title: 'Ticker',
+        type: 'basic',
+        icon: 'heroicons_outline:chart-pie',
+        link: '/ticker'
+    },
+    {
+        id: 'explorer',
         title: 'explorer',
-        type : 'basic',
-        icon : 'heroicons_outline:chart-pie',
-        link : '/explorer'
+        type: 'basic',
+        icon: 'heroicons_outline:chart-pie',
+        link: '/explorer'
     },
     {
-        id   : 'about',
+        id: 'about',
         title: 'About',
-        type : 'basic',
-        icon : 'heroicons_outline:information-circle',
-        link : '/about'
+        type: 'basic',
+        icon: 'heroicons_outline:information-circle',
+        link: '/about'
     }
 ];
 export const horizontalNavigation: blockcoreNavigationItem[] = [
     {
-        id   : 'home',
+        id: 'home',
         title: 'home',
-        type : 'basic',
-        icon : 'heroicons_outline:home',
-        link : '/home'
+        type: 'basic',
+        icon: 'heroicons_outline:home',
+        link: '/home'
     },
     {
-        id   : 'explorer',
+        id: 'Ticker',
+        title: 'Ticker',
+        type: 'basic',
+        icon: 'heroicons_outline:chart-pie',
+        link: '/ticker'
+    },
+    {
+        id: 'explorer',
         title: 'explorer',
-        type : 'basic',
-        icon : 'heroicons_outline:chart-pie',
-        link : '/explorer'
+        type: 'basic',
+        icon: 'heroicons_outline:chart-pie',
+        link: '/explorer'
     },
     {
-        id   : 'about',
+        id: 'about',
         title: 'About',
-        type : 'basic',
-        icon : 'heroicons_outline:information-circle',
-        link : '/about'
+        type: 'basic',
+        icon: 'heroicons_outline:information-circle',
+        link: '/about'
     }
 ];

@@ -12,7 +12,7 @@ export const appRoutes: Route[] = [
     { path: '', pathMatch: 'full', redirectTo: 'home' },
 
 
-    // Landing routes
+    // home routes
     {
         path: '',
         component: LayoutComponent,
@@ -20,11 +20,11 @@ export const appRoutes: Route[] = [
             initialData: InitialDataResolver,
         },
         children: [
-            { path: 'home', loadChildren: () => import('app/modules/landing/home/home.module').then(m => m.HomeModule) },
+            { path: 'home', loadChildren: () => import('app/modules/dashboard/home/home.module').then(m => m.HomeModule) },
         ]
     },
 
-    // Explorer routes
+    // explorer routes
     {
         path: '',
         component: LayoutComponent,
@@ -32,10 +32,21 @@ export const appRoutes: Route[] = [
             initialData: InitialDataResolver,
         },
         children: [
-            { path: 'explorer', loadChildren: () => import('app/modules/explorer/explorer/explorer.module').then(m => m.ExplorerModule) },
+            { path: 'explorer', loadChildren: () => import('app/modules/dashboard/explorer/explorer.module').then(m => m.ExplorerModule) },
         ]
     },
 
+    // ticker routes
+    {
+        path: '',
+        component: LayoutComponent,
+        resolve: {
+            initialData: InitialDataResolver,
+        },
+        children: [
+            { path: 'ticker', loadChildren: () => import('app/modules/dashboard/ticker/ticker.module').then(m => m.TickerModule) },
+        ]
+    },
 
     // About routes
     {
@@ -45,7 +56,7 @@ export const appRoutes: Route[] = [
             initialData: InitialDataResolver,
         },
         children: [
-            { path: 'about', loadChildren: () => import('app/modules/pages/about.module').then(m => m.AboutModule) },
+            { path: 'about', loadChildren: () => import('app/modules/dashboard/about/about.module').then(m => m.AboutModule) },
         ]
     }
 ];

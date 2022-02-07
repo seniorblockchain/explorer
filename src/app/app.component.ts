@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { Router } from '@angular/router';
 @Component({
     selector   : 'app-root',
     templateUrl: './app.component.html',
@@ -7,10 +7,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent
 {
-    /**
-     * Constructor
-     */
-    constructor()
-    {
+    title = 'app';
+
+  constructor(private router: Router) {
+    const path = localStorage.getItem('path');
+    if (path) {
+      localStorage.removeItem('path');
+      this.router.navigate([path]);
     }
+  }
 }

@@ -4,5 +4,5 @@ export const coin = {
     name  : 'Bitcoin',
     symbol : 'BTC',
     logo: 'assets/images/logos/btc.jpg',
-    status: 'online'
+    status: 'active'
 };
