@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ApiService } from 'app/services/api.service';
+import { SetupService } from 'app/services/setup.service';
 @Component({
     selector   : 'app-root',
     templateUrl: './app.component.html',
@@ -9,7 +11,8 @@ export class AppComponent
 {
     title = 'app';
 
-  constructor(private router: Router) {
+  constructor(private router: Router , private api: ApiService,
+    private setup: SetupService, private activatedRoute: ActivatedRoute) {
     const path = localStorage.getItem('path');
     if (path) {
       localStorage.removeItem('path');

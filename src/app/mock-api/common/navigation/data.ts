@@ -14,14 +14,14 @@ export const defaultNavigation: blockcoreNavigationItem[] = [
         title: 'Ticker',
         type: 'basic',
         icon: 'heroicons_outline:chart-pie',
-        link: '/ticker'
+        link: '/btc/ticker'
     },
     {
         id: 'explorer',
         title: 'Explorer',
         type: 'basic',
         icon: 'heroicons_outline:chart-pie',
-        link: '/explorer'
+        link: '/btc/explorer'
     },
     {
         id: 'about',
@@ -44,7 +44,7 @@ export const compactNavigation: blockcoreNavigationItem[] = [
         title: 'explorer',
         type: 'basic',
         icon: 'heroicons_outline:chart-pie',
-        link: '/explorer'
+        link: '/btc/explorer'
     },
     {
         id: 'about',
@@ -67,14 +67,14 @@ export const futuristicNavigation: blockcoreNavigationItem[] = [
         title: 'Ticker',
         type: 'basic',
         icon: 'heroicons_outline:chart-pie',
-        link: '/ticker'
+        link: '/btc/ticker'
     },
     {
         id: 'explorer',
         title: 'explorer',
         type: 'basic',
         icon: 'heroicons_outline:chart-pie',
-        link: '/explorer'
+        link: '/btc/explorer'
     },
     {
         id: 'about',
@@ -97,14 +97,14 @@ export const horizontalNavigation: blockcoreNavigationItem[] = [
         title: 'Ticker',
         type: 'basic',
         icon: 'heroicons_outline:chart-pie',
-        link: '/ticker'
+        link: '/btc/ticker'
     },
     {
         id: 'explorer',
         title: 'explorer',
         type: 'basic',
         icon: 'heroicons_outline:chart-pie',
-        link: '/explorer'
+        link: '/btc/explorer'
     },
     {
         id: 'about',

@@ -37,7 +37,7 @@ export class HomeService
      */
     getData(): Observable<any>
     {
-        return this._httpClient.get('https://chains.blockcore.net/CHAINS.json').pipe(
+        return this._httpClient.get('https://chains.blockcore.net/CHAINS-BLOCKCORE.json').pipe(
             tap((response: any) => {
                 this._data.next(response);
             })

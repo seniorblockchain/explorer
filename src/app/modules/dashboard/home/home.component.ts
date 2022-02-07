@@ -42,6 +42,7 @@ export class HomeComponent implements OnInit, OnDestroy
     /**
      * On init
      */
+
     ngOnInit(): void
     {
         this.searchForm = this._formBuilder.group({

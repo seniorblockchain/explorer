@@ -1,8 +1,12 @@
+/* eslint-disable no-var */
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { ApexOptions } from 'ng-apexcharts';
 import { TickerService } from 'app/modules/dashboard/ticker/ticker.service';
+import { ApiService } from 'app/services/api.service';
+import { SetupService } from 'app/services/setup.service';
 
 @Component({
     selector       : 'ticker',
@@ -20,6 +24,11 @@ export class TickerComponent implements OnInit, OnDestroy
     chartYearlyExpenses: ApexOptions = {};
     data: any;
     tickerLable: string = 'BTC Ticker';
+    subscription: any;
+    ticker: any = {};
+    error: any;
+    chain: any;
+
     private _unsubscribeAll: Subject<any> = new Subject<any>();
 
     /**
@@ -27,7 +36,9 @@ export class TickerComponent implements OnInit, OnDestroy
      */
     constructor(
         private _tickerService: TickerService,
-        private _router: Router
+        private _router: Router,
+        private api: ApiService,
+        public setup: SetupService,
     )
     {
     }
@@ -41,6 +52,9 @@ export class TickerComponent implements OnInit, OnDestroy
      */
     ngOnInit(): void
     {
+        this.subscription = this.setup.currentChain$.subscribe(async (chain) => {
+            await this.updateTicker();
+          });
         // Get the data
         this._tickerService.data$
             .pipe(takeUntil(this._unsubscribeAll))
@@ -68,6 +82,57 @@ export class TickerComponent implements OnInit, OnDestroy
         };
     }
 
+
+    async updateTicker() {
+
+        try {
+          this.error = null;
+          const url = this.setup.Explorer?.Ticker?.ApiUrl;
+
+          if (!url) {
+            this.ticker = {};
+            return;
+          }
+
+          const request = await this.api.download(url);
+
+          const changePercentage = this.navigator(request, this.setup.Explorer.Ticker.PercentagePath);
+          let changeType = 'neutral';
+
+          if (changePercentage < 0) {
+            changeType = 'negative';
+          }
+
+          if (changePercentage > 0) {
+            changeType = 'positive';
+          }
+
+          this.ticker = {
+            btc: this.navigator(request, this.setup.Explorer.Ticker.PricePathBTC),
+            usd: this.navigator(request, this.setup.Explorer.Ticker.PricePathUSD),
+            changePercentage,
+            changeType
+          };
+        }
+        catch (err) {
+          this.ticker = { btc: null, usd: null, changePercentage: null, changeType: null };
+          this.error = err;
+        }
+      }
+
+      navigator = (obj, path) => {
+        for (var i = 0, path = path.split('.'), len = path.length; i < len; i++) {
+          if (Array.isArray((obj[path[i]]))) {
+            obj = obj[path[i]][path[i + 1]];
+            i++;
+          } else {
+            obj = obj[path[i]];
+          }
+        };
+        return obj;
+      };
+
+
     /**
      * On destroy
      */
@@ -76,6 +141,7 @@ export class TickerComponent implements OnInit, OnDestroy
         // Unsubscribe from all subscriptions
         this._unsubscribeAll.next(null);
         this._unsubscribeAll.complete();
+        this.subscription.unsubscribe();
     }
 
     // -----------------------------------------------------------------------------------------------------
