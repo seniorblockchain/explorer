@@ -11,6 +11,7 @@ export const appRoutes: Route[] = [
 
 
     // Redirect empty path to '/blockcore'
+    { path: '', pathMatch: 'full', redirectTo: 'blockcore' },
     { path: ':chain/blockcore', pathMatch: 'full', redirectTo: 'blockcore' },
 
 
