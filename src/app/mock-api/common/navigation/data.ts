@@ -7,28 +7,28 @@ export const defaultNavigation: blockcoreNavigationItem[] = [
         title: 'Home',
         type: 'basic',
         icon: 'heroicons_outline:home',
-        link: '/home'
+        link: 'blockcore'
     }
     , {
         id: 'Ticker',
         title: 'Ticker',
         type: 'basic',
         icon: 'heroicons_outline:chart-pie',
-        link: '/btc/ticker'
+        link: 'ticker'
     },
     {
         id: 'explorer',
         title: 'Explorer',
         type: 'basic',
         icon: 'heroicons_outline:chart-pie',
-        link: '/btc/explorer'
+        link: 'explorer'
     },
     {
         id: 'about',
         title: 'About',
         type: 'basic',
         icon: 'heroicons_outline:information-circle',
-        link: '/about'
+        link: 'about'
     }
 ];
 export const compactNavigation: blockcoreNavigationItem[] = [
@@ -37,21 +37,28 @@ export const compactNavigation: blockcoreNavigationItem[] = [
         title: 'home',
         type: 'basic',
         icon: 'heroicons_outline:home',
-        link: '/home'
+        link: 'blockcore'
+    },
+    {
+        id: 'Ticker',
+        title: 'Ticker',
+        type: 'basic',
+        icon: 'heroicons_outline:chart-pie',
+        link: 'ticker'
     },
     {
         id: 'explorer',
         title: 'explorer',
         type: 'basic',
         icon: 'heroicons_outline:chart-pie',
-        link: '/btc/explorer'
+        link: 'explorer'
     },
     {
         id: 'about',
         title: 'About',
         type: 'basic',
         icon: 'heroicons_outline:information-circle',
-        link: '/about'
+        link: 'about'
     }
 ];
 export const futuristicNavigation: blockcoreNavigationItem[] = [
@@ -60,28 +67,28 @@ export const futuristicNavigation: blockcoreNavigationItem[] = [
         title: 'home',
         type: 'basic',
         icon: 'heroicons_outline:home',
-        link: '/home'
+        link: '/blockcore'
     },
     {
         id: 'Ticker',
         title: 'Ticker',
         type: 'basic',
         icon: 'heroicons_outline:chart-pie',
-        link: '/btc/ticker'
+        link: 'ticker'
     },
     {
         id: 'explorer',
         title: 'explorer',
         type: 'basic',
         icon: 'heroicons_outline:chart-pie',
-        link: '/btc/explorer'
+        link: 'explorer'
     },
     {
         id: 'about',
         title: 'About',
         type: 'basic',
         icon: 'heroicons_outline:information-circle',
-        link: '/about'
+        link: 'about'
     }
 ];
 export const horizontalNavigation: blockcoreNavigationItem[] = [
@@ -90,27 +97,27 @@ export const horizontalNavigation: blockcoreNavigationItem[] = [
         title: 'home',
         type: 'basic',
         icon: 'heroicons_outline:home',
-        link: '/home'
+        link: 'blockcore'
     },
     {
         id: 'Ticker',
         title: 'Ticker',
         type: 'basic',
         icon: 'heroicons_outline:chart-pie',
-        link: '/btc/ticker'
+        link: 'ticker'
     },
     {
         id: 'explorer',
         title: 'explorer',
         type: 'basic',
         icon: 'heroicons_outline:chart-pie',
-        link: '/btc/explorer'
+        link: 'explorer'
     },
     {
         id: 'about',
         title: 'About',
         type: 'basic',
         icon: 'heroicons_outline:information-circle',
-        link: '/about'
+        link: 'about'
     }
 ];

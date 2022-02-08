@@ -14,6 +14,7 @@ import { ShortcutsModule } from 'app/layout/common/shortcuts/shortcuts.module';
 import { CoinModule } from 'app/layout/common/coin/coin.module';
 import { SharedModule } from 'app/shared/shared.module';
 import { ModernLayoutComponent } from 'app/layout/layouts/horizontal/modern/modern.component';
+import { appRoutes } from 'app/app.routing';
 
 @NgModule({
     declarations: [
@@ -33,10 +34,12 @@ import { ModernLayoutComponent } from 'app/layout/layouts/horizontal/modern/mode
         SearchModule,
         ShortcutsModule,
         CoinModule,
-        SharedModule
+        SharedModule,
+        RouterModule.forRoot(appRoutes, {onSameUrlNavigation: 'reload'}),
     ],
     exports     : [
-        ModernLayoutComponent
+        ModernLayoutComponent,
+        RouterModule
     ]
 })
 export class ModernLayoutModule

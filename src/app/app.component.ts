@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, RouterModule } from '@angular/router';
 import { ApiService } from 'app/services/api.service';
 import { SetupService } from 'app/services/setup.service';
 @Component({

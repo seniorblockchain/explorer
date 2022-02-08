@@ -32,6 +32,7 @@ export class NavigationMockApi
      */
     registerHandlers(): void
     {
+
         // -----------------------------------------------------------------------------------------------------
         // @ Navigation - GET
         // -----------------------------------------------------------------------------------------------------
@@ -54,6 +55,7 @@ export class NavigationMockApi
                     this._defaultNavigation.forEach((defaultNavItem) => {
                         if ( defaultNavItem.id === futuristicNavItem.id )
                         {
+                            // eslint-disable-next-line @typescript-eslint/no-unused-expressions
                             futuristicNavItem.children = cloneDeep(defaultNavItem.children);
                         }
                     });
@@ -68,7 +70,6 @@ export class NavigationMockApi
                         }
                     });
                 });
-
                 // Return the response
                 return [
                     200,

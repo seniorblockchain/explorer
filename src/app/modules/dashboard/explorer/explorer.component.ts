@@ -4,6 +4,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { ApexOptions } from 'ng-apexcharts';
 import { ExplorerService } from 'app/modules/dashboard/explorer/explorer.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SetupService } from 'app/services/setup.service';
 
 @Component({
     selector       : 'explorer',
@@ -30,7 +31,9 @@ export class ExplorerComponent implements OnInit, OnDestroy
     constructor(
         private _explorerService: ExplorerService,
         private _router: Router,
-        private _formBuilder: FormBuilder
+        private _formBuilder: FormBuilder,
+        public setup: SetupService,
+
     )
     {
     }

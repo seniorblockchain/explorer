@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { IsActiveMatchOptions } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
@@ -5,6 +6,7 @@ import { blockcoreHorizontalNavigationComponent } from '@blockcore/components/na
 import { blockcoreNavigationService } from '@blockcore/components/navigation/navigation.service';
 import { blockcoreNavigationItem } from '@blockcore/components/navigation/navigation.types';
 import { blockcoreUtilsService } from '@blockcore/services/utils/utils.service';
+import { SetupService } from 'app/services/setup.service';
 
 @Component({
     selector       : 'blockcore-horizontal-navigation-basic-item',
@@ -26,7 +28,8 @@ export class blockcoreHorizontalNavigationBasicItemComponent implements OnInit, 
     constructor(
         private _changeDetectorRef: ChangeDetectorRef,
         private _blockcoreNavigationService: blockcoreNavigationService,
-        private _blockcoreUtilsService: blockcoreUtilsService
+        private _blockcoreUtilsService: blockcoreUtilsService,
+        public setup: SetupService
     )
     {
         // Set the equivalent of {exact: false} as default for active match options.
@@ -45,6 +48,7 @@ export class blockcoreHorizontalNavigationBasicItemComponent implements OnInit, 
      */
     ngOnInit(): void
     {
+        
         // Set the "isActiveMatchOptions" either from item's
         // "isActiveMatchOptions" or the equivalent form of
         // item's "exactMatch" option

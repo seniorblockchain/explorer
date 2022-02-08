@@ -7,13 +7,13 @@
                 <!-- Avatar and name -->
                 <div class="flex flex-auto items-center min-w-0">
                     <div class="flex-0 w-16 h-16 rounded-full overflow-hidden">
-                        <img class="w-full h-full" src="assets/images/logos/btc.jpg">
+                        <img class="w-full h-full" src= {{setup.Chain?.Icon}}>
                     </div>
                     <div class="flex flex-col min-w-0 ml-4">
                         <ng-container>
                             <div
                                 class="text-2xl md:text-5xl font-semibold tracking-tight leading-7 md:leading-snug truncate">
-                                Bticoin
+                                {{setup.Chain?.Symbol}}
                             </div>
                         </ng-container>
                     </div>

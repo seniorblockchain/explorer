@@ -2,14 +2,16 @@ import { Route } from '@angular/router';
 import { LayoutComponent } from 'app/layout/layout.component';
 import { InitialDataResolver } from 'app/app.resolvers';
 
+
+
 // @formatter:off
 /* eslint-disable max-len */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 export const appRoutes: Route[] = [
 
 
-    // Redirect empty path to '/'
-    { path: '', pathMatch: 'full', redirectTo: 'home' },
+    // Redirect empty path to '/blockcore'
+    { path: ':chain/blockcore', pathMatch: 'full', redirectTo: 'blockcore' },
 
 
     // home routes
@@ -17,10 +19,10 @@ export const appRoutes: Route[] = [
         path: '',
         component: LayoutComponent,
         resolve: {
-            initialData: InitialDataResolver,
+            chain: InitialDataResolver,
         },
         children: [
-            { path: 'home', loadChildren: () => import('app/modules/dashboard/home/home.module').then(m => m.HomeModule) },
+            { path: ':chain', loadChildren: () => import('app/modules/dashboard/home/home.module').then(m => m.HomeModule) },
         ]
     },
 
@@ -29,7 +31,7 @@ export const appRoutes: Route[] = [
         path: '',
         component: LayoutComponent,
         resolve: {
-            initialData: InitialDataResolver,
+            chain: InitialDataResolver,
         },
         children: [
             { path: ':chain/explorer', loadChildren: () => import('app/modules/dashboard/explorer/explorer.module').then(m => m.ExplorerModule) },
@@ -41,7 +43,7 @@ export const appRoutes: Route[] = [
         path: '',
         component: LayoutComponent,
         resolve: {
-            initialData: InitialDataResolver,
+            chain: InitialDataResolver,
         },
         children: [
             { path: ':chain/ticker', loadChildren: () => import('app/modules/dashboard/ticker/ticker.module').then(m => m.TickerModule) },
@@ -53,10 +55,10 @@ export const appRoutes: Route[] = [
         path: '',
         component: LayoutComponent,
         resolve: {
-            initialData: InitialDataResolver,
+            chain: InitialDataResolver,
         },
         children: [
-            { path: 'about', loadChildren: () => import('app/modules/dashboard/about/about.module').then(m => m.AboutModule) },
+            { path: ':chain/about', loadChildren: () => import('app/modules/dashboard/about/about.module').then(m => m.AboutModule) },
         ]
     }
 ];

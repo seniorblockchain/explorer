@@ -9,7 +9,7 @@
         <div
             class="blockcore-horizontal-navigation-item"
             [ngClass]="{'blockcore-horizontal-navigation-item-active-forced': item.active}"
-            [routerLink]="[item.link]"
+            [routerLink]= "[setup.current ,item.link]"
             [routerLinkActive]="'blockcore-horizontal-navigation-item-active'"
             [routerLinkActiveOptions]="isActiveMatchOptions"
             [matTooltip]="item.tooltip || ''">

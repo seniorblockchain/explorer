@@ -26,7 +26,7 @@ const routerConfig: ExtraOptions = {
         BrowserModule,
         BrowserAnimationsModule,
         RouterModule.forRoot(appRoutes, routerConfig),
-
+        RouterModule.forRoot(appRoutes, {onSameUrlNavigation: 'reload'}),
         // blockcore, blockcoreConfig & blockcoreMockAPI
         blockcoreModule,
         blockcoreConfigModule.forRoot(appConfig),
@@ -41,6 +41,7 @@ const routerConfig: ExtraOptions = {
         // 3rd party modules that require global configuration via forRoot
         MarkdownModule.forRoot({})
     ],
+    exports: [RouterModule],
     bootstrap   : [
         AppComponent
     ]

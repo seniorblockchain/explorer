@@ -8,6 +8,7 @@ import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
 import * as satcomma from 'satcomma';
+import { NavigationService } from 'app/core/navigation/navigation.service';
 
 @Injectable({
     providedIn: 'root'
@@ -15,12 +16,10 @@ import * as satcomma from 'satcomma';
 export class SetupService {
     data: any;
     chains: any;
-
     Chain: any;
     Network: any;
     Indexer: any;
     Explorer: any;
-
     multiChain: boolean;
     initialized = false;
 
@@ -69,6 +68,7 @@ export class SetupService {
     }
 
     constructor(
+        private _navigationService: NavigationService,
         private http: HttpClient,
         private api: ApiService,
         private router: Router
@@ -94,10 +94,8 @@ export class SetupService {
             this.current = chain;
             return;
         }
-
         // Make sure we have downloaded the setup before we trigger change.
         const data = await this.api.loadSetup(chain);
-
         this.data = data;
         this.Chain = this.data.Chain;
         this.Network = this.data.Network;
@@ -106,11 +104,10 @@ export class SetupService {
 
         // Update the chain subject, which should trigger consumers to do some processing.
         this.current = chain;
-
+        localStorage.setItem('chain', chain);
         if (this.Chain?.Color) {
             document.documentElement.style.setProperty('--accent', this.Chain?.Color);
         }
-
         return null;
     }
 
