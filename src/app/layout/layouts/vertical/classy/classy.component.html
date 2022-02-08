@@ -21,17 +21,17 @@
             <div class="relative w-24 h-24">
                 <img
                     class="w-full h-full rounded-full"
-                    *ngIf="coin.logo"
-                    [src]="coin.logo"
+                    *ngIf="setup.Chain?.Icon"
+                    [src]="setup.Chain?.Icon"
                     alt="Coin logo">
                 <mat-icon
                     class="icon-size-24"
-                    *ngIf="!coin.logo"
+                    *ngIf="!setup.Chain?.Icon"
                     [svgIcon]="'heroicons_solid:user-circle'"></mat-icon>
             </div>
             <div class="flex flex-col items-center justify-center w-full mt-6">
                 <div class="w-full whitespace-nowrap text-ellipsis overflow-hidden text-center leading-normal font-medium">
-                    {{coin.name}}
+                    {{setup.Chain?.Name}}
                 </div>
             </div>
         </div>

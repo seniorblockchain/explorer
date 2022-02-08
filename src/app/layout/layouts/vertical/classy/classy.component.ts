@@ -7,6 +7,7 @@ import { Navigation } from 'app/core/navigation/navigation.types';
 import { NavigationService } from 'app/core/navigation/navigation.service';
 import { Coin } from 'app/core/coin/coin.types';
 import { CoinService } from 'app/core/coin/coin.service';
+import { SetupService } from 'app/services/setup.service';
 
 @Component({
     selector     : 'classy-layout',
@@ -29,7 +30,8 @@ export class ClassyLayoutComponent implements OnInit, OnDestroy
         private _navigationService: NavigationService,
         private _coinService: CoinService,
         private _blockcoreMediaWatcherService: blockcoreMediaWatcherService,
-        private _blockcoreNavigationService: blockcoreNavigationService
+        private _blockcoreNavigationService: blockcoreNavigationService,
+        public setup: SetupService,
     )
     {
     }

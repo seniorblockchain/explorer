@@ -1,3 +1,4 @@
+import { SetupService } from 'app/services/setup.service';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { IsActiveMatchOptions } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
@@ -26,7 +27,8 @@ export class blockcoreVerticalNavigationBasicItemComponent implements OnInit, On
     constructor(
         private _changeDetectorRef: ChangeDetectorRef,
         private _blockcoreNavigationService: blockcoreNavigationService,
-        private _blockcoreUtilsService: blockcoreUtilsService
+        private _blockcoreUtilsService: blockcoreUtilsService,
+        public setup: SetupService
     )
     {
         // Set the equivalent of {exact: false} as default for active match options.

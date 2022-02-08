@@ -4,6 +4,7 @@ import { BooleanInput } from '@angular/cdk/coercion';
 import { Subject, takeUntil } from 'rxjs';
 import { Coin } from 'app/core/coin/coin.types';
 import { CoinService } from 'app/core/coin/coin.service';
+import { SetupService } from 'app/services/setup.service';
 
 @Component({
     selector       : 'coin',
@@ -29,7 +30,8 @@ export class CoinComponent implements OnInit, OnDestroy
     constructor(
         private _changeDetectorRef: ChangeDetectorRef,
         private _router: Router,
-        private _coinService: CoinService
+        private _coinService: CoinService,
+        public setup: SetupService
     )
     {
     }

@@ -5,10 +5,10 @@
     <span class="relative">
         <img
             class="w-7 h-7 rounded-full"
-            *ngIf="showAvatar && coin.logo"
-            [src]="coin.logo">
+            *ngIf="showAvatar && setup.Chain?.Icon"
+            [src]="setup.Chain?.Icon">
         <mat-icon
-            *ngIf="!showAvatar || !coin.logo"
+            *ngIf="!showAvatar || !setup.Chain?.Icon"
             [svgIcon]="'heroicons_outline:light-bulb'"></mat-icon>
     </span>
 </button>
@@ -18,7 +18,7 @@
     #coinActions="matMenu">
     <button mat-menu-item>
         <mat-icon [svgIcon]="'heroicons_outline:presentation-chart-line'"></mat-icon>
-        <span>{{coin.name}}</span>
+        <span>{{setup.Chain?.Name}}</span>
     </button>
     <mat-divider class="my-2"></mat-divider>
     <button mat-menu-item>

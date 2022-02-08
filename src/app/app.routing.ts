@@ -23,7 +23,7 @@ export const appRoutes: Route[] = [
             chain: InitialDataResolver,
         },
         children: [
-            { path: ':chain', loadChildren: () => import('app/modules/dashboard/home/home.module').then(m => m.HomeModule) },
+            { path: 'blockcore', loadChildren: () => import('app/modules/dashboard/home/home.module').then(m => m.HomeModule) },
         ]
     },
 
@@ -62,4 +62,5 @@ export const appRoutes: Route[] = [
             { path: ':chain/about', loadChildren: () => import('app/modules/dashboard/about/about.module').then(m => m.AboutModule) },
         ]
     }
+
 ];
