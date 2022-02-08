@@ -2,3 +2,6 @@
 /*  @ Import/write your custom styles here.
 /*  @ Styles from this file will override 'vendors.scss' and blockcore's base styles.
 /* ----------------------------------------------------------------------------------------------------- */
+body {
+    overflow-y: scroll;
+  }
