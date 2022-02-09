@@ -1,6 +1,6 @@
 /* eslint-disable no-var */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { ApexOptions } from 'ng-apexcharts';
@@ -37,6 +37,7 @@ export class TickerComponent implements OnInit, OnDestroy {
         private _router: Router,
         private api: ApiService,
         public setup: SetupService,
+        private cd: ChangeDetectorRef
     ) {
     }
 
@@ -107,6 +108,8 @@ export class TickerComponent implements OnInit, OnDestroy {
                 changePercentage,
                 changeType
             };
+
+            this.cd.detectChanges();
         }
         catch (err) {
             this.ticker = { btc: null, usd: null, changePercentage: null, changeType: null };
