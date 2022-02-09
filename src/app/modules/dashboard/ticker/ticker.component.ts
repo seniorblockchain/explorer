@@ -9,13 +9,12 @@ import { ApiService } from 'app/services/api.service';
 import { SetupService } from 'app/services/setup.service';
 
 @Component({
-    selector       : 'ticker',
-    templateUrl    : './ticker.component.html',
-    encapsulation  : ViewEncapsulation.None,
+    selector: 'ticker',
+    templateUrl: './ticker.component.html',
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TickerComponent implements OnInit, OnDestroy
-{
+export class TickerComponent implements OnInit, OnDestroy {
     chartprice: ApexOptions = {};
     chartTaskDistribution: ApexOptions = {};
     chartBudgetDistribution: ApexOptions = {};
@@ -23,7 +22,7 @@ export class TickerComponent implements OnInit, OnDestroy
     chartMonthlyExpenses: ApexOptions = {};
     chartYearlyExpenses: ApexOptions = {};
     data: any;
-    tickerLable: string = 'BTC Ticker';
+    tickerLable: string = 'Ticker';
     subscription: any;
     ticker: any = {};
     error: any;
@@ -39,8 +38,7 @@ export class TickerComponent implements OnInit, OnDestroy
         private _router: Router,
         private api: ApiService,
         public setup: SetupService,
-    )
-    {
+    ) {
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -50,11 +48,10 @@ export class TickerComponent implements OnInit, OnDestroy
     /**
      * On init
      */
-    ngOnInit(): void
-    {
+    ngOnInit(): void {
         this.subscription = this.setup.currentChain$.subscribe(async (chain) => {
             await this.updateTicker();
-          });
+        });
         // Get the data
         this._tickerService.data$
             .pipe(takeUntil(this._unsubscribeAll))
@@ -84,60 +81,59 @@ export class TickerComponent implements OnInit, OnDestroy
 
 
     async updateTicker() {
-
+        console.log("updateTicker");
         try {
-          this.error = null;
-          const url = this.setup.Explorer?.Ticker?.ApiUrl;
+            this.error = null;
+            const url = this.setup.Explorer?.Ticker?.ApiUrl;
 
-          if (!url) {
-            this.ticker = {};
-            return;
-          }
+            if (!url) {
+                this.ticker = {};
+                return;
+            }
 
-          const request = await this.api.download(url);
+            const request = await this.api.download(url);
 
-          const changePercentage = this.navigator(request, this.setup.Explorer.Ticker.PercentagePath);
-          let changeType = 'neutral';
+            const changePercentage = this.navigator(request, this.setup.Explorer.Ticker.PercentagePath);
+            let changeType = 'neutral';
 
-          if (changePercentage < 0) {
-            changeType = 'negative';
-          }
+            if (changePercentage < 0) {
+                changeType = 'negative';
+            }
 
-          if (changePercentage > 0) {
-            changeType = 'positive';
-          }
+            if (changePercentage > 0) {
+                changeType = 'positive';
+            }
 
-          this.ticker = {
-            btc: this.navigator(request, this.setup.Explorer.Ticker.PricePathBTC),
-            usd: this.navigator(request, this.setup.Explorer.Ticker.PricePathUSD),
-            changePercentage,
-            changeType
-          };
+            this.ticker = {
+                btc: this.navigator(request, this.setup.Explorer.Ticker.PricePathBTC),
+                usd: this.navigator(request, this.setup.Explorer.Ticker.PricePathUSD),
+                changePercentage,
+                changeType
+            };
         }
         catch (err) {
-          this.ticker = { btc: null, usd: null, changePercentage: null, changeType: null };
-          this.error = err;
+            this.ticker = { btc: null, usd: null, changePercentage: null, changeType: null };
+            this.error = err;
         }
-      }
+    }
 
-      navigator = (obj, path) => {
+    navigator = (obj, path) => {
         for (var i = 0, path = path.split('.'), len = path.length; i < len; i++) {
-          if (Array.isArray((obj[path[i]]))) {
-            obj = obj[path[i]][path[i + 1]];
-            i++;
-          } else {
-            obj = obj[path[i]];
-          }
+            if (Array.isArray((obj[path[i]]))) {
+                obj = obj[path[i]][path[i + 1]];
+                i++;
+            } else {
+                obj = obj[path[i]];
+            }
         };
         return obj;
-      };
+    };
 
 
     /**
      * On destroy
      */
-    ngOnDestroy(): void
-    {
+    ngOnDestroy(): void {
         // Unsubscribe from all subscriptions
         this._unsubscribeAll.next(null);
         this._unsubscribeAll.complete();
@@ -154,8 +150,7 @@ export class TickerComponent implements OnInit, OnDestroy
      * @param index
      * @param item
      */
-    trackByFn(index: number, item: any): any
-    {
+    trackByFn(index: number, item: any): any {
         return item.id || index;
     }
 
@@ -173,8 +168,7 @@ export class TickerComponent implements OnInit, OnDestroy
      * @param element
      * @private
      */
-    private _fixSvgFill(element: Element): void
-    {
+    private _fixSvgFill(element: Element): void {
         // Current URL
         const currentURL = this._router.url;
 
@@ -182,11 +176,11 @@ export class TickerComponent implements OnInit, OnDestroy
         // 2. Filter out the ones that doesn't have cross reference so we only left with the ones that use the 'url(#id)' syntax
         // 3. Insert the 'currentURL' at the front of the 'fill' attribute value
         Array.from(element.querySelectorAll('*[fill]'))
-             .filter(el => el.getAttribute('fill').indexOf('url(') !== -1)
-             .forEach((el) => {
-                 const attrVal = el.getAttribute('fill');
-                 el.setAttribute('fill', `url(${currentURL}${attrVal.slice(attrVal.indexOf('#'))}`);
-             });
+            .filter(el => el.getAttribute('fill').indexOf('url(') !== -1)
+            .forEach((el) => {
+                const attrVal = el.getAttribute('fill');
+                el.setAttribute('fill', `url(${currentURL}${attrVal.slice(attrVal.indexOf('#'))}`);
+            });
     }
 
     /**
@@ -194,35 +188,34 @@ export class TickerComponent implements OnInit, OnDestroy
      *
      * @private
      */
-    private _prepareChartData(): void
-    {
+    private _prepareChartData(): void {
         // Github issues
         this.chartprice = {
-            chart      : {
+            chart: {
                 fontFamily: 'inherit',
-                foreColor : 'inherit',
-                height    : '100%',
-                type      : 'line',
-                toolbar   : {
+                foreColor: 'inherit',
+                height: '100%',
+                type: 'line',
+                toolbar: {
                     show: false
                 },
-                zoom      : {
+                zoom: {
                     enabled: false
                 }
             },
-            colors     : ['#64748B', '#94A3B8'],
-            dataLabels : {
-                enabled        : true,
+            colors: ['#64748B', '#94A3B8'],
+            dataLabels: {
+                enabled: true,
                 enabledOnSeries: [0],
-                background     : {
+                background: {
                     borderWidth: 0
                 }
             },
-            grid       : {
+            grid: {
                 borderColor: 'var(--blockcore-border)'
             },
-            labels     : this.data.price.labels,
-            legend     : {
+            labels: this.data.price.labels,
+            legend: {
                 show: false
             },
             plotOptions: {
@@ -230,42 +223,42 @@ export class TickerComponent implements OnInit, OnDestroy
                     columnWidth: '50%'
                 }
             },
-            series     : this.data.price.series,
-            states     : {
+            series: this.data.price.series,
+            states: {
                 hover: {
                     filter: {
-                        type : 'darken',
+                        type: 'darken',
                         value: 0.75
                     }
                 }
             },
-            stroke     : {
+            stroke: {
                 width: [3, 0]
             },
-            tooltip    : {
+            tooltip: {
                 followCursor: true,
-                theme       : 'dark'
+                theme: 'dark'
             },
-            xaxis      : {
+            xaxis: {
                 axisBorder: {
                     show: false
                 },
-                axisTicks : {
+                axisTicks: {
                     color: 'var(--blockcore-border)'
                 },
-                labels    : {
+                labels: {
                     style: {
                         colors: 'var(--blockcore-text-secondary)'
                     }
                 },
-                tooltip   : {
+                tooltip: {
                     enabled: false
                 }
             },
-            yaxis      : {
+            yaxis: {
                 labels: {
                     offsetX: -16,
-                    style  : {
+                    style: {
                         colors: 'var(--blockcore-text-secondary)'
                     }
                 }
@@ -274,20 +267,20 @@ export class TickerComponent implements OnInit, OnDestroy
 
         // Task distribution
         this.chartTaskDistribution = {
-            chart      : {
+            chart: {
                 fontFamily: 'inherit',
-                foreColor : 'inherit',
-                height    : '100%',
-                type      : 'polarArea',
-                toolbar   : {
+                foreColor: 'inherit',
+                height: '100%',
+                type: 'polarArea',
+                toolbar: {
                     show: false
                 },
-                zoom      : {
+                zoom: {
                     enabled: false
                 }
             },
-            labels     : this.data.taskDistribution.labels,
-            legend     : {
+            labels: this.data.taskDistribution.labels,
+            legend: {
                 position: 'bottom'
             },
             plotOptions: {
@@ -295,36 +288,36 @@ export class TickerComponent implements OnInit, OnDestroy
                     spokes: {
                         connectorColors: 'var(--blockcore-border)'
                     },
-                    rings : {
+                    rings: {
                         strokeColor: 'var(--blockcore-border)'
                     }
                 }
             },
-            series     : this.data.taskDistribution.series,
-            states     : {
+            series: this.data.taskDistribution.series,
+            states: {
                 hover: {
                     filter: {
-                        type : 'darken',
+                        type: 'darken',
                         value: 0.75
                     }
                 }
             },
-            stroke     : {
+            stroke: {
                 width: 2
             },
-            theme      : {
+            theme: {
                 monochrome: {
-                    enabled       : true,
-                    color         : '#93C5FD',
+                    enabled: true,
+                    color: '#93C5FD',
                     shadeIntensity: 0.75,
-                    shadeTo       : 'dark'
+                    shadeTo: 'dark'
                 }
             },
-            tooltip    : {
+            tooltip: {
                 followCursor: true,
-                theme       : 'dark'
+                theme: 'dark'
             },
-            yaxis      : {
+            yaxis: {
                 labels: {
                     style: {
                         colors: 'var(--blockcore-text-secondary)'
@@ -335,95 +328,95 @@ export class TickerComponent implements OnInit, OnDestroy
 
         // Budget distribution
         this.chartBudgetDistribution = {
-            chart      : {
+            chart: {
                 fontFamily: 'inherit',
-                foreColor : 'inherit',
-                height    : '100%',
-                type      : 'radar',
-                sparkline : {
+                foreColor: 'inherit',
+                height: '100%',
+                type: 'radar',
+                sparkline: {
                     enabled: true
                 }
             },
-            colors     : ['#818CF8'],
-            dataLabels : {
-                enabled   : true,
-                formatter : (val: number): string | number => `${val}%`,
+            colors: ['#818CF8'],
+            dataLabels: {
+                enabled: true,
+                formatter: (val: number): string | number => `${val}%`,
                 textAnchor: 'start',
-                style     : {
-                    fontSize  : '13px',
+                style: {
+                    fontSize: '13px',
                     fontWeight: 500
                 },
                 background: {
                     borderWidth: 0,
-                    padding    : 4
+                    padding: 4
                 },
-                offsetY   : -15
+                offsetY: -15
             },
-            markers    : {
+            markers: {
                 strokeColors: '#818CF8',
-                strokeWidth : 4
+                strokeWidth: 4
             },
             plotOptions: {
                 radar: {
                     polygons: {
-                        strokeColors   : 'var(--blockcore-border)',
+                        strokeColors: 'var(--blockcore-border)',
                         connectorColors: 'var(--blockcore-border)'
                     }
                 }
             },
-            series     : this.data.budgetDistribution.series,
-            stroke     : {
+            series: this.data.budgetDistribution.series,
+            stroke: {
                 width: 2
             },
-            tooltip    : {
+            tooltip: {
                 theme: 'dark',
-                y    : {
+                y: {
                     formatter: (val: number): string => `${val}%`
                 }
             },
-            xaxis      : {
-                labels    : {
-                    show : true,
+            xaxis: {
+                labels: {
+                    show: true,
                     style: {
-                        fontSize  : '12px',
+                        fontSize: '12px',
                         fontWeight: '500'
                     }
                 },
                 categories: this.data.budgetDistribution.categories
             },
-            yaxis      : {
-                max       : (max: number): number => parseInt((max + 10).toFixed(0), 10),
+            yaxis: {
+                max: (max: number): number => parseInt((max + 10).toFixed(0), 10),
                 tickAmount: 7
             }
         };
 
         // Weekly expenses
         this.chartWeeklyExpenses = {
-            chart  : {
+            chart: {
                 animations: {
                     enabled: false
                 },
                 fontFamily: 'inherit',
-                foreColor : 'inherit',
-                height    : '100%',
-                type      : 'line',
-                sparkline : {
+                foreColor: 'inherit',
+                height: '100%',
+                type: 'line',
+                sparkline: {
                     enabled: true
                 }
             },
-            colors : ['#22D3EE'],
-            series : this.data.weeklyExpenses.series,
-            stroke : {
+            colors: ['#22D3EE'],
+            series: this.data.weeklyExpenses.series,
+            stroke: {
                 curve: 'smooth'
             },
             tooltip: {
                 theme: 'dark'
             },
-            xaxis  : {
-                type      : 'category',
+            xaxis: {
+                type: 'category',
                 categories: this.data.weeklyExpenses.labels
             },
-            yaxis  : {
+            yaxis: {
                 labels: {
                     formatter: (val): string => `$${val}`
                 }
@@ -432,31 +425,31 @@ export class TickerComponent implements OnInit, OnDestroy
 
         // Monthly expenses
         this.chartMonthlyExpenses = {
-            chart  : {
+            chart: {
                 animations: {
                     enabled: false
                 },
                 fontFamily: 'inherit',
-                foreColor : 'inherit',
-                height    : '100%',
-                type      : 'line',
-                sparkline : {
+                foreColor: 'inherit',
+                height: '100%',
+                type: 'line',
+                sparkline: {
                     enabled: true
                 }
             },
-            colors : ['#4ADE80'],
-            series : this.data.monthlyExpenses.series,
-            stroke : {
+            colors: ['#4ADE80'],
+            series: this.data.monthlyExpenses.series,
+            stroke: {
                 curve: 'smooth'
             },
             tooltip: {
                 theme: 'dark'
             },
-            xaxis  : {
-                type      : 'category',
+            xaxis: {
+                type: 'category',
                 categories: this.data.monthlyExpenses.labels
             },
-            yaxis  : {
+            yaxis: {
                 labels: {
                     formatter: (val): string => `$${val}`
                 }
@@ -465,31 +458,31 @@ export class TickerComponent implements OnInit, OnDestroy
 
         // Yearly expenses
         this.chartYearlyExpenses = {
-            chart  : {
+            chart: {
                 animations: {
                     enabled: false
                 },
                 fontFamily: 'inherit',
-                foreColor : 'inherit',
-                height    : '100%',
-                type      : 'line',
-                sparkline : {
+                foreColor: 'inherit',
+                height: '100%',
+                type: 'line',
+                sparkline: {
                     enabled: true
                 }
             },
-            colors : ['#FB7185'],
-            series : this.data.yearlyExpenses.series,
-            stroke : {
+            colors: ['#FB7185'],
+            series: this.data.yearlyExpenses.series,
+            stroke: {
                 curve: 'smooth'
             },
             tooltip: {
                 theme: 'dark'
             },
-            xaxis  : {
-                type      : 'category',
+            xaxis: {
+                type: 'category',
                 categories: this.data.yearlyExpenses.labels
             },
-            yaxis  : {
+            yaxis: {
                 labels: {
                     formatter: (val): string => `$${val}`
                 }

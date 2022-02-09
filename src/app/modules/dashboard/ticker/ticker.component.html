@@ -65,17 +65,21 @@
                                     <div class="flex items-center mt-1">
                                         <div class="flex flex-col">
                                             <div class="text-3xl font-semibold tracking-tight leading-tight">
-                                                <h2 *ngIf="ticker.btc">
-                                                    {{ticker.btc.toFixed(8)}} <i class="fab fa-btc"></i> <span *ngIf="ticker.changePercentage" class="{{ticker.changeType}}">{{ticker.changePercentage}}%</span>
-                                                 </h2>
-                                                 <h3 *ngIf="ticker.usd">${{ticker.usd.toFixed(3)}}</h3>
+                                                <div class="widget" *ngIf="setup.featureEnabled(setup.Explorer?.Features?.Ticker)">
+                                                    <h1><span class="accent">${{setup.Chain?.Symbol}}</span>.</h1>
+                                                    <h2 *ngIf="ticker.btc">
+                                                       {{ticker.btc.toFixed(8)}} <i class="fab fa-btc"></i> <span *ngIf="ticker.changePercentage" class="{{ticker.changeType}}">{{ticker.changePercentage}}%</span>
+                                                    </h2>
+                                                    <h3 *ngIf="ticker.usd">${{ticker.usd.toFixed(3)}}</h3>
+                                                    <app-error class="centered" [error]="error"></app-error>
+                                                 </div>
                                             </div>
                                             <div class="flex items-center">
                                                 <mat-icon
                                                     class="mr-1 icon-size-5 text-red-500"
                                                     [svgIcon]="'heroicons_solid:trending-down'"></mat-icon>
                                                 <div class="font-medium text-sm text-secondary leading-none whitespace-nowrap">
-                                                    <span class="text-red-500">2%</span>
+                                                    <span class="text-red-500">{{ticker.changePercentage}}</span>
                                                     below tickered
                                                 </div>
                                             </div>
