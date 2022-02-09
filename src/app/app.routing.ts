@@ -36,17 +36,7 @@ export const appRoutes: Route[] = [
             { path: ':chain', loadChildren: () => import('app/modules/dashboard/home/home.module').then(m => m.HomeModule) },
         ]
     },
-    // explorer routes
-    {
-        path: '',
-        component: LayoutComponent,
-        resolve: {
-            chain: InitialDataResolver,
-        },
-        children: [
-            { path: ':chain/explorer', loadChildren: () => import('app/modules/dashboard/explorer/explorer.module').then(m => m.ExplorerModule) },
-        ]
-    },
+
 
     // ticker routes
     {
@@ -60,7 +50,57 @@ export const appRoutes: Route[] = [
         ]
     },
 
-    // About routes
+    // explorer routes
+    {
+        path: '',
+        component: LayoutComponent,
+        resolve: {
+            chain: InitialDataResolver,
+        },
+        children: [
+            { path: ':chain/explorer', loadChildren: () => import('app/modules/dashboard/explorer/explorer.module').then(m => m.ExplorerModule) },
+        ]
+    },
+
+    // insight routes
+    {
+        path: '',
+        component: LayoutComponent,
+        resolve: {
+            chain: InitialDataResolver,
+        },
+        children: [
+            { path: ':chain/insight', loadChildren: () => import('app/modules/dashboard/insight/insight.module').then(m => m.InsightModule) },
+        ]
+    },
+
+    // network routes
+    {
+        path: '',
+        component: LayoutComponent,
+        resolve: {
+            chain: InitialDataResolver,
+        },
+        children: [
+            { path: ':chain/network', loadChildren: () => import('app/modules/dashboard/network/network.module').then(m => m.NetworkModule) },
+        ]
+    },
+
+
+        // api routes
+        {
+            path: '',
+            component: LayoutComponent,
+            resolve: {
+                chain: InitialDataResolver,
+            },
+            children: [
+                { path: ':chain/api', loadChildren: () => import('app/modules/dashboard/chainAPI/chainAPI.module').then(m => m.ChainAPIModule) },
+            ]
+        },
+
+
+    // about routes
     {
         path: '',
         component: LayoutComponent,

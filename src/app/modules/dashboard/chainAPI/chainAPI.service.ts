@@ -1,18 +1,19 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
-import { SetupService } from 'app/services/setup.service';
 
 @Injectable({
     providedIn: 'root'
 })
-export class HomeService {
+export class ChainAPIService
+{
     private _data: BehaviorSubject<any> = new BehaviorSubject(null);
 
     /**
      * Constructor
      */
-    constructor(public setup: SetupService,
-    ) {
+    constructor(private _httpClient: HttpClient)
+    {
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -22,8 +23,9 @@ export class HomeService {
     /**
      * Getter for data
      */
-    get data$(): Observable<any> {
-        return  this.setup.chains.asObservable();
+    get data$(): Observable<any>
+    {
+        return this._data.asObservable();
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -33,7 +35,12 @@ export class HomeService {
     /**
      * Get data
      */
-    getData(): Observable<any> {
-        return this.setup.chains;
+    getData(): Observable<any>
+    {
+        return this._httpClient.get('api/ticker/ticker').pipe(
+            tap((response: any) => {
+                this._data.next(response);
+            })
+        );
     }
 }

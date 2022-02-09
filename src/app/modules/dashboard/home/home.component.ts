@@ -4,6 +4,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { ApexOptions } from 'ng-apexcharts';
 import { HomeService } from 'app/modules/dashboard/home/home.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SetupService } from 'app/services/setup.service';
 
 @Component({
     selector       : 'home',
@@ -30,7 +31,8 @@ export class HomeComponent implements OnInit, OnDestroy
     constructor(
         private _homeService: HomeService,
         private _router: Router,
-        private _formBuilder: FormBuilder
+        private _formBuilder: FormBuilder,
+        public setup: SetupService,
     )
     {
     }
@@ -46,25 +48,8 @@ export class HomeComponent implements OnInit, OnDestroy
     ngOnInit(): void
     {
         this.searchForm = this._formBuilder.group({
-            name    : ['Brian Hughes'],
-            username: ['brianh'],
-            title   : ['Senior Frontend Developer'],
-            company : ['YXZ Software'],
-            about   : ['Hey! This is Brian; husband, father and gamer. I\'m mostly passionate about bleeding edge tech and chocolate! 🍫'],
-            email   : ['hughes.brian@mail.com', Validators.email],
-            phone   : ['121-490-33-12'],
-            country : ['usa'],
-            language: ['english']
+            name    : ['Blockcore']
         });
-        // Get the data
-        this._homeService.data$
-            .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe((data) => {
-
-                // Store the data
-                this.data = data;
-
-            });
 
         // Attach SVG fill fixer to all ApexCharts
         window['Apex'] = {
