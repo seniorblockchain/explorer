@@ -43,13 +43,6 @@ export const defaultNavigation: blockcoreNavigationItem[] = [
         type: 'basic',
         icon: 'heroicons_outline:code',
         link: 'api'
-    },
-    {
-        id: 'about',
-        title: 'About',
-        type: 'basic',
-        icon: 'heroicons_outline:information-circle',
-        link: 'about'
     }
 ];
 export const compactNavigation: blockcoreNavigationItem[] = [
@@ -94,13 +87,6 @@ export const compactNavigation: blockcoreNavigationItem[] = [
         type: 'basic',
         icon: 'heroicons_outline:code',
         link: 'api'
-    },
-    {
-        id: 'about',
-        title: 'About',
-        type: 'basic',
-        icon: 'heroicons_outline:information-circle',
-        link: 'about'
     }
 ];
 export const futuristicNavigation: blockcoreNavigationItem[] = [
@@ -145,19 +131,12 @@ export const futuristicNavigation: blockcoreNavigationItem[] = [
         type: 'basic',
         icon: 'heroicons_outline:code',
         link: 'api'
-    },
-    {
-        id: 'about',
-        title: 'About',
-        type: 'basic',
-        icon: 'heroicons_outline:information-circle',
-        link: 'about'
     }
 ];
 export const horizontalNavigation: blockcoreNavigationItem[] = [
     {
         id: 'blockcore',
-        title: 'blockcore',
+        title: 'Home',
         type: 'basic',
         icon: 'heroicons_outline:home',
         link: 'blockcore'
@@ -196,12 +175,5 @@ export const horizontalNavigation: blockcoreNavigationItem[] = [
         type: 'basic',
         icon: 'heroicons_outline:code',
         link: 'api'
-    },
-    {
-        id: 'about',
-        title: 'About',
-        type: 'basic',
-        icon: 'heroicons_outline:information-circle',
-        link: 'about'
     }
 ];
