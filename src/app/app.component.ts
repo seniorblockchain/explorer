@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router, ActivatedRoute, RouterModule } from '@angular/router';
 import { ApiService } from 'app/services/api.service';
 import { SetupService } from 'app/services/setup.service';
+
 @Component({
     selector   : 'app-root',
     templateUrl: './app.component.html',

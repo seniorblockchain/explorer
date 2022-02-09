@@ -51,7 +51,7 @@
             <!-- Tabs -->
             <mat-tab-group
                 class="sm:px-2"
-                [animationDuration]="'0'">
+                >
 
                 <!-- Ticker -->
                 <mat-tab label={{setup.Chain?.Name}}>
@@ -73,6 +73,7 @@
                                                     <h3 *ngIf="ticker.usd">${{ticker.usd.toFixed(3)}}</h3>
                                                     <app-error class="centered" [error]="error"></app-error>
                                                  </div>
+
                                             </div>
                                             <div class="flex items-center">
                                                 <mat-icon
@@ -80,7 +81,7 @@
                                                     [svgIcon]="'heroicons_solid:trending-down'"></mat-icon>
                                                 <div class="font-medium text-sm text-secondary leading-none whitespace-nowrap">
                                                     <span class="text-red-500">{{ticker.changePercentage}}</span>
-                                                    below tickered
+
                                                 </div>
                                             </div>
                                         </div>

@@ -7,7 +7,6 @@ import { ApexOptions } from 'ng-apexcharts';
 import { TickerService } from 'app/modules/dashboard/ticker/ticker.service';
 import { ApiService } from 'app/services/api.service';
 import { SetupService } from 'app/services/setup.service';
-
 @Component({
     selector: 'ticker',
     templateUrl: './ticker.component.html',
@@ -81,7 +80,6 @@ export class TickerComponent implements OnInit, OnDestroy {
 
 
     async updateTicker() {
-        console.log("updateTicker");
         try {
             this.error = null;
             const url = this.setup.Explorer?.Ticker?.ApiUrl;
@@ -90,7 +88,6 @@ export class TickerComponent implements OnInit, OnDestroy {
                 this.ticker = {};
                 return;
             }
-
             const request = await this.api.download(url);
 
             const changePercentage = this.navigator(request, this.setup.Explorer.Ticker.PercentagePath);

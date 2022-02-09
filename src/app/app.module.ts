@@ -12,7 +12,8 @@ import { mockApiServices } from 'app/mock-api';
 import { LayoutModule } from 'app/layout/layout.module';
 import { AppComponent } from 'app/app.component';
 import { appRoutes } from 'app/app.routing';
-
+import { HttpClientModule } from '@angular/common/http';
+import { NgHttpLoaderModule } from 'ng-http-loader';
 const routerConfig: ExtraOptions = {
     preloadingStrategy       : PreloadAllModules,
     scrollPositionRestoration: 'enabled'
@@ -37,6 +38,9 @@ const routerConfig: ExtraOptions = {
 
         // Layout module of your application
         LayoutModule,
+        BrowserModule,
+        HttpClientModule,
+        NgHttpLoaderModule.forRoot(),  
 
         // 3rd party modules that require global configuration via forRoot
         MarkdownModule.forRoot({})
