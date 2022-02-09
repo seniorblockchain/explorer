@@ -26,7 +26,16 @@ export const appRoutes: Route[] = [
             { path: 'blockcore', loadChildren: () => import('app/modules/dashboard/home/home.module').then(m => m.HomeModule) },
         ]
     },
-
+    {
+        path: '',
+        component: LayoutComponent,
+        resolve: {
+            chain: InitialDataResolver,
+        },
+        children: [
+            { path: ':chain', loadChildren: () => import('app/modules/dashboard/home/home.module').then(m => m.HomeModule) },
+        ]
+    },
     // explorer routes
     {
         path: '',
