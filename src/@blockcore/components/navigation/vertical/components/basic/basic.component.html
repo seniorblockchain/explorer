@@ -3,7 +3,7 @@
     [class.blockcore-vertical-navigation-item-has-subtitle]="!!item.subtitle" [ngClass]="item.classes?.wrapper">
 
     <!-- Item with an internal link -->
-    <ng-container *ngIf="item.link && !item.externalLink && !item.function && !item.disabled">
+    <ng-container *ngIf="item.link && !item.externalLink && !item.function && !item.disabled && setup.current !=='blockcore'">
         <a class="blockcore-vertical-navigation-item"
             [ngClass]="{'blockcore-vertical-navigation-item-active-forced': item.active}"
             [routerLink]="[setup.current ,item.link]"

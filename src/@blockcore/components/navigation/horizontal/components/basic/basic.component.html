@@ -5,7 +5,7 @@
     [ngClass]="item.classes?.wrapper">
 
     <!-- Item with an internal link -->
-    <ng-container *ngIf="item.link && !item.externalLink && !item.function && !item.disabled">
+    <ng-container *ngIf="item.link && !item.externalLink && !item.function && !item.disabled && setup.current !=='blockcore'">
         <div
             class="blockcore-horizontal-navigation-item"
             [ngClass]="{'blockcore-horizontal-navigation-item-active-forced': item.active}"

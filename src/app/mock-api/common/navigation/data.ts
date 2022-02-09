@@ -27,7 +27,7 @@ export const defaultNavigation: blockcoreNavigationItem[] = [
         id: 'insight',
         title: 'Insight',
         type: 'basic',
-        icon: 'heroicons_outline:sparkles',
+        icon: 'heroicons_outline:presentation-chart-line',
         link: 'insight'
     },
     {
@@ -71,7 +71,7 @@ export const compactNavigation: blockcoreNavigationItem[] = [
         id: 'insight',
         title: 'Insight',
         type: 'basic',
-        icon: 'heroicons_outline:sparkles',
+        icon: 'heroicons_outline:presentation-chart-line',
         link: 'insight'
     },
     {
@@ -115,7 +115,7 @@ export const futuristicNavigation: blockcoreNavigationItem[] = [
         id: 'insight',
         title: 'Insight',
         type: 'basic',
-        icon: 'heroicons_outline:sparkles',
+        icon: 'heroicons_outline:presentation-chart-line',
         link: 'insight'
     },
     {
@@ -159,7 +159,7 @@ export const horizontalNavigation: blockcoreNavigationItem[] = [
         id: 'insight',
         title: 'Insight',
         type: 'basic',
-        icon: 'heroicons_outline:sparkles',
+        icon: 'heroicons_outline:presentation-chart-line',
         link: 'insight'
     },
     {

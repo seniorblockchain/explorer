@@ -65,7 +65,10 @@
                                     <div class="flex items-center mt-1">
                                         <div class="flex flex-col">
                                             <div class="text-3xl font-semibold tracking-tight leading-tight">
-                                                {{data.weeklyExpenses.amount | currency:'USD'}}
+                                                <h2 *ngIf="ticker.btc">
+                                                    {{ticker.btc.toFixed(8)}} <i class="fab fa-btc"></i> <span *ngIf="ticker.changePercentage" class="{{ticker.changeType}}">{{ticker.changePercentage}}%</span>
+                                                 </h2>
+                                                 <h3 *ngIf="ticker.usd">${{ticker.usd.toFixed(3)}}</h3>
                                             </div>
                                             <div class="flex items-center">
                                                 <mat-icon
