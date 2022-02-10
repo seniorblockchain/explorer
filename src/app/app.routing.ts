@@ -23,7 +23,7 @@ export const appRoutes: Route[] = [
             chain: InitialDataResolver,
         },
         children: [
-            { path: 'blockcore', loadChildren: () => import('app/modules/dashboard/home/home.module').then(m => m.HomeModule) },
+            { path: 'blockcore', loadChildren: () => import('app/modules/home/home.module').then(m => m.HomeModule) },
         ]
     },
     {
@@ -33,7 +33,7 @@ export const appRoutes: Route[] = [
             chain: InitialDataResolver,
         },
         children: [
-            { path: ':chain', loadChildren: () => import('app/modules/dashboard/home/home.module').then(m => m.HomeModule) },
+            { path: ':chain', loadChildren: () => import('app/modules/home/home.module').then(m => m.HomeModule) },
         ]
     },
 
@@ -46,7 +46,7 @@ export const appRoutes: Route[] = [
             chain: InitialDataResolver,
         },
         children: [
-            { path: ':chain/ticker', loadChildren: () => import('app/modules/dashboard/ticker/ticker.module').then(m => m.TickerModule) },
+            { path: ':chain/ticker', loadChildren: () => import('app/modules/ticker/ticker.module').then(m => m.TickerModule) },
         ]
     },
 
@@ -58,7 +58,7 @@ export const appRoutes: Route[] = [
             chain: InitialDataResolver,
         },
         children: [
-            { path: ':chain/explorer', loadChildren: () => import('app/modules/dashboard/explorer/explorer.module').then(m => m.ExplorerModule) },
+            { path: ':chain/explorer', loadChildren: () => import('app/modules/explorer/explorer.module').then(m => m.ExplorerModule) },
         ]
     },
 
@@ -70,7 +70,7 @@ export const appRoutes: Route[] = [
             chain: InitialDataResolver,
         },
         children: [
-            { path: ':chain/insight', loadChildren: () => import('app/modules/dashboard/insight/insight.module').then(m => m.InsightModule) },
+            { path: ':chain/insight', loadChildren: () => import('app/modules/insight/insight.module').then(m => m.InsightModule) },
         ]
     },
 
@@ -82,7 +82,7 @@ export const appRoutes: Route[] = [
             chain: InitialDataResolver,
         },
         children: [
-            { path: ':chain/network', loadChildren: () => import('app/modules/dashboard/network/network.module').then(m => m.NetworkModule) },
+            { path: ':chain/network', loadChildren: () => import('app/modules/network/network.module').then(m => m.NetworkModule) },
         ]
     },
 
@@ -95,7 +95,7 @@ export const appRoutes: Route[] = [
                 chain: InitialDataResolver,
             },
             children: [
-                { path: ':chain/api', loadChildren: () => import('app/modules/dashboard/chainAPI/chainAPI.module').then(m => m.ChainAPIModule) },
+                { path: ':chain/api', loadChildren: () => import('app/modules/chainAPI/chainAPI.module').then(m => m.ChainAPIModule) },
             ]
         },
 
@@ -108,7 +108,7 @@ export const appRoutes: Route[] = [
             chain: InitialDataResolver,
         },
         children: [
-            { path: ':chain/about', loadChildren: () => import('app/modules/dashboard/about/about.module').then(m => m.AboutModule) },
+            { path: ':chain/about', loadChildren: () => import('app/modules/about/about.module').then(m => m.AboutModule) },
         ]
     }
 

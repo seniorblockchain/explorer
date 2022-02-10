@@ -40,7 +40,7 @@ const routerConfig: ExtraOptions = {
         LayoutModule,
         BrowserModule,
         HttpClientModule,
-        NgHttpLoaderModule.forRoot(),  
+        NgHttpLoaderModule.forRoot(),
 
         // 3rd party modules that require global configuration via forRoot
         MarkdownModule.forRoot({})
