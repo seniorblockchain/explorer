@@ -5,7 +5,8 @@ import { ApexOptions } from 'ng-apexcharts';
 import { ExplorerService } from 'app/modules/explorer/explorer.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SetupService } from 'app/services/setup.service';
-import {CommonModule} from '@angular/common';
+import { CommonModule } from '@angular/common';
+
 @Component({
     selector: 'explorer',
     templateUrl: './explorer.component.html',
@@ -20,8 +21,20 @@ export class ExplorerComponent implements OnInit, OnDestroy {
     chartWeeklyExpenses: ApexOptions = {};
     chartMonthlyExpenses: ApexOptions = {};
     chartYearlyExpenses: ApexOptions = {};
+    info: any;
+    node: any;
+    blockchain: any;
+    network: any;
+    configuration: any;
+    consensus: any;
+    peers: any;
     blocks: any;
-    explorerLable: string = 'BTC Explorer';
+    timerInfo: any;
+    timerBlocks: any;
+    errorBlocks: string;
+    errorInfo: string;
+    subscription: any;
+    explorerLable: string = 'Explorer';
     private _unsubscribeAll: Subject<any> = new Subject<any>();
 
     /**
@@ -34,7 +47,7 @@ export class ExplorerComponent implements OnInit, OnDestroy {
         public setup: SetupService,
         public cdr: ChangeDetectorRef,
         public com: CommonModule
-     ) {
+    ) {
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -49,15 +62,34 @@ export class ExplorerComponent implements OnInit, OnDestroy {
             name: ['Brian Hughes'],
             username: ['brianh']
         });
-        // Get the data
-        this._explorerService.data$
+        // Get the blocks data
+        this._explorerService.blocksdata$
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe((data) => {
-                // Store the data
                 this.blocks = data;
                 this.cdr.detectChanges();
             });
 
+
+        // Get the info data
+        this._explorerService.infodata$
+            .pipe(takeUntil(this._unsubscribeAll))
+            .subscribe((data) => {
+                try {
+                    this.info = data;
+
+                    this.node = this.info.node; console.log(this.node);
+                    this.blockchain = this.node.blockchain;
+                    this.network = this.node.network;
+                    this.configuration = this.info.configuration;
+                    this.consensus = this.configuration?.consensus;
+                    this.errorInfo = null;
+                } catch (error) {
+                    this.errorInfo = error;
+                    console.log(error);
+                }
+                this.cdr.detectChanges();
+            });
 
     }
 

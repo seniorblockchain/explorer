@@ -9,13 +9,10 @@ import { ApiService } from 'app/services/api.service';
     providedIn: 'root'
 })
 export class ExplorerService {
-    private _data: BehaviorSubject<any> = new BehaviorSubject(null);
+    private _blockdata: BehaviorSubject<any> = new BehaviorSubject(null);
+    private _infodata: BehaviorSubject<any> = new BehaviorSubject(null);
+
     info: any;
-    node: any;
-    blockchain: any;
-    network: any;
-    configuration: any;
-    consensus: any;
     peers: any;
     blocks: any;
     timerInfo: any;
@@ -37,10 +34,12 @@ export class ExplorerService {
     /**
      * Getter for data
      */
-    get data$(): Observable<any> {
-        return this._data.asObservable();
+    get blocksdata$(): Observable<any> {
+        return this._blockdata.asObservable();
     }
-
+    get infodata$(): Observable<any> {
+        return this._infodata.asObservable();
+    }
     // -----------------------------------------------------------------------------------------------------
     // @ Public methods
     // -----------------------------------------------------------------------------------------------------
@@ -48,11 +47,14 @@ export class ExplorerService {
     /**
      * Get data
      */
-    async getData(): Promise<Observable<any>> {
-       await this.updateBlocks();
-       return  this.blocks ;
+    async getBlocksData(): Promise<Observable<any>> {
+        await this.updateBlocks();
+        return this.blocks;
     }
-
+    async getInfoData(): Promise<Observable<any>> {
+        await this.updateInfo();
+        return this.info;
+    }
     // eslint-disable-next-line @angular-eslint/use-lifecycle-interface
     ngOnDestroy(): void {
         clearTimeout(this.timerInfo);
@@ -82,7 +84,7 @@ export class ExplorerService {
             });
 
             this.blocks = list;
-            this._data.next(this.blocks);
+            this._blockdata.next(this.blocks);
             this.errorBlocks = null;
         } catch (error) {
             this.errorBlocks = error;
@@ -90,7 +92,7 @@ export class ExplorerService {
 
         this.timerBlocks = setTimeout(async () => {
             await this.updateBlocks();
-            this._data.next(this.blocks);
+            this._blockdata.next(this.blocks);
         }, 15000);
     }
 
@@ -101,12 +103,7 @@ export class ExplorerService {
 
         try {
             this.info = await this.api.getInfo();
-
-            this.node = this.info.node;
-            this.blockchain = this.node.blockchain;
-            this.network = this.node.network;
-            this.configuration = this.info.configuration;
-            this.consensus = this.configuration?.consensus;
+            this._infodata.next(this.info);
             this.errorInfo = null;
         } catch (error) {
             this.errorInfo = error;
@@ -114,6 +111,7 @@ export class ExplorerService {
 
         this.timerInfo = setTimeout(async () => {
             await this.updateInfo();
+            this._infodata.next(this.info);
         }, 15000);
     }
 

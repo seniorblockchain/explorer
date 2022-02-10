@@ -2,7 +2,7 @@
 /*  @ Import/write your custom styles here.
 /*  @ Styles from this file will override 'vendors.scss' and blockcore's base styles.
 /* ----------------------------------------------------------------------------------------------------- */
-body {
+html {
     overflow-y: scroll;
   }
   .mode-aware {
@@ -28,7 +28,7 @@ html{
     color: var(--btc);
 }
 .back-chain-color{
-    background-color: var(--btc);
+    background-color: var(--accent) !important;
 }
 .chaincolor{
     color: var(--accent);

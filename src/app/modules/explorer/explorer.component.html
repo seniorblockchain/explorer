@@ -16,16 +16,14 @@
                             </div>
                         </ng-container>
                         <div *ngIf="setup.Chain?.Description" class="flex items-center">
-                            <mat-icon
-                                class="icon-size-5"
-                                [svgIcon]="'heroicons_solid:badge-check'"></mat-icon>
+                            <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:badge-check'"></mat-icon>
                             <div class="ml-1.5 leading-6 truncate text-secondary">{{setup.Chain?.Description}}</div>
                         </div>
                     </div>
                 </div>
                 <!-- Actions -->
                 <div class="flex items-center mt-6 sm:mt-0 sm:ml-2 space-x-3">
-                    <a href="{{setup.Chain?.Url}}">
+                    <a href="{{setup.Chain?.Url}}" target="_blank">
                         <button class="blockcore-mat-button-rounded" mat-flat-button [color]="'primary'">
                             <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:chevron-double-right'"></mat-icon>
                             <span class="ml-2">Website</span>
@@ -50,8 +48,8 @@
         <div class="w-full max-w-screen-xl mx-auto">
             <!-- Tabs -->
             <mat-tab-group class="sm:px-2" [animationDuration]="'0'">
-                <!-- Explorer -->
-                <mat-tab label={{setup.Chain?.Name}}>
+                <!-- Search & Last Blocks -->
+                <mat-tab label="Search & Last Blocks">
                     <ng-template matTabContent>
 
                         <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 gap-6 w-full min-w-0 mb-6">
@@ -85,7 +83,6 @@
                                         <div class="text-lg font-medium tracking-tight leading-6 truncate"
                                             matTooltip="{{item.blockTime | timestamp | date:'hh:mm'}}">{{item.blockTime
                                             | ago}}
-
                                         </div>
                                         <div class="ml-2 -mt-2 -mr-3">
                                             <button mat-icon-button [matMenuTriggerFor]="Menu1254">
@@ -94,8 +91,8 @@
                                                 </mat-icon>
                                             </button>
                                             <mat-menu #Menu1254="matMenu">
-                                                <button mat-menu-item>Block Details</button>
-                                                <button mat-menu-item>Transactions</button>
+                                                <a [routerLink]="['block', item.blockIndex]"> <button
+                                                        mat-menu-item>Block Details</button></a>
                                             </mat-menu>
                                         </div>
                                     </div>
@@ -115,7 +112,199 @@
 
                             </div>
                         </div>
+                        <!-- View All Blocks -->
+                        <div class="py-10 sm:py-12 sm:px-16 text-on-primary-600">
+                            <div class="flex flex-col items-center w-full max-w-7xl mx-auto text-center">
+                                <a [routerLink]="['blocks']"><button mat-flat-button
+                                        class="blockcore-mat-button-large px-12 back-chain-color text-primary-800">
+                                        <span class="text-lg">View All Blocks</span>
+                                    </button></a>
+                            </div>
+                        </div>
                     </ng-template>
+
+
+                </mat-tab>
+
+
+
+                <mat-tab label="Network Statistics">
+                    <ng-template matTabContent>
+                        <!-- Section title -->
+
+                        <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 gap-8 w-full">
+
+
+                            <div *ngIf="node?.error"
+                                class="relative flex flex-col flex-auto p-6 pr-3 pb-3 bg-card rounded-2xl shadow overflow-hidden">
+                                <div class="absolute bottom-0 right-0 w-24 h-24 -m-6">
+                                    <mat-icon class="icon-size-24 opacity-25 text-red-500 dark:text-red-400"
+                                        [svgIcon]="'heroicons_outline:exclamation-circle'"></mat-icon>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="flex flex-col">
+                                        <div class="text-lg font-medium tracking-tight leading-6 truncate">Error from
+                                            node :</div>
+                                    </div>
+
+                                </div>
+                                <div class="flex flex-row flex-wrap mt-4 -mx-6">
+                                    <span class="negative">{{node.error}}</span>
+                                </div>
+                            </div>
+
+                            <div *ngIf="errorInfo"
+                                class="relative flex flex-col flex-auto p-6 pr-3 pb-3 bg-card rounded-2xl shadow overflow-hidden">
+                                <div class="absolute bottom-0 right-0 w-24 h-24 -m-6">
+                                    <mat-icon class="icon-size-24 opacity-25 text-red-500 dark:text-red-400"
+                                        [svgIcon]="'heroicons_outline:exclamation-circle'"></mat-icon>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="flex flex-col">
+                                        <div class="text-lg font-medium tracking-tight leading-6 truncate">Error from
+                                            indexer :</div>
+                                    </div>
+
+                                </div>
+                                <div class="flex flex-row flex-wrap mt-4 -mx-6">
+
+                                    <div class="flex flex-col mx-6 my-3">
+                                        <div class="text-sm font-medium leading-none text-secondary">
+                                            <span class="negative">{{errorInfo}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div *ngIf="!node?.error && info"
+                            class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-8 w-full">
+
+                            <div
+                                class="relative flex flex-col flex-auto p-6 pr-3 pb-3 bg-card rounded-2xl shadow overflow-hidden">
+                                <div class="absolute bottom-0 right-0 w-24 h-24 -m-6">
+                                    <mat-icon class="icon-size-24 opacity-25 text-green-500 dark:text-green-400"
+                                        [svgIcon]="'heroicons_outline:check-circle'"></mat-icon>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="flex flex-col">
+                                        <div class="text-lg font-medium tracking-tight leading-6 truncate">Transactions
+                                            in pool :</div>
+                                    </div>
+                                    <div class="ml-auto -mt-2">
+                                        <button mat-icon-button [matMenuTriggerFor]="previousStatementMenu">
+                                            <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:dots-vertical'">
+                                            </mat-icon>
+                                        </button>
+                                        <mat-menu #previousStatementMenu="matMenu">
+
+                                            <a [routerLink]="['mempool']"> <button mat-menu-item>
+                                                    <span class="flex items-center">
+                                                        <mat-icon class="icon-size-5 mr-3"
+                                                            [svgIcon]="'heroicons_solid:credit-card'"></mat-icon>
+                                                        <span>Mempool Details</span>
+                                                    </span>
+                                                </button>
+                                            </a>
+                                        </mat-menu>
+                                    </div>
+                                </div>
+                                <div class="flex flex-row flex-wrap mt-4 -mx-6">
+                                    <div class="flex flex-col mx-6 my-3">
+                                        <div class="text-sm font-medium leading-none text-secondary">Count :</div>
+                                        <div class="mt-2 font-medium text-3xl leading-none chaincolor">
+                                            {{node.transactionsInPool}}</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div *ngIf="!node?.error && info"
+                                class="relative flex flex-col flex-auto p-6 pr-3 pb-3 bg-card rounded-2xl shadow overflow-hidden">
+                                <div class="absolute bottom-0 right-0 w-24 h-24 -m-6">
+                                    <mat-icon class="icon-size-24 opacity-25 text-green-500 dark:text-green-400"
+                                        [svgIcon]="'heroicons_outline:check-circle'"></mat-icon>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="flex flex-col">
+                                        <div class="text-lg font-medium tracking-tight leading-6 truncate">Sync Progress
+                                            :</div>
+                                    </div>
+                                </div>
+                                <div class="flex flex-row flex-wrap mt-4 -mx-6">
+                                    <div class="flex flex-col mx-6 my-3">
+                                        <div class="text-sm font-medium leading-none text-secondary">Details :</div>
+                                        <div class="mt-2 font-medium text-3xl leading-none chaincolor">
+                                            {{node.progress}}</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div *ngIf="!node?.error && info"
+                            class="grid grid-cols-1 mt-6 sm:grid-cols-1 lg:grid-cols-3 gap-8 w-full">
+
+                            <div class="flex flex-col flex-auto bg-card shadow rounded-2xl overflow-hidden p-6">
+                                <div class="flex items-start justify-between">
+                                    <div class="text-lg font-medium tracking-tight leading-6 truncate">Average Block
+                                        Size :</div>
+                                </div>
+
+                                <div class="mt-8">
+
+                                    <ng-container>
+                                        <div class="flex items-center text-blue-500">
+
+                                            {{node.avgBlockSizeKb | size}}
+
+                                        </div>
+                                    </ng-container>
+
+                                </div>
+                            </div>
+
+                            <div class="flex flex-col flex-auto bg-card shadow rounded-2xl overflow-hidden p-6">
+                                <div class="flex items-start justify-between">
+                                    <div class="text-lg font-medium tracking-tight leading-6 truncate">Difficulty :
+                                    </div>
+                                </div>
+
+                                <div class="mt-8">
+
+                                    <ng-container>
+
+                                        <div class="flex items-center text-blue-500">
+
+                                            {{blockchain.difficulty}}
+                                        </div>
+
+
+
+                                    </ng-container>
+
+                                </div>
+                            </div>
+
+                            <div class="flex flex-col flex-auto bg-card shadow rounded-2xl overflow-hidden p-6">
+                                <div class="flex items-start justify-between">
+                                    <div class="text-lg font-medium tracking-tight leading-6 truncate">Total Network
+                                        Staking Weight :</div>
+                                </div>
+
+                                <div class="mt-8">
+
+                                    <ng-container>
+                                        <div class="flex items-center text-blue-500">
+                                            {{blockchain.networkWeight | amount}} {{setup.Chain.Symbol}}
+                                        </div>
+                                    </ng-container>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </ng-template>
+
+
                 </mat-tab>
             </mat-tab-group>
         </div>
