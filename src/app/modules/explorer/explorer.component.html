@@ -15,6 +15,12 @@
                                 {{setup.Chain?.Symbol}}
                             </div>
                         </ng-container>
+                        <div *ngIf="setup.Chain?.Description" class="flex items-center">
+                            <mat-icon
+                                class="icon-size-5"
+                                [svgIcon]="'heroicons_solid:badge-check'"></mat-icon>
+                            <div class="ml-1.5 leading-6 truncate text-secondary">{{setup.Chain?.Description}}</div>
+                        </div>
                     </div>
                 </div>
                 <!-- Actions -->
