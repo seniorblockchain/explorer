@@ -18,6 +18,9 @@ import { ExplorerComponent } from 'app/modules/explorer/explorer.component';
 import { explorerRoutes } from 'app/modules/explorer/explorer.routing';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
+import { PipeModule } from 'app/shared/pipe.module';
+import { MatTooltipModule } from '@angular/material/tooltip';
+
 @NgModule({
     declarations: [
         ExplorerComponent
@@ -39,8 +42,10 @@ import { MatInputModule } from '@angular/material/input';
         TranslocoModule,
         SharedModule,
         MatSelectModule,
-        MatInputModule
-    ]
+        MatInputModule,
+        PipeModule,
+        MatTooltipModule
+     ]
 })
 export class ExplorerModule {
 }

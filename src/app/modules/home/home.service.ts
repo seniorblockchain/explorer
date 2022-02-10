@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable @angular-eslint/contextual-lifecycle */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Injectable } from '@angular/core';
@@ -15,7 +16,7 @@ export class HomeService {
     /**
      * Constructor
      */
-    constructor(    public setup: SetupService,
+    constructor(public setup: SetupService,
         private api: ApiService,
     ) {
     }
@@ -28,7 +29,7 @@ export class HomeService {
      * Getter for data
      */
     get data$(): Observable<any> {
-        return  this._data.asObservable();
+        return this._data.asObservable();
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -38,7 +39,7 @@ export class HomeService {
     /**
      * Get data
      */
-     async getData(): Promise<Observable<any>> {
+    async getData(): Promise<Observable<any>> {
         await this.updateTicker();
         return this.tickers;
     }
@@ -47,24 +48,23 @@ export class HomeService {
     // eslint-disable-next-line @angular-eslint/use-lifecycle-interface
     async ngOnInit() {
         await this.updateTicker();
-      }
+    }
 
 
 
-      async updateTicker() {
+    async updateTicker() {
 
         try {
-          const coins = this.setup.chains.map(c => c.coin).filter(c => c != null);
+            const coins = this.setup.chains.map(c => c.coin).filter(c => c != null);
 
-          const coinList = coins.join('%2C');
-          const url = `https://api.coingecko.com/api/v3/simple/price?ids=${coinList}&vs_currencies=btc&include_24hr_vol=true&include_24hr_change=true&include_last_updated_at=true`;
-
-          const request = await this.api.download(url);
-          this.tickers = request;
-          this._data.next(this.tickers);
+            const coinList = coins.join('%2C');
+            const url = `https://api.coingecko.com/api/v3/simple/price?ids=${coinList}&vs_currencies=btc&include_24hr_vol=true&include_24hr_change=true&include_last_updated_at=true`;
+            const request = await this.api.download(url);
+            this.tickers = request;
+            this._data.next(this.tickers);
         }
         catch (err) {
-          console.error(err);
+            console.error(err);
         }
-      }
+    }
 }

@@ -18,19 +18,25 @@ body {
       drop-shadow(var(--stroke-neg) var(--stroke-pos) 0 var(--stroke-color))
       drop-shadow(var(--stroke-neg) var(--stroke-neg) 0 var(--stroke-color));
    }
-   html{
+html{
     --accent: #f3b623;
+    --btc: #f3b623;
     --positive: #63c700;
     --negative: #f80606;
 }
 .btccolor{
+    color: var(--btc);
+}
+.back-chain-color{
+    background-color: var(--btc);
+}
+.chaincolor{
     color: var(--accent);
 }
 .positive {
     color: var(--positive);
  }
-
- .negative {
+.negative {
     color: var(--negative);
  }
 

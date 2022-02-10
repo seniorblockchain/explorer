@@ -6,7 +6,7 @@
                 <!-- Avatar and name -->
                 <div class="flex flex-auto items-center min-w-0">
                     <div class="flex-0 w-16 h-16 rounded-full overflow-hidden">
-                        <img class="w-full h-full" src= {{setup.Chain?.Icon}}>
+                        <img class="w-full h-full" src={{setup.Chain?.Icon}}>
                     </div>
                     <div class="flex flex-col min-w-0 ml-4">
                         <ng-container>
@@ -19,10 +19,12 @@
                 </div>
                 <!-- Actions -->
                 <div class="flex items-center mt-6 sm:mt-0 sm:ml-2 space-x-3">
-                    <button class="blockcore-mat-button-rounded" mat-flat-button [color]="'primary'">
-                        <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:chevron-double-right'"></mat-icon>
-                        <span class="ml-2">Website</span>
-                    </button>
+                    <a href="{{setup.Chain?.Url}}">
+                        <button class="blockcore-mat-button-rounded" mat-flat-button [color]="'primary'">
+                            <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:chevron-double-right'"></mat-icon>
+                            <span class="ml-2">Website</span>
+                        </button>
+                    </a>
                 </div>
             </div>
             <!-- Home selector -->
@@ -67,119 +69,45 @@
                             </div>
                         </div>
 
-                        <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-4 gap-6 w-full min-w-0">
-                            <!-- block -->
-                            <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
-                                <div class="flex items-start justify-between">
-                                    <div class="text-lg font-medium tracking-tight leading-6 truncate">4 minutes ago
-                                    </div>
-                                    <div class="ml-2 -mt-2 -mr-3">
-                                        <button mat-icon-button [matMenuTriggerFor]="Menu1254">
-                                            <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:dots-vertical'">
-                                            </mat-icon>
-                                        </button>
-                                        <mat-menu #Menu1254="matMenu">
-                                            <button mat-menu-item>Block Details</button>
-                                            <button mat-menu-item>Transactions</button>
-                                        </mat-menu>
-                                    </div>
-                                </div>
-                                <div class="flex flex-col items-center mt-2">
-                                    <div
-                                        class="text-5xl sm:text-6xl font-bold tracking-tight leading-none text-blue-500">
-                                        1254</div>
-                                    <div class="text-lg font-medium text-blue-600 dark:text-blue-500 mt-3">Size: 0.235kb
-                                    </div>
-                                    <div class="flex items-baseline justify-center w-full mt-5 text-secondary">
-                                        <div class="text-md font-medium truncate">Transactions:</div>
-                                        <div class="ml-1.5 text-lg font-semibold">2</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Overdue -->
-                            <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
-                                <div class="flex items-start justify-between">
-                                    <div class="text-lg font-medium tracking-tight leading-6 truncate">3 minutes ago
-                                    </div>
-                                    <div class="ml-2 -mt-2 -mr-3">
-                                        <button mat-icon-button [matMenuTriggerFor]="Menu1255">
-                                            <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:dots-vertical'">
-                                            </mat-icon>
-                                        </button>
-                                        <mat-menu #Menu1255="matMenu">
-                                            <button mat-menu-item>Block Details</button>
-                                            <button mat-menu-item>Transactions</button>
-                                        </mat-menu>
-                                    </div>
-                                </div>
-                                <div class="flex flex-col items-center mt-2">
-                                    <div
-                                        class="text-5xl sm:text-6xl font-bold tracking-tight leading-none text-red-500">
-                                        1255</div>
-                                    <div class="text-lg font-medium text-red-600 dark:text-red-500">Size: 0.235kb</div>
-                                    <div class="flex items-baseline justify-center w-full mt-5 text-secondary">
-                                        <div class="text-md font-medium truncate">Transactions:</div>
-                                        <div class="ml-1.5 text-lg font-semibold">9</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Issues -->
-                            <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
-                                <div class="flex items-start justify-between">
-                                    <div class="text-lg font-medium tracking-tight leading-6 truncate">2 minutes ago
-                                    </div>
-                                    <div class="ml-2 -mt-2 -mr-3">
-                                        <button mat-icon-button [matMenuTriggerFor]="Menu1256">
-                                            <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:dots-vertical'">
-                                            </mat-icon>
-                                        </button>
-                                        <mat-menu #Menu1256="matMenu">
-                                            <button mat-menu-item>Block Details</button>
-                                            <button mat-menu-item>Transactions</button>
-                                        </mat-menu>
-                                    </div>
-                                </div>
-                                <div class="flex flex-col items-center mt-2">
-                                    <div
-                                        class="text-5xl sm:text-6xl font-bold tracking-tight leading-none text-amber-500">
-                                        1256</div>
-                                    <div class="text-lg font-medium text-amber-600 dark:text-amber-500">Size: 0.235kb
-                                    </div>
-                                    <div class="flex items-baseline justify-center w-full mt-5 text-secondary">
-                                        <div class="text-md font-medium truncate">Transactions:</div>
-                                        <div class="ml-1.5 text-lg font-semibold">19</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Features -->
-                            <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
-                                <div class="flex items-start justify-between">
-                                    <div class="text-lg font-medium tracking-tight leading-6 truncate">1 minutes ago
-                                    </div>
-                                    <div class="ml-2 -mt-2 -mr-3">
-                                        <button mat-icon-button [matMenuTriggerFor]="Menu1257">
-                                            <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:dots-vertical'">
-                                            </mat-icon>
-                                        </button>
-                                        <mat-menu #Menu1257="matMenu">
-                                            <button mat-menu-item>Block Details</button>
-                                            <button mat-menu-item>Transactions</button>
-                                        </mat-menu>
-                                    </div>
-                                </div>
-                                <div class="flex flex-col items-center mt-2">
-                                    <div
-                                        class="text-5xl sm:text-6xl font-bold tracking-tight leading-none text-green-500">
-                                        1257</div>
-                                    <div class="text-lg font-medium text-green-600 dark:text-green-500">Size: 0.235kb
-                                    </div>
-                                    <div class="flex items-baseline justify-center w-full mt-5 text-secondary">
-                                        <div class="text-md font-medium truncate">Transactions:</div>
-                                        <div class="ml-1.5 text-lg font-semibold">16</div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div *ngIf="blocks" class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-4 gap-6 w-full min-w-0">
 
+                            <!-- block -->
+                            <div *ngFor="let item of blocks">
+
+                                <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
+                                    <div class="flex items-start justify-between">
+                                        <div class="text-lg font-medium tracking-tight leading-6 truncate"
+                                            matTooltip="{{item.blockTime | timestamp | date:'hh:mm'}}">{{item.blockTime
+                                            | ago}}
+
+                                        </div>
+                                        <div class="ml-2 -mt-2 -mr-3">
+                                            <button mat-icon-button [matMenuTriggerFor]="Menu1254">
+                                                <mat-icon class="icon-size-5"
+                                                    [svgIcon]="'heroicons_solid:dots-vertical'">
+                                                </mat-icon>
+                                            </button>
+                                            <mat-menu #Menu1254="matMenu">
+                                                <button mat-menu-item>Block Details</button>
+                                                <button mat-menu-item>Transactions</button>
+                                            </mat-menu>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col items-center mt-2">
+                                        <div
+                                            class="text-5xl sm:text-6xl font-bold tracking-tight leading-none chaincolor">
+                                            {{item.blockIndex}}</div>
+                                        <div class="text-lg font-medium text-blue-600 dark:text-blue-500 mt-3">Size:
+                                            {{item.blockSize | size}}
+                                        </div>
+                                        <div class="flex items-baseline justify-center w-full mt-5 text-secondary">
+                                            <div class="text-md font-medium truncate">Transactions:</div>
+                                            <div class="ml-1.5 text-lg font-semibold">{{item.transactionCount}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
                     </ng-template>
                 </mat-tab>

@@ -14,14 +14,14 @@ import { AppComponent } from 'app/app.component';
 import { appRoutes } from 'app/app.routing';
 import { HttpClientModule } from '@angular/common/http';
 import { NgHttpLoaderModule } from 'ng-http-loader';
-const routerConfig: ExtraOptions = {
+  const routerConfig: ExtraOptions = {
     preloadingStrategy       : PreloadAllModules,
     scrollPositionRestoration: 'enabled'
 };
 
 @NgModule({
     declarations: [
-        AppComponent,
+        AppComponent
     ],
     imports     : [
         BrowserModule,
@@ -43,9 +43,11 @@ const routerConfig: ExtraOptions = {
         NgHttpLoaderModule.forRoot(),
 
         // 3rd party modules that require global configuration via forRoot
-        MarkdownModule.forRoot({})
+        MarkdownModule.forRoot({}),
+
+
     ],
-    exports: [RouterModule],
+    exports: [RouterModule ],
     bootstrap   : [
         AppComponent
     ]
