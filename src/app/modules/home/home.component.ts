@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
@@ -22,6 +23,7 @@ export class HomeComponent implements OnInit, OnDestroy
     chartMonthlyExpenses: ApexOptions = {};
     chartYearlyExpenses: ApexOptions = {};
     data: any;
+    tickers: any = {};
     selectNetwork: string = 'Select Network';
     private _unsubscribeAll: Subject<any> = new Subject<any>();
 
@@ -39,7 +41,14 @@ export class HomeComponent implements OnInit, OnDestroy
         this.searchForm = this._formBuilder.group({
             name    : ['Blockcore']
         });
-        
+        this._homeService.data$
+            .pipe(takeUntil(this._unsubscribeAll))
+            .subscribe((data) => {
+
+                // Store the data
+                this.tickers = data;
+                console.log(data);
+            });
 
     }
 
@@ -50,6 +59,12 @@ export class HomeComponent implements OnInit, OnDestroy
         this._unsubscribeAll.complete();
     }
 
-
+    getChangeClass(value: number) {
+        if (value < 0) {
+          return 'negative';
+        } else {
+          return 'positive';
+        }
+      }
 
 }

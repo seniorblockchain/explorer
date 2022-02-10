@@ -18,3 +18,19 @@ body {
       drop-shadow(var(--stroke-neg) var(--stroke-pos) 0 var(--stroke-color))
       drop-shadow(var(--stroke-neg) var(--stroke-neg) 0 var(--stroke-color));
    }
+   html{
+    --accent: #f3b623;
+    --positive: #63c700;
+    --negative: #f80606;
+}
+.btccolor{
+    color: var(--accent);
+}
+.positive {
+    color: var(--positive);
+ }
+
+ .negative {
+    color: var(--negative);
+ }
+

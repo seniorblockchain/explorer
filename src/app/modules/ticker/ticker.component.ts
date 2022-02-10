@@ -89,7 +89,6 @@ export class TickerComponent implements OnInit, OnDestroy {
         return item.id || index;
     }
 
- 
     /**
      * Prepare the chart data from the data
      *

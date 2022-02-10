@@ -13,8 +13,8 @@ export class HomeResolver implements Resolve<any>
     {
     }
 
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any>
+    async resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<Observable<any>>
     {
-        return this._homeService.getData();
+        return await this._homeService.getData();
     }
 }
