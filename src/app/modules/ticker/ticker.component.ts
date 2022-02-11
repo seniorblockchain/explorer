@@ -88,6 +88,19 @@ export class TickerComponent implements OnInit, OnDestroy {
                 }
             });
 
+        // Attach SVG fill fixer to all ApexCharts
+        window['Apex'] = {
+            chart: {
+                events: {
+                    mounted: (chart: any, options?: any): void => {
+                        this._fixSvgFill(chart.el);
+                    },
+                    updated: (chart: any, options?: any): void => {
+                        this._fixSvgFill(chart.el);
+                    }
+                }
+            }
+        };
     }
 
     getChangeClass(value: number) {
@@ -118,7 +131,17 @@ export class TickerComponent implements OnInit, OnDestroy {
     trackByFn(index: number, item: any): any {
         return item.id || index;
     }
-
+    private _fixSvgFill(element: Element): void
+    {
+        // Current URL
+        const currentURL = this._router.url;
+        Array.from(element.querySelectorAll('*[fill]'))
+             .filter(el => el.getAttribute('fill').indexOf('url(') !== -1)
+             .forEach((el) => {
+                 const attrVal = el.getAttribute('fill');
+                 el.setAttribute('fill', `url(${currentURL}${attrVal.slice(attrVal.indexOf('#'))}`);
+             });
+    }
     /**
      * Prepare the chart data from the data
      *

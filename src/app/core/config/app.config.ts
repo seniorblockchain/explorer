@@ -6,10 +6,6 @@ export type Screens = { [key: string]: string };
 export type Theme = 'theme-default' | string;
 export type Themes = { id: string; name: string }[];
 
-/**
- * AppConfig interface. Update this interface to strictly type your config
- * object.
- */
 export interface AppConfig {
     layout: Layout;
     scheme: Scheme;
@@ -18,19 +14,6 @@ export interface AppConfig {
     themes: Themes;
 }
 
-/**
- * Default configuration for the entire application. This object is used by
- * blockcoreConfigService to set the default configuration.
- *
- * If you need to store global configuration for your app, you can use this
- * object to set the defaults. To access, update and reset the config, use
- * blockcoreConfigService and its methods.
- *
- * "Screens" are carried over to the BreakpointObserver for accessing them within
- * components, and they are required.
- *
- * "Themes" are required for Tailwind to generate themes.
- */
 export const appConfig: AppConfig = JSON.parse(localStorage.getItem('config')) ?? {
     layout: 'modern',
     scheme: 'dark',
