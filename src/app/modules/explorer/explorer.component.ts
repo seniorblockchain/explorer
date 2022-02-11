@@ -62,6 +62,7 @@ export class ExplorerComponent implements OnInit, OnDestroy {
             name: ['Brian Hughes'],
             username: ['brianh']
         });
+
         // Get the blocks data
         this._explorerService.blocksdata$
             .pipe(takeUntil(this._unsubscribeAll))
@@ -78,7 +79,7 @@ export class ExplorerComponent implements OnInit, OnDestroy {
                 try {
                     this.info = data;
 
-                    this.node = this.info.node; console.log(this.node);
+                    this.node = this.info.node;
                     this.blockchain = this.node.blockchain;
                     this.network = this.node.network;
                     this.configuration = this.info.configuration;
@@ -86,7 +87,6 @@ export class ExplorerComponent implements OnInit, OnDestroy {
                     this.errorInfo = null;
                 } catch (error) {
                     this.errorInfo = error;
-                    console.log(error);
                 }
                 this.cdr.detectChanges();
             });

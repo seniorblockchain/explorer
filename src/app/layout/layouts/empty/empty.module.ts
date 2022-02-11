@@ -10,7 +10,6 @@ import { EmptyLayoutComponent } from 'app/layout/layouts/empty/empty.component';
     ],
     imports     : [
         RouterModule,
-        blockcoreLoadingBarModule,
         SharedModule
     ],
     exports     : [

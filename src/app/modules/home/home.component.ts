@@ -47,7 +47,6 @@ export class HomeComponent implements OnInit, OnDestroy
 
                 // Store the data
                 this.tickers = data;
-                console.log(data);
             });
 
     }

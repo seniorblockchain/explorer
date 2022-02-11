@@ -6,7 +6,6 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { blockcoreFullscreenModule } from '@blockcore/components/fullscreen';
-import { blockcoreLoadingBarModule } from '@blockcore/components/loading-bar';
 import { blockcoreNavigationModule } from '@blockcore/components/navigation';
 import { LanguagesModule } from 'app/layout/common/languages/languages.module';
 import { SearchModule } from 'app/layout/common/search/search.module';
@@ -20,7 +19,7 @@ import { appRoutes } from 'app/app.routing';
     declarations: [
         ModernLayoutComponent
     ],
-    imports     : [
+    imports: [
         HttpClientModule,
         RouterModule,
         MatButtonModule,
@@ -28,20 +27,18 @@ import { appRoutes } from 'app/app.routing';
         MatIconModule,
         MatMenuModule,
         blockcoreFullscreenModule,
-        blockcoreLoadingBarModule,
         blockcoreNavigationModule,
         LanguagesModule,
         SearchModule,
         ShortcutsModule,
         CoinModule,
         SharedModule,
-        RouterModule.forRoot(appRoutes, {onSameUrlNavigation: 'reload'}),
+        RouterModule.forRoot(appRoutes, { onSameUrlNavigation: 'reload' }),
     ],
-    exports     : [
+    exports: [
         ModernLayoutComponent,
         RouterModule
     ]
 })
-export class ModernLayoutModule
-{
+export class ModernLayoutModule {
 }
