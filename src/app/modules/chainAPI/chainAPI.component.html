@@ -64,77 +64,7 @@
                 <!-- ChainAPI -->
                 <mat-tab label={{setup.Chain?.Name}}>
                     <ng-template matTabContent>
-                        <div class="grid grid-cols-1 sm:grid-cols-6 gap-6 w-full min-w-0">
 
-                            <!-- Expense -->
-                            <div class="sm:col-span-6 lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-y-6">
-                                <!-- Weekly expenses -->
-                                <div class="col-span-1 sm:col-span-1 flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden sm:mr-3">
-                                    <div class="flex items-center mt-1">
-                                        <div class="flex flex-col">
-                                            <div class="text-3xl font-semibold tracking-tight leading-tight">
-                                                {{data.weeklyExpenses.amount | currency:'USD'}}
-                                            </div>
-                                            <div class="flex items-center">
-                                                <mat-icon
-                                                    class="mr-1 icon-size-5 text-red-500"
-                                                    [svgIcon]="'heroicons_solid:trending-down'"></mat-icon>
-                                                <div class="font-medium text-sm text-secondary leading-none whitespace-nowrap">
-                                                    <span class="text-red-500">2%</span>
-                                                    below networked
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-span-1 sm:col-span-1 flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden sm:ml-3">
-                                    <div class="flex items-start justify-between">
-                                        <div class="text-lg font-medium tracking-tight leading-6 truncate">Weekly Expenses</div>
-                                        <div class="ml-2 -mt-2 -mr-3">
-                                            <button
-                                                mat-icon-button
-                                                [matMenuTriggerFor]="weeklyExpensesMenu">
-                                                <mat-icon
-                                                    class="icon-size-5"
-                                                    [svgIcon]="'heroicons_solid:dots-vertical'"></mat-icon>
-                                            </button>
-                                            <mat-menu #weeklyExpensesMenu="matMenu">
-                                                <button mat-menu-item>This week</button>
-                                                <button mat-menu-item>Last week</button>
-                                                <button mat-menu-item>2 weeks ago</button>
-                                            </mat-menu>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center mt-1">
-                                        <div class="flex flex-col">
-                                            <div class="text-3xl font-semibold tracking-tight leading-tight">
-                                                {{data.weeklyExpenses.amount | currency:'USD'}}
-                                            </div>
-                                            <div class="flex items-center">
-                                                <mat-icon
-                                                    class="mr-1 icon-size-5 text-red-500"
-                                                    [svgIcon]="'heroicons_solid:trending-down'"></mat-icon>
-                                                <div class="font-medium text-sm text-secondary leading-none whitespace-nowrap">
-                                                    <span class="text-red-500">2%</span>
-                                                    below networked
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="flex flex-col flex-auto ml-8">
-                                            <apx-chart
-                                                class="flex-auto w-full h-16"
-                                                [chart]="chartWeeklyExpenses.chart"
-                                                [colors]="chartWeeklyExpenses.colors"
-                                                [series]="chartWeeklyExpenses.series"
-                                                [stroke]="chartWeeklyExpenses.stroke"
-                                                [tooltip]="chartWeeklyExpenses.tooltip"
-                                                [xaxis]="chartWeeklyExpenses.xaxis"
-                                                [yaxis]="chartWeeklyExpenses.yaxis"></apx-chart>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </ng-template>
                 </mat-tab>
 
