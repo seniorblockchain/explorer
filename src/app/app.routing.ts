@@ -1,3 +1,4 @@
+import { HomeComponent } from 'app/modules/home/home.component';
 import { Route } from '@angular/router';
 import { LayoutComponent } from 'app/layout/layout.component';
 import { InitialDataResolver } from 'app/app.resolvers';
@@ -110,6 +111,14 @@ export const appRoutes: Route[] = [
         children: [
             { path: ':chain/about', loadChildren: () => import('app/modules/about/about.module').then(m => m.AboutModule) },
         ]
-    }
+   }
+,
+{
+path: '**',
+    resolve: {
+      path: InitialDataResolver
+    },
+    component: HomeComponent
+  }
 
 ];

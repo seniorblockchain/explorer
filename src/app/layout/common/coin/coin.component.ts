@@ -90,11 +90,5 @@ export class CoinComponent implements OnInit, OnDestroy
         }).subscribe();
     }
 
-    /**
-     * Sign out
-     */
-    signOut(): void
-    {
-        this._router.navigate(['/sign-out']);
-    }
+
 }

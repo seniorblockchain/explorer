@@ -26,7 +26,7 @@
                 </div>
                 <!-- Actions -->
                 <div class="flex items-center mt-6 sm:mt-0 sm:ml-2 space-x-3">
-                    <a href="{{setup.Chain?.Url}}" target="_blank">
+                    <a href="" target="_blank">
                         <button class="blockcore-mat-button-rounded" mat-flat-button [color]="'primary'">
                             <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:chevron-double-right'"></mat-icon>
                             <span class="ml-2">Website</span>
@@ -54,7 +54,7 @@
     </div>
 
     <!-- Main -->
-    <div class="flex-auto border-t -mt-px pt-4 sm:pt-6">
+    <div  class="flex-auto border-t -mt-px pt-4 sm:pt-6">
         <div class="w-full max-w-screen-xl mx-auto">
             <!-- Tabs -->
             <mat-tab-group
@@ -64,82 +64,103 @@
                 <!-- Ticker -->
                 <mat-tab label={{setup.Chain?.Name}}>
                     <ng-template matTabContent>
-                        <div class="grid grid-cols-1 sm:grid-cols-6 gap-6 w-full min-w-0">
 
-                            <!-- Expense -->
-                            <div class="sm:col-span-6 lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-y-6">
-                                <!-- Weekly expenses -->
-                                <div class="col-span-1 sm:col-span-1 flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden sm:mr-3">
-                                    <div class="flex items-center mt-1">
-                                        <div class="flex flex-col">
-                                            <div class="text-3xl font-semibold tracking-tight leading-tight">
-                                                <div class="widget" *ngIf="setup.featureEnabled(setup.Explorer?.Features?.Ticker)">
-                                                    <h1><span class="accent">${{setup.Chain?.Symbol}}</span>.</h1>
-                                                    <h2 *ngIf="ticker.btc">
-                                                       {{ticker.btc.toFixed(8)}} <i class="fab fa-btc"></i> <span *ngIf="ticker.changePercentage" class="{{ticker.changeType}}">{{ticker.changePercentage}}%</span>
-                                                    </h2>
-                                                    <h3 *ngIf="ticker.usd">${{ticker.usd.toFixed(3)}}</h3>
-                                                    <app-error class="centered" [error]="error"></app-error>
-                                                 </div>
+                        <div *ngIf="dataprice" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
+                            <!-- Price Chart -->
+                            <div class="sm:col-span-2 lg:col-span-3 dark flex flex-col flex-auto bg-card shadow rounded-2xl overflow-hidden">
+                                <div class="flex items-center justify-between mt-10 ml-10 mr-6 sm:mr-10">
+                                    <div class="flex flex-col">
+                                        <div class="mr-4 text-2xl md:text-3xl font-semibold tracking-tight leading-7">{{setup.Chain?.Symbol}} to USD Chart </div>
+                                    </div>
 
-                                            </div>
-                                            <div class="flex items-center">
-                                                <mat-icon
-                                                    class="mr-1 icon-size-5 text-red-500"
-                                                    [svgIcon]="'heroicons_solid:trending-down'"></mat-icon>
-                                                <div class="font-medium text-sm text-secondary leading-none whitespace-nowrap">
-                                                    <span class="text-red-500">{{ticker.changePercentage}}</span>
-
-                                                </div>
-                                            </div>
+                                </div>
+                                <div class="flex flex-col flex-auto h-80">
+                                    <apx-chart
+                                        class="flex-auto w-full h-full"
+                                        [chart]="coinpricechart.chart"
+                                        [colors]="coinpricechart.colors"
+                                        [dataLabels]="coinpricechart.dataLabels"
+                                        [fill]="coinpricechart.fill"
+                                        [grid]="coinpricechart.grid"
+                                        [series]="coinpricechart.series"
+                                        [stroke]="coinpricechart.stroke"
+                                        [tooltip]="coinpricechart.tooltip"
+                                        [xaxis]="coinpricechart.xaxis"
+                                        [yaxis]="coinpricechart.yaxis"></apx-chart>
+                                </div>
+                            </div>
+                            <!-- Price -->
+                            <div *ngIf="data" class="sm:col-span-2 lg:col-span-1 flex flex-col flex-auto bg-card shadow rounded-2xl overflow-hidden">
+                                <div class="flex items-start justify-between m-6 mb-0">
+                                    <div class="text-lg font-medium tracking-tight leading-6 truncate">Price</div>
+                                    <div class="text-sm font-medium tracking-tight leading-6 truncate"
+                                    matTooltip="{{ticker.last_updated_at | timestamp | date:'hh:mm'}}">last update : {{ticker.last_updated_at
+                                    | ago}}
+                                </div>
+                                </div>
+                                <div class="flex flex-col lg:flex-row lg:items-center mx-6 mt-3">
+                                    <div class="text-7xl font-bold tracking-tighter leading-tight"> ${{ticker.usd.toFixed(3)}}</div>
+                                    <div class="flex lg:flex-col lg:ml-3">
+                                        <mat-icon
+                                            class="icon-size-5" [ngClass]="getChangeClass(ticker.usd_24h_change)"
+                                            [svgIcon]="'heroicons_solid:'+getChangeIcon(ticker.usd_24h_change)"></mat-icon>
+                                        <div class="flex items-center ml-1 lg:ml-0 lg:mt-0.5 text-md leading-none whitespace-nowrap text-secondary">
+                                            <span class="font-medium" [ngClass]="getChangeClass(ticker.usd_24h_change)">{{ticker.usd_24h_change.toFixed(2)}} %</span>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-span-1 sm:col-span-1 flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden sm:ml-3">
-                                    <div class="flex items-start justify-between">
-                                        <div class="text-lg font-medium tracking-tight leading-6 truncate">Weekly Expenses</div>
-                                        <div class="ml-2 -mt-2 -mr-3">
-                                            <button
-                                                mat-icon-button
-                                                [matMenuTriggerFor]="weeklyExpensesMenu">
-                                                <mat-icon
-                                                    class="icon-size-5"
-                                                    [svgIcon]="'heroicons_solid:dots-vertical'"></mat-icon>
-                                            </button>
-                                            <mat-menu #weeklyExpensesMenu="matMenu">
-                                                <button mat-menu-item>This week</button>
-                                                <button mat-menu-item>Last week</button>
-                                                <button mat-menu-item>2 weeks ago</button>
-                                            </mat-menu>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center mt-1">
-                                        <div class="flex flex-col">
-                                            <div class="text-3xl font-semibold tracking-tight leading-tight">
-                                                {{data.weeklyExpenses.amount | currency:'USD'}}
-                                            </div>
-                                            <div class="flex items-center">
-                                                <mat-icon
-                                                    class="mr-1 icon-size-5 text-red-500"
-                                                    [svgIcon]="'heroicons_solid:trending-down'"></mat-icon>
-                                                <div class="font-medium text-sm text-secondary leading-none whitespace-nowrap">
-                                                    <span class="text-red-500">2%</span>
-                                                    below tickered
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="flex flex-col flex-auto ml-8">
-                                            <apx-chart
-                                                class="flex-auto w-full h-16"
-                                                [chart]="chartWeeklyExpenses.chart"
-                                                [colors]="chartWeeklyExpenses.colors"
-                                                [series]="chartWeeklyExpenses.series"
-                                                [stroke]="chartWeeklyExpenses.stroke"
-                                                [tooltip]="chartWeeklyExpenses.tooltip"
-                                                [xaxis]="chartWeeklyExpenses.xaxis"
-                                                [yaxis]="chartWeeklyExpenses.yaxis"></apx-chart>
-                                        </div>
-                                    </div>
+                                <div class="flex flex-col flex-auto h-20">
+                                    <apx-chart
+                                        class="flex-auto w-full h-full"
+                                        [chart]="chartConversions.chart"
+                                        [colors]="chartConversions.colors"
+                                        [series]="chartConversions.series"
+                                        [stroke]="chartConversions.stroke"
+                                        [tooltip]="chartConversions.tooltip"
+                                        [xaxis]="chartConversions.xaxis"
+                                        [yaxis]="chartConversions.yaxis"></apx-chart>
+                                </div>
+                            </div>
+                            <!-- Market cap -->
+                            <div *ngIf="data" class="flex flex-col flex-auto bg-card shadow rounded-2xl overflow-hidden">
+                                <div class="flex items-start justify-between m-6 mb-0">
+                                    <div class="text-lg font-medium tracking-tight leading-6 truncate">USD Market Cap</div>
+
+                                </div>
+                                <div class="flex flex-col lg:flex-row lg:items-center mx-6 mt-3">
+                                    <div class="text-7xl font-bold tracking-tighter leading-tight">{{ticker.usd_market_cap.toFixed(3)}}</div>
+                                </div>
+                                <div class="flex flex-col flex-auto h-20">
+                                    <apx-chart
+                                        class="flex-auto w-full h-full"
+                                        [chart]="chartImpressions.chart"
+                                        [colors]="chartImpressions.colors"
+                                        [series]="chartImpressions.series"
+                                        [stroke]="chartImpressions.stroke"
+                                        [tooltip]="chartImpressions.tooltip"
+                                        [xaxis]="chartImpressions.xaxis"
+                                        [yaxis]="chartImpressions.yaxis"></apx-chart>
+                                </div>
+                            </div>
+                            <!-- Volume -->
+                            <div *ngIf="data" class="flex flex-col flex-auto bg-card shadow rounded-2xl overflow-hidden">
+                                <div class="flex items-start justify-between m-6 mb-0">
+                                    <div class="text-lg font-medium tracking-tight leading-6 truncate">Volume in Last 24h</div>
+
+                                </div>
+                                <div class="flex flex-col lg:flex-row lg:items-center mx-6 mt-3">
+                                    <div class="text-7xl font-bold tracking-tighter leading-tight">{{ticker.usd_24h_vol.toFixed(3)}}</div>
+                                </div>
+                                <div class="flex flex-col flex-auto h-20">
+                                    <apx-chart
+                                        class="flex-auto w-full h-full"
+                                        [chart]="chartVisits.chart"
+                                        [colors]="chartVisits.colors"
+                                        [series]="chartVisits.series"
+                                        [stroke]="chartVisits.stroke"
+                                        [tooltip]="chartVisits.tooltip"
+                                        [xaxis]="chartVisits.xaxis"
+                                        [yaxis]="chartVisits.yaxis"></apx-chart>
                                 </div>
                             </div>
                         </div>

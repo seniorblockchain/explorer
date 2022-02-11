@@ -34,6 +34,9 @@ export class HomeComponent implements OnInit, OnDestroy
         public setup: SetupService,
     )
     {
+        if (!setup.multiChain) {
+            _router.navigate(['/blockcore' + setup.current.toLowerCase()]);
+          }
     }
 
     ngOnInit(): void

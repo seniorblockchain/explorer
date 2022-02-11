@@ -16,6 +16,8 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { SharedModule } from 'app/shared/shared.module';
 import { TickerComponent } from 'app/modules/ticker/ticker.component';
 import { tickerRoutes } from 'app/modules/ticker/ticker.routing';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { PipeModule } from 'app/shared/pipe.module';
 
 @NgModule({
     declarations: [
@@ -36,7 +38,9 @@ import { tickerRoutes } from 'app/modules/ticker/ticker.routing';
         MatTabsModule,
         NgApexchartsModule,
         TranslocoModule,
-        SharedModule
+        SharedModule,
+        MatTooltipModule,
+        PipeModule
     ]
 })
 export class TickerModule

@@ -113,7 +113,7 @@
                             </div>
                         </div>
                         <!-- View All Blocks -->
-                        <div class="py-10 sm:py-12 sm:px-16 text-on-primary-600">
+                        <div *ngIf="blocks" class="py-10 sm:py-12 sm:px-16 text-on-primary-600">
                             <div class="flex flex-col items-center w-full max-w-7xl mx-auto text-center">
                                 <a [routerLink]="['blocks']"><button mat-flat-button
                                         class="blockcore-mat-button-large px-12 back-chain-color text-primary-800">
@@ -127,10 +127,10 @@
                 </mat-tab>
 
 
+                <!-- Network Statistics -->
 
                 <mat-tab label="Network Statistics">
                     <ng-template matTabContent>
-                        <!-- Section title -->
 
                         <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 gap-8 w-full">
 

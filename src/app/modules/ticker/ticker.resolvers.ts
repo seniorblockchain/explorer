@@ -17,8 +17,9 @@ export class TickerResolver implements Resolve<any>
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any>
     {
        return forkJoin([
-            this._tickerService.getData(),
-            this._tickerService.updateTicker()
+            this._tickerService.get3baxChartData(),
+            this._tickerService.updateTicker(),
+            this._tickerService.getPriceChartData()
         ]);
     }
 }

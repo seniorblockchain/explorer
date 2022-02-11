@@ -58,7 +58,7 @@ export class HomeService {
             const coins = this.setup.chains.map(c => c.coin).filter(c => c != null);
 
             const coinList = coins.join('%2C');
-            const url = `https://api.coingecko.com/api/v3/simple/price?ids=${coinList}&vs_currencies=btc&include_24hr_vol=true&include_24hr_change=true&include_last_updated_at=true`;
+            const url = `https://api.coingecko.com/api/v3/simple/price?ids=${coinList}&vs_currencies=usd&include_24hr_vol=true&include_24hr_change=true&include_last_updated_at=true`;
             const request = await this.api.download(url);
             this.tickers = request;
             this._data.next(this.tickers);

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { cloneDeep } from 'lodash-es';
 import { blockcoreMockApiService } from '@blockcore/lib/mock-api';
-import { ticker as tickerData } from 'app/mock-api/ticker/ticker/data';
+import {  tickerData } from 'app/mock-api/ticker/ticker/data';
 
 @Injectable({
     providedIn: 'root'

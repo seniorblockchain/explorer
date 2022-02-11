@@ -19,6 +19,7 @@ html {
       drop-shadow(var(--stroke-neg) var(--stroke-neg) 0 var(--stroke-color));
    }
 html{
+    --black: #000000;
     --accent: #f3b623;
     --btc: #f3b623;
     --positive: #63c700;
@@ -38,5 +39,9 @@ html{
  }
 .negative {
     color: var(--negative);
+ }
+ .apexcharts-menu
+ {
+    color: var(--black);
  }
 

@@ -1,4 +1,3 @@
-import { ticker } from './../../mock-api/ticker/ticker/data';
 /* eslint-disable no-var */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
@@ -16,12 +15,18 @@ import { SetupService } from 'app/services/setup.service';
 })
 export class TickerComponent implements OnInit, OnDestroy {
     chartprice: ApexOptions = {};
-    chartTaskDistribution: ApexOptions = {};
-    chartBudgetDistribution: ApexOptions = {};
-    chartWeeklyExpenses: ApexOptions = {};
-    chartMonthlyExpenses: ApexOptions = {};
-    chartYearlyExpenses: ApexOptions = {};
+
+    coinpricechart: ApexOptions;
+    chartConversions: ApexOptions;
+    chartImpressions: ApexOptions;
+    chartVisits: ApexOptions;
+    coinpricechartVsPageViews: ApexOptions;
+    chartNewVsReturning: ApexOptions;
+    chartGender: ApexOptions;
+    chartAge: ApexOptions;
+    chartLanguage: ApexOptions;
     data: any;
+    dataprice: any;
     tickerLable: string = 'Ticker';
     ticker: any = {};
     error: any;
@@ -52,30 +57,53 @@ export class TickerComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
 
         // Get the data
-        this._tickerService.data$
+        this._tickerService.data3bax$
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe((data) => {
-
-                // Store the data
-                this.data = data;
-                // Prepare the chart data
-                this._prepareChartData();
+                if (data !== null) {
+                    this.data = data;
+                    this._prepareChartData();
+                }
             });
+
+
+        this._tickerService.dataprice$
+            .pipe(takeUntil(this._unsubscribeAll))
+            .subscribe((dataprice) => {
+
+                if (dataprice !== null) {
+                    this.dataprice = dataprice;
+                    this._preparePriceChartData();
+                }
+            });
+
 
         this._tickerService.dataticker$
             .pipe(takeUntil(this._unsubscribeTicker))
-            .subscribe((t) => {
-                if (t !== null) {
-                    if (t.coin === this.setup.Chain.Symbol ) {
-                        // Prepare the ticker data
-                        this.ticker = t;
-                    }
+            .subscribe((dataticker) => {
+                if (dataticker !== null) {
+
+                    // Prepare the ticker data
+                    this.ticker = dataticker;
                 }
             });
 
     }
 
-
+    getChangeClass(value: number) {
+        if (value < 0) {
+          return 'negative';
+        } else {
+          return 'positive';
+        }
+      }
+      getChangeIcon(value: number) {
+        if (value < 0) {
+          return 'trending-down';
+        } else {
+          return 'trending-up';
+        }
+      }
 
     ngOnDestroy(): void {
         // Unsubscribe from all subscriptions
@@ -83,6 +111,8 @@ export class TickerComponent implements OnInit, OnDestroy {
         this._unsubscribeAll.complete();
         this._unsubscribeTicker.next(null);
         this._unsubscribeTicker.complete();
+        this.data = {};
+        this.dataprice = {};
     }
 
     trackByFn(index: number, item: any): any {
@@ -95,303 +125,219 @@ export class TickerComponent implements OnInit, OnDestroy {
      * @private
      */
     private _prepareChartData(): void {
-        // Github issues
-        this.chartprice = {
+        // Conversions
+        this.chartConversions = {
             chart: {
+                animations: {
+                    enabled: false
+                },
                 fontFamily: 'inherit',
                 foreColor: 'inherit',
                 height: '100%',
-                type: 'line',
-                toolbar: {
-                    show: false
-                },
-                zoom: {
-                    enabled: false
+                type: 'area',
+                sparkline: {
+                    enabled: true
                 }
             },
-            colors: ['#64748B', '#94A3B8'],
-            dataLabels: {
-                enabled: true,
-                enabledOnSeries: [0],
-                background: {
-                    borderWidth: 0
-                }
+            colors: ['#38BDF8'],
+            fill: {
+                colors: ['#38BDF8'],
+                opacity: 0.5
             },
-            grid: {
-                borderColor: 'var(--blockcore-border)'
-            },
-            labels: this.data.price.labels,
-            legend: {
-                show: false
-            },
-            plotOptions: {
-                bar: {
-                    columnWidth: '50%'
-                }
-            },
-            series: this.data.price.series,
-            states: {
-                hover: {
-                    filter: {
-                        type: 'darken',
-                        value: 0.75
-                    }
-                }
-            },
+            series: [{
+                name: 'prices',
+                data: this.data.prices
+            }],
             stroke: {
-                width: [3, 0]
+                curve: 'smooth'
             },
             tooltip: {
                 followCursor: true,
                 theme: 'dark'
+            },
+            xaxis: {
+                type: 'datetime',
+            },
+            yaxis: {
+                labels: {
+                    formatter: (val): string => val.toString()
+                }
+            }
+        };
+
+        // Impressions
+        this.chartImpressions = {
+            chart: {
+                animations: {
+                    enabled: false
+                },
+                fontFamily: 'inherit',
+                foreColor: 'inherit',
+                height: '100%',
+                type: 'area',
+                sparkline: {
+                    enabled: true
+                }
+            },
+            colors: ['#34D399'],
+            fill: {
+                colors: ['#34D399'],
+                opacity: 0.5
+            },
+            series: [{
+                name: 'market_caps',
+                data: this.data.market_caps
+            }],
+            stroke: {
+                curve: 'smooth'
+            },
+            tooltip: {
+                followCursor: true,
+                theme: 'dark'
+            },
+            xaxis: {
+                type: 'datetime',
+            },
+            yaxis: {
+                labels: {
+                    formatter: (val): string => val.toString()
+                }
+            }
+        };
+
+        // Visits
+        this.chartVisits = {
+            chart: {
+                animations: {
+                    enabled: false
+                },
+                fontFamily: 'inherit',
+                foreColor: 'inherit',
+                height: '100%',
+                type: 'area',
+                sparkline: {
+                    enabled: true
+                }
+            },
+            colors: ['#FB7185'],
+            fill: {
+                colors: ['#FB7185'],
+                opacity: 0.5
+            },
+            series: [{
+                name: 'total_volumes',
+                data: this.data.total_volumes
+            }],
+            stroke: {
+                curve: 'smooth'
+            },
+            tooltip: {
+                followCursor: true,
+                theme: 'dark'
+            },
+            xaxis: {
+                type: 'datetime',
+            },
+            yaxis: {
+                labels: {
+                    formatter: (val): string => val.toString()
+                }
+            }
+        };
+
+
+    }
+
+    private _preparePriceChartData(): void {
+        this.coinpricechart = {
+            chart: {
+                animations: {
+                    speed: 400,
+                    animateGradually: {
+                        enabled: false
+                    }
+                },
+                fontFamily: 'inherit',
+                foreColor: 'inherit',
+                width: '100%',
+                height: '100%',
+                type: 'area',
+                toolbar: {
+                    show: true,
+                },
+                zoom: {
+                    enabled: true
+                }
+            },
+            colors: ['#818CF8'],
+            dataLabels: {
+                enabled: false
+            },
+            fill: {
+                colors: ['#312E81']
+            },
+            grid: {
+                show: true,
+                borderColor: '#334155',
+                padding: {
+                    top: 10,
+                    bottom: -40,
+                    left: 0,
+                    right: 0
+                },
+                position: 'back',
+                xaxis: {
+                    lines: {
+                        show: true
+                    }
+                }
+            },
+            series: [{
+                name: 'prices',
+                data: this.dataprice.prices
+            }],
+            stroke: {
+                width: 2
+            },
+            tooltip: {
+                followCursor: true,
+                theme: 'dark',
+                x: {
+                    format: 'MMM dd, yyyy'
+                },
+                y: {
+                    formatter: (value: number): string => `${value}`
+                }
             },
             xaxis: {
                 axisBorder: {
                     show: false
                 },
                 axisTicks: {
-                    color: 'var(--blockcore-border)'
-                },
-                labels: {
-                    style: {
-                        colors: 'var(--blockcore-text-secondary)'
-                    }
-                },
-                tooltip: {
-                    enabled: false
-                }
-            },
-            yaxis: {
-                labels: {
-                    offsetX: -16,
-                    style: {
-                        colors: 'var(--blockcore-text-secondary)'
-                    }
-                }
-            }
-        };
-
-        // Task distribution
-        this.chartTaskDistribution = {
-            chart: {
-                fontFamily: 'inherit',
-                foreColor: 'inherit',
-                height: '100%',
-                type: 'polarArea',
-                toolbar: {
                     show: false
                 },
-                zoom: {
-                    enabled: false
-                }
-            },
-            labels: this.data.taskDistribution.labels,
-            legend: {
-                position: 'bottom'
-            },
-            plotOptions: {
-                polarArea: {
-                    spokes: {
-                        connectorColors: 'var(--blockcore-border)'
-                    },
-                    rings: {
-                        strokeColor: 'var(--blockcore-border)'
+                crosshairs: {
+                    stroke: {
+                        color: '#475569',
+                        dashArray: 0,
+                        width: 2
                     }
-                }
-            },
-            series: this.data.taskDistribution.series,
-            states: {
-                hover: {
-                    filter: {
-                        type: 'darken',
-                        value: 0.75
-                    }
-                }
-            },
-            stroke: {
-                width: 2
-            },
-            theme: {
-                monochrome: {
-                    enabled: true,
-                    color: '#93C5FD',
-                    shadeIntensity: 0.75,
-                    shadeTo: 'dark'
-                }
-            },
-            tooltip: {
-                followCursor: true,
-                theme: 'dark'
-            },
-            yaxis: {
+                },
                 labels: {
+                    offsetY: -20,
                     style: {
-                        colors: 'var(--blockcore-text-secondary)'
-                    }
-                }
-            }
-        };
-
-        // Budget distribution
-        this.chartBudgetDistribution = {
-            chart: {
-                fontFamily: 'inherit',
-                foreColor: 'inherit',
-                height: '100%',
-                type: 'radar',
-                sparkline: {
-                    enabled: true
-                }
-            },
-            colors: ['#818CF8'],
-            dataLabels: {
-                enabled: true,
-                formatter: (val: number): string | number => `${val}%`,
-                textAnchor: 'start',
-                style: {
-                    fontSize: '13px',
-                    fontWeight: 500
-                },
-                background: {
-                    borderWidth: 0,
-                    padding: 4
-                },
-                offsetY: -15
-            },
-            markers: {
-                strokeColors: '#818CF8',
-                strokeWidth: 4
-            },
-            plotOptions: {
-                radar: {
-                    polygons: {
-                        strokeColors: 'var(--blockcore-border)',
-                        connectorColors: 'var(--blockcore-border)'
-                    }
-                }
-            },
-            series: this.data.budgetDistribution.series,
-            stroke: {
-                width: 2
-            },
-            tooltip: {
-                theme: 'dark',
-                y: {
-                    formatter: (val: number): string => `${val}%`
-                }
-            },
-            xaxis: {
-                labels: {
-                    show: true,
-                    style: {
-                        fontSize: '12px',
-                        fontWeight: '500'
+                        colors: '#CBD5E1'
                     }
                 },
-                categories: this.data.budgetDistribution.categories
-            },
-            yaxis: {
-                max: (max: number): number => parseInt((max + 10).toFixed(0), 10),
-                tickAmount: 7
-            }
-        };
-
-        // Weekly expenses
-        this.chartWeeklyExpenses = {
-            chart: {
-                animations: {
+                tickAmount: 20,
+                tooltip: {
                     enabled: false
                 },
-                fontFamily: 'inherit',
-                foreColor: 'inherit',
-                height: '100%',
-                type: 'line',
-                sparkline: {
-                    enabled: true
-                }
-            },
-            colors: ['#22D3EE'],
-            series: this.data.weeklyExpenses.series,
-            stroke: {
-                curve: 'smooth'
-            },
-            tooltip: {
-                theme: 'dark'
-            },
-            xaxis: {
-                type: 'category',
-                categories: this.data.weeklyExpenses.labels
+                type: 'datetime'
             },
             yaxis: {
-                labels: {
-                    formatter: (val): string => `$${val}`
-                }
-            }
-        };
 
-        // Monthly expenses
-        this.chartMonthlyExpenses = {
-            chart: {
-                animations: {
-                    enabled: false
-                },
-                fontFamily: 'inherit',
-                foreColor: 'inherit',
-                height: '100%',
-                type: 'line',
-                sparkline: {
-                    enabled: true
-                }
-            },
-            colors: ['#4ADE80'],
-            series: this.data.monthlyExpenses.series,
-            stroke: {
-                curve: 'smooth'
-            },
-            tooltip: {
-                theme: 'dark'
-            },
-            xaxis: {
-                type: 'category',
-                categories: this.data.monthlyExpenses.labels
-            },
-            yaxis: {
-                labels: {
-                    formatter: (val): string => `$${val}`
-                }
-            }
-        };
-
-        // Yearly expenses
-        this.chartYearlyExpenses = {
-            chart: {
-                animations: {
-                    enabled: false
-                },
-                fontFamily: 'inherit',
-                foreColor: 'inherit',
-                height: '100%',
-                type: 'line',
-                sparkline: {
-                    enabled: true
-                }
-            },
-            colors: ['#FB7185'],
-            series: this.data.yearlyExpenses.series,
-            stroke: {
-                curve: 'smooth'
-            },
-            tooltip: {
-                theme: 'dark'
-            },
-            xaxis: {
-                type: 'category',
-                categories: this.data.yearlyExpenses.labels
-            },
-            yaxis: {
-                labels: {
-                    formatter: (val): string => `$${val}`
-                }
+                show: false
             }
         };
     }
