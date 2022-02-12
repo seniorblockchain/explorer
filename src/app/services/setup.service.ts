@@ -78,7 +78,6 @@ export class SetupService {
 
     async getChains(chain: string) {
         if (environment.local) {
-            console.log('Environment is local, don\'t get setup configuration from server.');
             return;
         }
 

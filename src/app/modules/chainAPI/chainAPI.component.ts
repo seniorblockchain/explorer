@@ -23,7 +23,6 @@ export class ChainAPIComponent implements OnInit, OnDestroy {
     chartYearlyExpenses: ApexOptions = {};
     data: any;
     chainAPILable: string = 'ChainAPI';
-    subscription: any;
     chainAPI: any = {};
     error: any;
     chain: any;
@@ -45,7 +44,6 @@ export class ChainAPIComponent implements OnInit, OnDestroy {
         // Unsubscribe from all subscriptions
         this._unsubscribeAll.next(null);
         this._unsubscribeAll.complete();
-        this.subscription.unsubscribe();
     }
 
     ngOnInit(): void {

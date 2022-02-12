@@ -25,8 +25,6 @@ export class LoadingResolverService implements Resolve<any> {
 
       // If not initialized yet, perform some operations:
       if (!this.setup.initialized) {
-         console.log('Initilization of Explorer');
-
          try {
             // First make a request to the local API to check what chain instance it is runnign.
             const explorerChainRequest = await this.api.request('/api/explorer/chain');
@@ -34,7 +32,6 @@ export class LoadingResolverService implements Resolve<any> {
             if (explorerChainRequest.status === 200) {
                explorerChain = await explorerChainRequest.text();
 
-               console.log('API Chain:', explorerChain);
                this.setup.apiChain = explorerChain;
 
                this.setup.multiChain = (explorerChain === 'BLOCKCORE' || explorerChain === 'COINVAULT');
@@ -48,7 +45,6 @@ export class LoadingResolverService implements Resolve<any> {
          }
 
          if (this.setup.multiChain) {
-            console.log('GO GET', explorerChain);
             await this.setup.getChains(explorerChain);
          }
 
@@ -62,7 +58,6 @@ export class LoadingResolverService implements Resolve<any> {
          this.setup.initialized = true;
       }
 
-      console.log('Explorer Chain:', explorerChain);
 
       // TODO: Figure out a better way to get path fragments pre-parsed into an array.
       const fragments = state.url.split('/');

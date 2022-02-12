@@ -69,8 +69,6 @@ export class ApiService {
 
    async loadSetup(chain: string) {
 
-      console.log('LOAD SETUP', chain);
-
       let setup = null;
 
       if (environment.local) {

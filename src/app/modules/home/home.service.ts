@@ -40,19 +40,19 @@ export class HomeService {
      * Get data
      */
     async getData(): Promise<Observable<any>> {
-        await this.updateTicker();
+        await this.updateTickers();
         return this.tickers;
     }
 
 
     // eslint-disable-next-line @angular-eslint/use-lifecycle-interface
     async ngOnInit() {
-        await this.updateTicker();
+        await this.updateTickers();
     }
 
 
 
-    async updateTicker() {
+    async updateTickers() {
 
         try {
             const coins = this.setup.chains.map(c => c.coin).filter(c => c != null);

@@ -24,7 +24,6 @@ export class NetworkComponent implements OnInit, OnDestroy
     chartYearlyExpenses: ApexOptions = {};
     data: any;
     networkLable: string = 'Network';
-    subscription: any;
     network: any = {};
     error: any;
     chain: any;
@@ -70,7 +69,6 @@ export class NetworkComponent implements OnInit, OnDestroy
         // Unsubscribe from all subscriptions
         this._unsubscribeAll.next(null);
         this._unsubscribeAll.complete();
-        this.subscription.unsubscribe();
     }
 
 

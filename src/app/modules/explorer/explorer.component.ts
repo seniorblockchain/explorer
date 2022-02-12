@@ -48,57 +48,58 @@ export class ExplorerComponent implements OnInit, OnDestroy {
         public cdr: ChangeDetectorRef,
         public com: CommonModule
     ) {
+
     }
 
-    // -----------------------------------------------------------------------------------------------------
-    // @ Lifecycle hooks
-    // -----------------------------------------------------------------------------------------------------
 
-    /**
-     * On init
-     */
     ngOnInit(): void {
         this.searchForm = this._formBuilder.group({
-            name: ['Brian Hughes'],
-            username: ['brianh']
+            name: ['blockcore']
+        });
+        this.subscription = this.setup.currentChain$.subscribe(async (chain) => {
+            if (!this.setup.isCurrentRootChain) {
+                // Get the blocks data
+                this._explorerService.blocksdata$
+                    .pipe(takeUntil(this._unsubscribeAll))
+                    .subscribe((data) => {
+                        if (data !== null) {
+                            this.blocks = data;
+                            // this.cdr.detectChanges();
+                        }
+                    });
+
+
+                // Get the info data
+                this._explorerService.infodata$
+                    .pipe(takeUntil(this._unsubscribeAll))
+                    .subscribe((data) => {
+                        if (data !== null) {
+                            try {
+                                this.info = data;
+                                this.node = this.info.node;
+                                this.blockchain = this.node.blockchain;
+                                this.network = this.node.network;
+                                this.configuration = this.info.configuration;
+                                this.consensus = this.configuration?.consensus;
+                                this.errorInfo = null;
+                            } catch (error) {
+                                this.errorInfo = error;
+                            }
+                        }
+                        // this.cdr.detectChanges();
+                    });
+            }
         });
 
-        // Get the blocks data
-        this._explorerService.blocksdata$
-            .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe((data) => {
-                this.blocks = data;
-                this.cdr.detectChanges();
-            });
-
-
-        // Get the info data
-        this._explorerService.infodata$
-            .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe((data) => {
-                try {
-                    this.info = data;
-
-                    this.node = this.info.node;
-                    this.blockchain = this.node.blockchain;
-                    this.network = this.node.network;
-                    this.configuration = this.info.configuration;
-                    this.consensus = this.configuration?.consensus;
-                    this.errorInfo = null;
-                } catch (error) {
-                    this.errorInfo = error;
-                }
-                this.cdr.detectChanges();
-            });
 
     }
 
-    /**
-     * On destroy
-     */
+
     ngOnDestroy(): void {
-        // Unsubscribe from all subscriptions
         this._unsubscribeAll.next(null);
         this._unsubscribeAll.complete();
+        clearTimeout(this._explorerService.timerInfo);
+        clearTimeout(this._explorerService.timerBlocks);
+        this.subscription.unsubscribe();
     }
 }

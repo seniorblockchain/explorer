@@ -55,12 +55,6 @@ export class ExplorerService {
         await this.updateInfo();
         return this.info;
     }
-    // eslint-disable-next-line @angular-eslint/use-lifecycle-interface
-    ngOnDestroy(): void {
-        clearTimeout(this.timerInfo);
-        clearTimeout(this.timerBlocks);
-        this.subscription.unsubscribe();
-    }
 
     async updateBlocks() {
         if (this.setup.isCurrentRootChain) {

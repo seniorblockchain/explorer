@@ -24,7 +24,6 @@ export class InsightComponent implements OnInit, OnDestroy
     chartYearlyExpenses: ApexOptions = {};
     data: any;
     insightLable: string = 'Insight';
-    subscription: any;
     insight: any = {};
     error: any;
     chain: any;
@@ -76,7 +75,6 @@ export class InsightComponent implements OnInit, OnDestroy
         // Unsubscribe from all subscriptions
         this._unsubscribeAll.next(null);
         this._unsubscribeAll.complete();
-        this.subscription.unsubscribe();
     }
 
 
