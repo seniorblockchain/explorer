@@ -1,0 +1,97 @@
+/* Variables */
+$blockcore-vertical-navigation-thin-width: 80px;
+
+blockcore-vertical-navigation {
+
+    /* Thin appearance overrides */
+    &.blockcore-vertical-navigation-appearance-thin {
+        width: $blockcore-vertical-navigation-thin-width;
+        min-width: $blockcore-vertical-navigation-thin-width;
+        max-width: $blockcore-vertical-navigation-thin-width;
+
+        /* Left positioned */
+        &.blockcore-vertical-navigation-position-left {
+
+            &.blockcore-vertical-navigation-mode-side {
+                margin-left: -$blockcore-vertical-navigation-thin-width;
+            }
+
+            &.blockcore-vertical-navigation-opened {
+                margin-left: 0;
+            }
+        }
+
+        /* Right positioned */
+        &.blockcore-vertical-navigation-position-right {
+
+            &.blockcore-vertical-navigation-mode-side {
+                margin-right: -$blockcore-vertical-navigation-thin-width;
+            }
+
+            &.blockcore-vertical-navigation-opened {
+                margin-right: 0;
+            }
+
+            .blockcore-vertical-navigation-aside-wrapper {
+                left: auto;
+                right: $blockcore-vertical-navigation-thin-width;
+            }
+        }
+
+        /* Wrapper */
+        .blockcore-vertical-navigation-wrapper {
+
+            /* Content */
+            .blockcore-vertical-navigation-content {
+
+                > blockcore-vertical-navigation-aside-item,
+                > blockcore-vertical-navigation-basic-item {
+                    flex-direction: column;
+                    justify-content: center;
+                    height: 64px;
+                    min-height: 64px;
+                    max-height: 64px;
+                    padding: 0 16px;
+
+                    .blockcore-vertical-navigation-item-wrapper {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+
+                        .blockcore-vertical-navigation-item {
+                            justify-content: center;
+                            padding: 12px;
+                            border-radius: 4px;
+
+                            .blockcore-vertical-navigation-item-icon {
+                                margin: 0;
+                            }
+
+                            .blockcore-vertical-navigation-item-arrow,
+                            .blockcore-vertical-navigation-item-badge-content,
+                            .blockcore-vertical-navigation-item-title-wrapper {
+                                display: none;
+                            }
+                        }
+                    }
+                }
+
+                > blockcore-vertical-navigation-collapsable-item {
+                    display: none
+                }
+
+                > blockcore-vertical-navigation-group-item {
+
+                    > .blockcore-vertical-navigation-item-wrapper {
+                        display: none
+                    }
+                }
+            }
+        }
+
+        /* Aside wrapper */
+        .blockcore-vertical-navigation-aside-wrapper {
+            left: $blockcore-vertical-navigation-thin-width;
+        }
+    }
+}

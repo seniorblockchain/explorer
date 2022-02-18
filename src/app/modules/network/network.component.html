@@ -1,0 +1,307 @@
+<div class="flex flex-col flex-auto min-w-0">
+
+    <!-- Header -->
+    <div class="bg-card">
+        <div class="flex flex-col w-full max-w-screen-xl mx-auto px-6 sm:px-8">
+            <div class="flex flex-col sm:flex-row flex-auto sm:items-center min-w-0 my-8 sm:my-12">
+                <!-- Avatar and name -->
+                <div class="flex flex-auto items-center min-w-0">
+                    <div class="flex-0 w-16 h-16 rounded-full overflow-hidden">
+                        <img class="w-full h-full" src= {{setup.Chain?.Icon}}>
+                    </div>
+                    <div class="flex flex-col min-w-0 ml-4">
+                        <ng-container>
+                            <div
+                                class="text-2xl md:text-5xl font-semibold tracking-tight leading-7 md:leading-snug truncate">
+                                {{setup.Chain?.Symbol}}
+                            </div>
+                        </ng-container>
+                        <div *ngIf="setup.Chain?.Description" class="flex items-center">
+                            <mat-icon
+                                class="icon-size-5"
+                                [svgIcon]="'heroicons_solid:badge-check'"></mat-icon>
+                            <div class="ml-1.5 leading-6 truncate text-secondary">{{setup.Chain?.Description}}</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Actions -->
+                <div class="flex items-center mt-6 sm:mt-0 sm:ml-2 space-x-3">
+                    <a href="{{setup.Chain?.Url}}" target="_blank">
+                        <button class="blockcore-mat-button-rounded" mat-flat-button [color]="'primary'">
+                            <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:chevron-double-right'"></mat-icon>
+                            <span class="ml-2">Website</span>
+                        </button>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Main -->
+    <div class="flex-auto border-t -mt-px pt-4 sm:pt-6">
+        <div class="w-full max-w-screen-xl mx-auto">
+            <!-- Tabs -->
+            <mat-tab-group
+                class="sm:px-2"
+                [animationDuration]="'0'">
+
+                <!-- Network -->
+                <mat-tab label='Network'>
+                    <ng-template matTabContent>
+
+
+                        <h1>Network Information</h1>
+
+                        <p></p>
+
+                        <app-progress class="centered" *ngIf="!info"></app-progress>
+
+                        <div *ngIf="info">
+
+                          <h2>Blockchain</h2>
+
+                          <p>This information is read from the configuration file for the current chain.</p>
+
+                          <div class="grid-label-value">
+                            <div>
+                              <span>Name</span>
+                              <span>{{info.name}}</span>
+                            </div>
+                            <div>
+                              <span>Description</span>
+                              <span>{{info.description}}</span>
+                            </div>
+                            <div>
+                              <span>Website</span>
+                              <span class="breakable"><a [href]="info.url">{{info.url}}</a></span>
+                            </div>
+                            <div>
+                              <span>Symbol</span>
+                              <span>{{info.symbol}}</span>
+                            </div>
+                            <div>
+                              <span>Blockheight</span>
+                              <span>{{info.blockHeight}}</span>
+                            </div>
+                          </div>
+
+                          <h2>Network</h2>
+
+                          <p>This information is retrieve directly from the indexing node.</p>
+
+                          <div *ngIf="node?.error">
+                            <span class="muted">Error from node:</span> {{node.error}}<br>
+                          </div>
+
+                          <div *ngIf="!node?.error">
+
+                             <div class="grid-label-value">
+                                <div>
+                                   <span>Chain</span>
+                                   <span>{{node.blockchain.chain}}</span>
+                                </div>
+                                <div>
+                                   <span>Sync Progress</span>
+                                   <span>{{node.progress}} (Indexed/Chain Tip - Remaining)</span>
+                                </div>
+                                <div>
+                                   <span>Transactions in pool (mempool)</span>
+                                   <span>{{node.transactionsInPool}}</span>
+                                </div>
+                                <div>
+                                   <span>Average Block Persist In Seconds</span>
+                                   <span>{{node.avgBlockPersistInSeconds}}</span>
+                                </div>
+                                <div>
+                                   <span>Average Block Size</span>
+                                   <span>{{node.avgBlockSizeKb | size}}</span>
+                                </div>
+                                <div>
+                                   <span>Best Block Hash</span>
+                                   <span class="breakable">{{blockchain.bestBlockHash}}</span>
+                                </div>
+                                <div>
+                                   <span>Difficulty</span>
+                                   <span class="breakable">{{blockchain.difficulty}}</span>
+                                </div>
+                                <div *ngIf="blockchain.networkWeight > 0">
+                                   <span>Total Network Staking Weight</span>
+                                   <span>{{blockchain.networkWeight | amount}} {{setup.Chain.Symbol}}</span>
+                                </div>
+                                <div>
+                                   <span>Is Initial Block Download</span>
+                                   <span>{{blockchain.isInitialBlockDownload | yes}}</span>
+                                </div>
+                                <div>
+                                   <span>Is Pruned</span>
+                                   <span>{{blockchain.isPruned | yes}}</span>
+                                </div>
+                                <div>
+                                   <span>Version</span>
+                                   <span>{{network.version}}</span>
+                                </div>
+                                <div>
+                                   <span>Sub Version</span>
+                                   <span>{{network.subVersion}}</span>
+                                </div>
+                                <div>
+                                   <span>Protocol Version</span>
+                                   <span>{{network.protocolVersion}}</span>
+                                </div>
+                                <div>
+                                   <span>Connections</span>
+                                   <span>{{network.connections}}</span>
+                                </div>
+                                <div>
+                                   <span>Relay Fee</span>
+                                   <span>{{network.relayFee}}</span>
+                                </div>
+                                <div>
+                                   <span>Incremental Fee</span>
+                                   <span>{{network.incrementalFee}}</span>
+                                </div>
+                             </div>
+                          </div>
+
+                          <h2>Nodes seen last 24 hours</h2>
+
+                          <app-progress class="centered" *ngIf="!peers"></app-progress>
+
+                          <div class="grid-label-value" *ngIf="peers">
+                            <div *ngFor="let item of peers">
+                              <span>{{item.version}} ({{item.peers.length}})</span>
+                              <span>
+                                <ng-template ngFor let-item [ngForOf]="item.peers">
+                                  {{item.addr}}<br>
+                                </ng-template>
+                              </span>
+                            </div>
+                          </div>
+
+                          <h2 *ngIf="configuration">Configuration (Consensus)</h2>
+
+                          <p *ngIf="configuration">This information is read from the network definition of the current chain. This might differ to the configuration
+                            of the indexing node.</p>
+
+
+                          <div *ngIf="configuration" class="grid-label-value">
+                            <div>
+                              <span>Default Port</span>
+                              <span>{{configuration.defaultPort}}</span>
+                            </div>
+                            <div>
+                              <span>Default RPC Port</span>
+                              <span>{{configuration.defaultRPCPort}}</span>
+                            </div>
+                            <div>
+                              <span>Default API Port</span>
+                              <span>{{configuration.defaultAPIPort}}</span>
+                            </div>
+                            <div>
+                              <span>Default Web Socket Port</span>
+                              <span>{{configuration.defaultSignalRPort}}</span>
+                            </div>
+                            <div>
+                              <span>Fallback Fee</span>
+                              <span>{{configuration.fallbackFee}}</span>
+                            </div>
+                            <div>
+                              <span>Minimum Relay Tx Fee</span>
+                              <span>{{configuration.minRelayTxFee}}</span>
+                            </div>
+                            <div>
+                              <span>Minimum Tx Fee</span>
+                              <span>{{configuration.minTxFee}}</span>
+                            </div>
+                            <div>
+                              <span>Network Type</span>
+                              <span>{{configuration.networkType}}</span>
+                            </div>
+                            <div>
+                              <span>Name</span>
+                              <span>{{configuration.name}}</span>
+                            </div>
+                            <div>
+                              <span>Seed Nodes</span>
+                              <span class="small-little">
+                                  <div *ngFor="let seed of configuration.seedNodes">
+                                    {{seed}}
+                                  </div><br>
+                              </span>
+                            </div>
+                            <div>
+                              <span>DNS Seeds</span>
+                              <span class="small-little">
+                                  <div *ngFor="let seed of configuration.dnsSeeds">
+                                    {{seed}}
+                                  </div><br>
+                              </span>
+                            </div>
+                            <div>
+                              <span>Default Max Inbound Connections</span>
+                              <span>{{configuration.defaultMaxInboundConnections}}</span>
+                            </div>
+                            <div>
+                              <span>Default Max Outbound Connections</span>
+                              <span>{{configuration.defaultMaxOutboundConnections}}</span>
+                            </div>
+                            <div>
+                              <span>Genesis Date</span>
+                              <span>{{configuration.genesisDate}}</span>
+                            </div>
+                            <div>
+                              <span>Genesis Hash</span>
+                              <span class="breakable">{{configuration.genesisHash}}</span>
+                            </div>
+                            <div>
+                              <span>Coin Type</span>
+                              <span>{{consensus.coinType}}</span>
+                            </div>
+                            <div>
+                              <span>Coinbase Maturity</span>
+                              <span>{{consensus.coinbaseMaturity}}</span>
+                            </div>
+                            <div>
+                              <span>Is Proof-Of-Stake</span>
+                              <span>{{consensus.isProofOfStake | yes}}</span>
+                            </div>
+                            <div>
+                              <span>Maximum Money</span>
+                              <span class="breakable">{{consensus.maxMoney}}</span>
+                            </div>
+                            <div>
+                              <span>Last POW Block</span>
+                              <span>{{consensus.lastPOWBlock}}</span>
+                            </div>
+                            <div>
+                              <span>Premine Reward</span>
+                              <span>{{consensus.premineReward}}</span>
+                            </div>
+                            <div>
+                              <span>Proof-Of-Stake Reward</span>
+                              <span>{{consensus.proofOfStakeReward}}</span>
+                            </div>
+                            <div>
+                              <span>Proof-Of-Work Reward</span>
+                              <span>{{consensus.proofOfWorkReward}}</span>
+                            </div>
+                            <div>
+                              <span>Target Spacing</span>
+                              <span>{{consensus.targetSpacing}}</span>
+                            </div>
+
+                          </div>
+
+
+                        </div>
+
+
+                    </ng-template>
+                </mat-tab>
+
+            </mat-tab-group>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,153 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+import { Component, HostBinding, OnInit, OnDestroy, HostListener } from '@angular/core';
+import { ActivatedRoute, Route, Router } from '@angular/router';
+import { ApiService, HttpError } from 'app/services/api.service';
+import { SetupService } from 'app/services/setup.service';
+import { ScrollEvent } from 'app/shared/scroll.directive';
+
+@Component({
+    selector: 'app-address-component',
+    templateUrl: './address.component.html'
+})
+export class AddressComponent implements OnInit, OnDestroy {
+    @HostBinding('class.content-centered-top') hostClass = true;
+
+    info: any;
+    node: any;
+    blockchain: any;
+    network: any;
+    configuration: any;
+    consensus: any;
+    peers: any;
+    blocks: any;
+    transactions: any;
+
+    timerInfo: any;
+    timerBlocks: any;
+    timerTransactions: any;
+    address: any;
+    balance: any;
+    detailsVisible = false;
+    lastBlockHeight: number;
+    subscription: any;
+    limit = 10;
+    loading = false;
+    count = 0;
+    total: any;
+    link: string;
+    error: any;
+    errorTransactions: any;
+
+    constructor(
+        private api: ApiService,
+        private router: Router,
+        public setup: SetupService,
+        private activatedRoute: ActivatedRoute) {
+
+        this.activatedRoute.paramMap.subscribe(async (params) => {
+            const id: any = params.get('address');
+            this.transactions = null;
+            this.address = id;
+
+            try {
+                this.balance = await this.api.getAddress(id);
+            } catch (err) {
+                if (err.message[0] === '{') {
+                    this.error = JSON.parse(err.message);
+                } else {
+                    this.error = err;
+                }
+            }
+
+            try {
+                await this.updateTransactions('/api/query/address/' + id + '/transactions?offset=&limit=' + this.limit);
+            } catch (err) {
+                if (err.message[0] === '{') {
+                    this.errorTransactions = JSON.parse(err.message);
+                } else {
+                    this.errorTransactions = err;
+                }
+            }
+        });
+    }
+
+    amount(outputs: any[]) {
+        const filteredOutputs = outputs.filter(o => o.address === this.address);
+        const amount = filteredOutputs.reduce((acc, item) => acc + item.balance, 0);
+
+        return amount;
+    }
+
+    async ngOnInit() {
+
+    }
+    toggleAmountRendering() {
+        this.setup.toggleFormat();
+    }
+
+
+    toggleDetails() {
+        this.detailsVisible = !this.detailsVisible;
+    }
+
+    ngOnDestroy(): void {
+
+    }
+
+    async updateTransactions(url) {
+        // If no URL, then likely reached the end.
+        if (!url) {
+            return;
+        }
+
+        const baseUrl = this.api.baseUrl.replace('/api', '');
+        // For the block scrolling (using link http header), we must manually set full URL.
+        const response = await this.api.request(baseUrl + url);
+
+        // When the offset is not set (0), we should reverse the order of items.
+        let list = await response.json();
+
+        if (response.status !== 200) {
+            if (list && list.status) {
+                throw new HttpError(list.status, url, JSON.stringify(list));
+            } else {
+                throw new HttpError(response.status, url, response.statusText);
+            }
+        }
+
+        // Since we are looking at the history from latest to oldest, we must reverse the data in this individual page.
+        list = list.reverse();
+
+        this.total = response.headers.get('Pagination-Total');
+        const linkHeader = response.headers.get('Link');
+        const links = this.api.parseLinkHeader(linkHeader);
+
+        // This will be set to undefined/null when no more next links is available.
+        this.link = links.previous;
+
+        if (!this.transactions) {
+            this.transactions = [];
+        }
+
+        this.transactions = [...this.transactions, ...list];
+        this.count++;
+    }
+
+    async onScroll(event: ScrollEvent) {
+        if (event.isReachingBottom) {
+
+            this.loading = true;
+
+            setTimeout(async () => {
+                await this.updateTransactions(this.link);
+                this.loading = false;
+            });
+
+        }
+        if (event.isReachingTop) {
+        }
+        if (event.isWindowEvent) {
+        }
+    }
+}
+

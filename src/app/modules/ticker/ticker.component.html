@@ -1,0 +1,168 @@
+<div class="flex flex-col flex-auto min-w-0">
+
+    <!-- Header -->
+    <div class="bg-card">
+        <div class="flex flex-col w-full max-w-screen-xl mx-auto px-6 sm:px-8">
+            <div class="flex flex-col sm:flex-row flex-auto sm:items-center min-w-0 my-8 sm:my-12">
+                <!-- Avatar and name -->
+                <div class="flex flex-auto items-center min-w-0">
+                    <div class="flex-0 w-16 h-16 rounded-full overflow-hidden">
+                        <img class="w-full h-full" src={{setup.Chain?.Icon}}>
+                    </div>
+                    <div class="flex flex-col min-w-0 ml-4">
+                        <ng-container>
+                            <div
+                                class="text-2xl md:text-5xl font-semibold tracking-tight leading-7 md:leading-snug truncate">
+                                {{setup.Chain?.Symbol}}
+                            </div>
+                        </ng-container>
+                        <div *ngIf="setup.Chain?.Description" class="flex items-center">
+                            <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:badge-check'"></mat-icon>
+                            <div class="ml-1.5 leading-6 truncate text-secondary">{{setup.Chain?.Description}}</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Actions -->
+                <div class="flex items-center mt-6 sm:mt-0 sm:ml-2 space-x-3">
+                    <a href="" target="_blank">
+                        <button class="blockcore-mat-button-rounded" mat-flat-button [color]="'primary'">
+                            <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:chevron-double-right'"></mat-icon>
+                            <span class="ml-2">Website</span>
+                        </button>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Main -->
+    <div class="flex-auto border-t -mt-px pt-4 sm:pt-6">
+        <div class="w-full max-w-screen-xl mx-auto">
+            <!-- Tabs -->
+            <mat-tab-group class="sm:px-2">
+                <!-- Ticker -->
+                <mat-tab label='Ticker'>
+                    <ng-template matTabContent>
+                        <app-progress *ngIf="showloading !== 'no' && !_oneYearPricechartdata"></app-progress>
+
+                        <div *ngIf="_oneYearPricechartdata"
+                            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
+                            <!-- Price Chart -->
+                            <div
+                                class="sm:col-span-2 lg:col-span-3 dark flex flex-col flex-auto bg-card shadow rounded-2xl overflow-hidden">
+                                <div class="flex items-center justify-between mt-10 ml-10 mr-6 sm:mr-10">
+                                    <div class="flex flex-col">
+                                        <div class="mr-4 text-2xl md:text-3xl font-semibold tracking-tight leading-7">
+                                            {{setup.Chain?.Symbol}} to USD Chart </div>
+                                    </div>
+
+                                </div>
+                                <div class="flex flex-col flex-auto h-80">
+                                    <apx-chart class="flex-auto w-full h-full"
+                                        [chart]="oneYearPriceChart.chart"
+                                        [colors]="oneYearPriceChart.colors"
+                                        [dataLabels]="oneYearPriceChart.dataLabels"
+                                        [fill]="oneYearPriceChart.fill"
+                                        [grid]="oneYearPriceChart.grid"
+                                        [series]="oneYearPriceChart.series"
+                                        [stroke]="oneYearPriceChart.stroke"
+                                        [tooltip]="oneYearPriceChart.tooltip"
+                                        [xaxis]="oneYearPriceChart.xaxis"
+                                        [yaxis]="oneYearPriceChart.yaxis"></apx-chart>
+                                </div>
+                            </div>
+                            <!-- Last week Price -->
+                            <div *ngIf="_3boxchartdata"
+                                class="sm:col-span-2 lg:col-span-1 flex flex-col flex-auto bg-card shadow rounded-2xl overflow-hidden">
+                                <div class="flex items-start justify-between m-6 mb-0">
+                                    <div class="text-lg font-medium tracking-tight leading-6 truncate">Price</div>
+                                    <div class="text-sm font-medium tracking-tight leading-6 truncate"
+                                        matTooltip="{{ticker.last_updated_at | timestamp | date:'hh:mm'}}">last update :
+                                        {{ticker.last_updated_at
+                                        | ago}}
+                                    </div>
+                                </div>
+                                <div class="flex flex-col lg:flex-row lg:items-center mx-6 mt-3">
+                                    <div class="text-7xl font-bold tracking-tighter leading-tight">
+                                        ${{ticker.usd.toFixed(3)}}</div>
+                                    <div class="flex lg:flex-col lg:ml-3">
+                                        <mat-icon class="icon-size-5" [ngClass]="getChangeClass(ticker.usd_24h_change)"
+                                            [svgIcon]="'heroicons_solid:'+getChangeIcon(ticker.usd_24h_change)">
+                                        </mat-icon>
+                                        <div
+                                            class="flex items-center ml-1 lg:ml-0 lg:mt-0.5 text-md leading-none whitespace-nowrap text-secondary">
+                                            <span class="font-medium"
+                                                [ngClass]="getChangeClass(ticker.usd_24h_change)">{{ticker.usd_24h_change.toFixed(2)}}
+                                                %</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col flex-auto h-20">
+                                    <apx-chart class="flex-auto w-full h-full"
+                                        [chart]="lastweekPriceChart.chart"
+                                        [colors]="lastweekPriceChart.colors"
+                                        [series]="lastweekPriceChart.series"
+                                        [stroke]="lastweekPriceChart.stroke"
+                                        [tooltip]="lastweekPriceChart.tooltip"
+                                        [xaxis]="lastweekPriceChart.xaxis"
+                                        [yaxis]="lastweekPriceChart.yaxis">
+                                    </apx-chart>
+                                </div>
+                            </div>
+                            <!-- Market cap -->
+                            <div *ngIf="_3boxchartdata"
+                                class="flex flex-col flex-auto bg-card shadow rounded-2xl overflow-hidden">
+                                <div class="flex items-start justify-between m-6 mb-0">
+                                    <div class="text-lg font-medium tracking-tight leading-6 truncate">USD Market Cap
+                                    </div>
+
+                                </div>
+                                <div class="flex flex-col lg:flex-row lg:items-center mx-6 mt-3">
+                                    <div class="text-7xl font-bold tracking-tighter leading-tight">
+                                        {{ticker.usd_market_cap.toFixed(3)}}</div>
+                                </div>
+                                <div class="flex flex-col flex-auto h-20">
+                                    <apx-chart class="flex-auto w-full h-full" [chart]="lastweekMarketCapChart.chart"
+                                        [colors]="lastweekMarketCapChart.colors"
+                                        [series]="lastweekMarketCapChart.series"
+                                        [stroke]="lastweekMarketCapChart.stroke"
+                                        [tooltip]="lastweekMarketCapChart.tooltip"
+                                        [xaxis]="lastweekMarketCapChart.xaxis"
+                                        [yaxis]="lastweekMarketCapChart.yaxis">
+                                    </apx-chart>
+                                </div>
+                            </div>
+                            <!-- Volume -->
+                            <div *ngIf="_3boxchartdata"
+                                class="flex flex-col flex-auto bg-card shadow rounded-2xl overflow-hidden">
+                                <div class="flex items-start justify-between m-6 mb-0">
+                                    <div class="text-lg font-medium tracking-tight leading-6 truncate">Volume in Last
+                                        24h</div>
+
+                                </div>
+                                <div class="flex flex-col lg:flex-row lg:items-center mx-6 mt-3">
+                                    <div class="text-7xl font-bold tracking-tighter leading-tight">
+                                        {{ticker.usd_24h_vol.toFixed(3)}}</div>
+                                </div>
+                                <div class="flex flex-col flex-auto h-20">
+                                    <apx-chart class="flex-auto w-full h-full"
+                                        [chart]="lastweekVolumeChart.chart"
+                                        [colors]="lastweekVolumeChart.colors"
+                                        [series]="lastweekVolumeChart.series"
+                                        [stroke]="lastweekVolumeChart.stroke"
+                                        [tooltip]="lastweekVolumeChart.tooltip"
+                                        [xaxis]="lastweekVolumeChart.xaxis"
+                                        [yaxis]="lastweekVolumeChart.yaxis">
+                                    </apx-chart>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </mat-tab>
+
+            </mat-tab-group>
+        </div>
+    </div>
+
+</div>

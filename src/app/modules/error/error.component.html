@@ -1,0 +1,38 @@
+
+<div *ngIf="error" class="relative flex flex-col flex-auto p-6 pr-3 pb-3 bg-card rounded-2xl shadow overflow-hidden">
+    <div class="absolute bottom-0 right-0 w-24 h-24 -m-6">
+        <mat-icon class="icon-size-24 opacity-25 text-red-500 dark:text-red-400"
+            [svgIcon]="'heroicons_outline:exclamation-circle'"></mat-icon>
+    </div>
+    <div class="flex items-center">
+        <div class="flex flex-col">
+            <div class="text-lg font-medium tracking-tight leading-6 truncate break-all negative">
+                Something went wrong!
+            </div>
+        </div>
+    </div>
+    <div class="flex items-center mt-8">
+        <div class="flex flex-col">
+            <div class="font-medium break-all">
+                <div *ngIf="details">{{details}}</div>
+                <br>
+                <br>
+                <span class="clickable" (click)="detailsVisible = !detailsVisible"
+                    title="Show error details">
+                    <mat-icon matPrefix class="icon-size-10 text-red-500"
+                    [svgIcon]="'heroicons_solid:information-circle'"></mat-icon>
+                </span>
+            </div>
+            <div class="error-details mt-8" *ngIf="detailsVisible">
+                <div *ngIf="details">{{details}}</div>
+                <div *ngIf="stack" class="error-details-stack">{{stack}}</div>
+                <br>
+                <span class="text-red-500">
+                    Message:
+               </span>
+               <div>{{message}}</div>
+            </div>
+        </div>
+    </div>
+</div>
+

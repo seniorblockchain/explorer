@@ -1,0 +1,247 @@
+<div class="flex flex-col flex-auto min-w-0">
+
+    <!-- Header -->
+    <div class="bg-card">
+        <div class="flex flex-col w-full max-w-screen-xl mx-auto px-6 sm:px-8">
+            <div class="flex flex-col sm:flex-row flex-auto sm:items-center min-w-0 my-8 sm:my-12">
+                <!-- Avatar and name -->
+                <div class="flex flex-auto items-center min-w-0">
+                    <div class="flex-0 w-16 h-16 rounded-full overflow-hidden">
+                        <img class="w-full h-full" src={{setup.Chain?.Icon}}>
+                    </div>
+                    <div class="flex flex-col min-w-0 ml-4">
+                        <ng-container>
+                            <div
+                                class="text-2xl md:text-5xl font-semibold tracking-tight leading-7 md:leading-snug truncate">
+                                {{setup.Chain?.Symbol}}
+                            </div>
+                        </ng-container>
+                        <div *ngIf="setup.Chain?.Description" class="flex items-center">
+                            <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:badge-check'"></mat-icon>
+                            <div class="ml-1.5 leading-6 truncate text-secondary">{{setup.Chain?.Description}}</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Actions -->
+                <div class="flex items-center mt-6 sm:mt-0 sm:ml-2 space-x-3 hidden md:block">
+                    <a href="{{setup.Chain?.Url}}" target="_blank" target="_blank">
+                        <button class="blockcore-mat-button-rounded" mat-flat-button [color]="'primary'">
+                            <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:chevron-double-right'"></mat-icon>
+                            <span class="ml-2">Website</span>
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main -->
+    <div class="flex-auto border-t -mt-px pt-4 sm:pt-6">
+        <div class="w-full max-w-screen-xl mx-auto">
+            <!-- Tabs -->
+            <mat-tab-group class="sm:px-2" [animationDuration]="'0'">
+
+                <mat-tab label='Block'>
+                    <ng-template matTabContent>
+
+                        <app-search></app-search>
+
+                        <app-progress *ngIf="!block"></app-progress>
+
+
+                        <blockcore-block *ngIf="block" class="flex flex-col lg:flex-row w-full">
+
+                            <!-- Block Details -->
+                            <div
+                                class="flex flex-col items-center p-8 lg:px-10 lg:py-12 lg:min-w-80 bg-gray-100 dark:bg-black dark:bg-opacity-10">
+                                <div class="flex items-center whitespace-nowrap">
+                                    <mat-icon class="icon-size-14 mr-6 text-blue-500"
+                                        [svgIcon]="'heroicons_outline:cube'">
+                                    </mat-icon>
+                                    <div class="text-4xl font-extrabold tracking-tight">{{block.blockIndex}}</div>
+                                </div>
+                                <!-- <a [routerLink]="['../../', 'blocks']" class="mt-8 lg:mt-auto  hidden lg:block"
+                                    mat-flat-button [color]="'primary'">
+                                    Go to All Blocks
+                                </a> -->
+                            </div>
+                            <div class="p-6 sm:p-8 lg:p-10">
+                                <div class="text-3xl font-bold">Block Details</div>
+                                <div class="mt-2 leading-relaxed text-secondary">
+                                    <p class="break-all">Hash: {{block.blockHash}}</p>
+                                </div>
+
+                                <!-- Details -->
+                                <div class="grid grid-cols-1 lg:grid-cols-2 gap-y-4 mt-6">
+                                    <div class="flex items-center">
+                                        <mat-icon class="icon-size-5 text-primary"
+                                            [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                        <div class="ml-2"> <span>Age: </span>
+                                            <span class="text-primary break-all">{{block.blockTime | ago}}</span>
+                                        </div>
+
+                                    </div>
+                                    <div class="flex items-center">
+                                        <mat-icon class="icon-size-5 text-primary"
+                                            [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                        <div class="ml-2"> <span>Date: </span>
+                                            <span class="text-primary break-all">{{block.blockTime | timestamp}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <mat-icon class="icon-size-5 text-primary"
+                                            [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                        <div class="ml-2"> <span>Confirmations: </span>
+                                            <span class="text-primary break-all">{{block.confirmations}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <mat-icon class="icon-size-5 text-primary"
+                                            [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                        <div class="ml-2"> <span>Size: </span>
+                                            <span class="text-primary break-all">{{block.blockSize | size}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <mat-icon class="icon-size-5 text-primary"
+                                            [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                        <div class="ml-2"> <span>Unit Timestamp: </span>
+                                            <span class="text-primary break-all">{{block.blockTime}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <mat-icon class="icon-size-5 text-primary"
+                                            [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                        <div class="ml-2"> <span>Difficulty: </span>
+                                            <span class="text-primary break-all">{{block.difficulty}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <mat-icon class="icon-size-5 text-primary"
+                                            [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                        <div class="ml-2"> <span>Bits: </span>
+                                            <span class="text-primary break-all">{{block.bits}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <mat-icon class="icon-size-5 text-primary"
+                                            [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                        <div class="ml-2"> <span>Nonce: </span>
+                                            <span class="text-primary break-all">{{block.nonce}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-center mt-10">
+                                    <div class="font-medium text-secondary">
+                                        <a class="clickable" (click)="toggleDetails()"><span *ngIf="!detailsVisible">View</span><span
+                                                *ngIf="detailsVisible">Hide</span>
+                                            details</a>
+                                    </div>
+                                    <div class="flex-auto ml-2 border-b-2"></div>
+                                </div>
+                                <!-- More Details -->
+                                <div class="grid grid-cols-1 lg:grid-cols-1 gap-y-4 mt-4">
+
+                                    <div *ngIf="detailsVisible" class="flex items-center">
+                                        <mat-icon class="icon-size-5 text-primary"
+                                            [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                        <div class="ml-2"> <span>Merkle Root: </span>
+                                            <span class="text-primary break-all">{{block.merkleroot}}</span>
+                                        </div>
+                                    </div>
+
+                                    <div *ngIf="detailsVisible && block.posFlags !== 'proof-of-stake'"
+                                        class="flex items-center">
+                                        <mat-icon class="icon-size-5 text-primary"
+                                            [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                        <div class="ml-2"> <span>chainWork: </span>
+                                            <span class="text-primary break-all">{{block.chainWork}}</span>
+                                        </div>
+                                    </div>
+
+                                    <div *ngIf="detailsVisible && block.posFlags === 'proof-of-stake'"
+                                        class="flex items-center">
+                                        <mat-icon class="icon-size-5 text-primary"
+                                            [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                        <div class="ml-2"> <span>Proof-of-Stake BlockSignature: </span>
+                                            <span class="text-primary break-all">{{block.posBlockSignature}}</span>
+                                        </div>
+                                    </div>
+
+                                    <div *ngIf="detailsVisible && block.posFlags === 'proof-of-stake'"
+                                        class="flex items-center">
+                                        <mat-icon class="icon-size-5 text-primary"
+                                            [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                        <div class="ml-2"> <span>Proof-of-Stake BlockTrust: </span>
+                                            <span class="text-primary break-all">{{block.posBlockTrust}}</span>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="detailsVisible && block.posFlags === 'proof-of-stake'"
+                                        class="flex items-center">
+                                        <mat-icon class="icon-size-5 text-primary"
+                                            [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                        <div class="ml-2"> <span>Proof-of-Stake ChainTrust: </span>
+                                            <span class="text-primary break-all">{{block.posChainTrust}}</span>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="detailsVisible && block.posFlags === 'proof-of-stake'"
+                                        class="flex items-center">
+                                        <mat-icon class="icon-size-5 text-primary"
+                                            [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                        <div class="ml-2"> <span>Proof-of-Stake HashProof: </span>
+                                            <span class="text-primary break-all">{{block.posHashProof}}</span>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="detailsVisible && block.posFlags === 'proof-of-stake'"
+                                        class="flex items-center">
+                                        <mat-icon class="icon-size-5 text-primary"
+                                            [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                        <div class="ml-2"> <span>Proof-of-Stake Modifierv2: </span>
+                                            <span class="text-primary break-all">{{block.posModifierv2}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </blockcore-block>
+
+
+                        <blockcore-block *ngIf="total" class="flex items-center w-full p-6 filter-info ">
+                            <mat-icon class="icon-size-14 mr-6 text-blue-500" [svgIcon]="'heroicons_outline:document-text'">
+                            </mat-icon>
+
+                            <div class="flex flex-col">
+                                <div class="text-2xl font-semibold leading-tight break-all"><span>Transactions Count: </span><span class="text-primary">{{total}}</span>
+                                </div>
+                            </div>
+                        </blockcore-block>
+
+                        <app-progress *ngIf="!transactions"></app-progress>
+
+                        <div *ngIf="transactions" appDetectScroll (onScroll)="onScroll($event)" [bottomOffset]="400"
+                            [topOffset]="400">
+                            <blockcore-block class="flex items-center w-full p-6 filter-info justify-between"
+                                *ngFor="let item of transactions">
+                                <mat-icon class="icon-size-12 mr-6" [svgIcon]="'heroicons_outline:document-text'"
+                                    matTooltip="size: {{(item.size / 1024).toFixed(2)}}">
+                                </mat-icon>
+                                <div class="flex flex-col w-full">
+                                    <div class="text-2xl font-semibold leading-tight text-primary break-all">
+                                        <a
+                                            [routerLink]="['../../transaction', item.transactionHash]">{{item.transactionHash}}</a>
+                                    </div>
+                                </div>
+
+                            </blockcore-block>
+                            <app-progress *ngIf="loading"></app-progress>
+                        </div>
+
+
+                    </ng-template>
+                </mat-tab>
+
+            </mat-tab-group>
+        </div>
+    </div>
+
+</div>
