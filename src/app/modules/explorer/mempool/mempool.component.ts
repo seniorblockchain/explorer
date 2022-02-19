@@ -40,7 +40,7 @@ export class MempoolComponent implements OnInit, OnDestroy {
   constructor(
     private api: ApiService,
     private router: Router,
-    private setup: SetupService,
+    public setup: SetupService,
     private activatedRoute: ActivatedRoute) {
 
     this.activatedRoute.paramMap.subscribe(async (params) => {
