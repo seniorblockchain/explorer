@@ -42,6 +42,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
 
     async ngOnInit() {
+        await this.setup.setChain('blockcore');
+
         await this.updateTickers();
       }
 
