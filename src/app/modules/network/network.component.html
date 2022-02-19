@@ -7,7 +7,7 @@
                 <!-- Avatar and name -->
                 <div class="flex flex-auto items-center min-w-0">
                     <div class="flex-0 w-16 h-16 rounded-full overflow-hidden">
-                        <img class="w-full h-full" src= {{setup.Chain?.Icon}}>
+                        <img class="w-full h-full" src={{setup.Chain?.Icon}}>
                     </div>
                     <div class="flex flex-col min-w-0 ml-4">
                         <ng-container>
@@ -17,9 +17,7 @@
                             </div>
                         </ng-container>
                         <div *ngIf="setup.Chain?.Description" class="flex items-center">
-                            <mat-icon
-                                class="icon-size-5"
-                                [svgIcon]="'heroicons_solid:badge-check'"></mat-icon>
+                            <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:badge-check'"></mat-icon>
                             <div class="ml-1.5 leading-6 truncate text-secondary">{{setup.Chain?.Description}}</div>
                         </div>
                     </div>
@@ -42,257 +40,550 @@
     <div class="flex-auto border-t -mt-px pt-4 sm:pt-6">
         <div class="w-full max-w-screen-xl mx-auto">
             <!-- Tabs -->
-            <mat-tab-group
-                class="sm:px-2"
-                [animationDuration]="'0'">
+            <mat-tab-group class="sm:px-2" [animationDuration]="'0'">
 
                 <!-- Network -->
-                <mat-tab label='Network'>
+                <mat-tab label='Network Information'>
                     <ng-template matTabContent>
 
 
-                        <h1>Network Information</h1>
 
-                        <p></p>
+                        <app-progress *ngIf="!info"></app-progress>
 
-                        <app-progress class="centered" *ngIf="!info"></app-progress>
 
+
+                        <blockcore-block *ngIf="info" class="flex flex-col lg:flex-row w-full">
+
+                            <!-- Blockchain Details -->
+                            <div
+                                class="flex flex-col items-center p-8 lg:px-10 lg:py-12 lg:w-80 bg-gray-100 dark:bg-black dark:bg-opacity-10">
+                                <div class="flex items-center whitespace-nowrap">
+                                    <mat-icon class="icon-size-14 mr-6 text-blue-500"
+                                        [svgIcon]="'heroicons_outline:cube'">
+                                    </mat-icon>
+                                    <div class="text-4xl font-extrabold tracking-tight">Blockchain</div>
+                                </div>
+                            </div>
+                            <div class="p-6 sm:p-8 lg:p-10">
+                                <div class="text-3xl font-bold">Blockchain</div>
+                                <div class="mt-2 leading-relaxed text-secondary">
+                                    <p class="break-all">This information is read from the configuration file for the
+                                        current chain.</p>
+                                </div>
+
+                                <!-- Details -->
+                                <div class="grid grid-cols-1 lg:grid-cols-2 gap-y-4 mt-6">
+                                    <div class="flex items-center">
+                                        <mat-icon class="icon-size-5 text-primary"
+                                            [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                        <div class="ml-2"> <span>Name: </span>
+                                            <span class="text-primary break-all">{{info.name}}</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex items-center">
+                                        <mat-icon class="icon-size-5 text-primary"
+                                            [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                        <div class="ml-2"> <span>Description: </span>
+                                            <span class="text-primary break-all">{{info.description}}</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex items-center">
+                                        <mat-icon class="icon-size-5 text-primary"
+                                            [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                        <div class="ml-2"> <span>Website: </span>
+                                            <span class="text-primary break-all"><a
+                                                    [href]="info.url">{{info.url}}</a></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex items-center">
+                                        <mat-icon class="icon-size-5 text-primary"
+                                            [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                        <div class="ml-2"> <span>Symbol: </span>
+                                            <span class="text-primary break-all">{{info.symbol}}</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex items-center">
+                                        <mat-icon class="icon-size-5 text-primary"
+                                            [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                        <div class="ml-2"> <span>Blockheight: </span>
+                                            <span class="text-primary break-all">{{info.blockHeight}}</span>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+
+                            </div>
+                        </blockcore-block>
+
+                        <div *ngIf="node">
+                            <div *ngIf="node?.error">
+                                <span class="muted">Error from node:</span> {{node.error}}<br>
+                            </div>
+
+                            <blockcore-block *ngIf="!node?.error" class="flex flex-col lg:flex-row w-full">
+
+                                <!-- Network Details -->
+                                <div
+                                    class="flex flex-col items-center p-8 lg:px-10 lg:py-12 lg:w-80 bg-gray-100 dark:bg-black dark:bg-opacity-10">
+                                    <div class="flex items-center whitespace-nowrap">
+                                        <mat-icon class="icon-size-14 mr-6 text-blue-500"
+                                            [svgIcon]="'heroicons_outline:cube'">
+                                        </mat-icon>
+                                        <div class="text-4xl font-extrabold tracking-tight">Network</div>
+                                    </div>
+                                </div>
+                                <div class="p-6 sm:p-8 lg:p-10">
+                                    <div class="text-3xl font-bold">Network</div>
+                                    <div class="mt-2 leading-relaxed text-secondary">
+                                        <p class="break-all">This information is retrieve directly from the indexing
+                                            node.
+                                        </p>
+                                    </div>
+
+                                    <!-- Details -->
+                                    <div class="grid grid-cols-1 lg:grid-cols-1 gap-y-4 mt-6">
+                                        <div class="flex items-center">
+                                            <mat-icon class="icon-size-5 text-primary"
+                                                [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                            <div class="ml-2"> <span>Chain: </span>
+                                                <span class="text-primary break-all">{{node.blockchain.chain}}</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="flex items-center">
+                                            <mat-icon class="icon-size-5 text-primary"
+                                                [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                            <div class="ml-2"> <span>Sync Progress: </span>
+                                                <span class="text-primary break-all">{{node.progress}} (Indexed/Chain
+                                                    Tip -
+                                                    Remaining)</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="flex items-center">
+                                            <mat-icon class="icon-size-5 text-primary"
+                                                [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                            <div class="ml-2"> <span>Transactions in pool (mempool): </span>
+                                                <span class="text-primary break-all">{{node.transactionsInPool}}</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="flex items-center">
+                                            <mat-icon class="icon-size-5 text-primary"
+                                                [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                            <div class="ml-2"> <span>Average Block Persist In Seconds: </span>
+                                                <span
+                                                    class="text-primary break-all">{{node.avgBlockPersistInSeconds}}</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="flex items-center">
+                                            <mat-icon class="icon-size-5 text-primary"
+                                                [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                            <div class="ml-2"> <span>Average Block Size: </span>
+                                                <span class="text-primary break-all">{{node.avgBlockSizeKb |
+                                                    size}}</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="flex items-center">
+                                            <mat-icon class="icon-size-5 text-primary"
+                                                [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                            <div class="ml-2"> <span>Best Block Hash: </span>
+                                                <span class="text-primary break-all">{{blockchain.bestBlockHash}}</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="flex items-center">
+                                            <mat-icon class="icon-size-5 text-primary"
+                                                [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                            <div class="ml-2"> <span>Difficulty: </span>
+                                                <span class="text-primary break-all">{{blockchain.difficulty}}</span>
+                                            </div>
+                                        </div>
+
+
+                                        <div *ngIf="blockchain.networkWeight > 0" class="flex items-center">
+                                            <mat-icon class="icon-size-5 text-primary"
+                                                [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                            <div class="ml-2"> <span>Total Network Staking Weight: </span>
+                                                <span class="text-primary break-all">{{blockchain.networkWeight |
+                                                    amount}} {{setup.Chain.Symbol}}</span>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="flex items-center">
+                                            <mat-icon class="icon-size-5 text-primary"
+                                                [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                            <div class="ml-2"> <span>Is Initial Block Download: </span>
+                                                <span class="text-primary break-all">{{blockchain.isInitialBlockDownload
+                                                    | yes}}</span>
+                                            </div>
+                                        </div>
+
+
+
+
+                                        <div class="flex items-center">
+                                            <mat-icon class="icon-size-5 text-primary"
+                                                [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                            <div class="ml-2"> <span>Is Pruned: </span>
+                                                <span class="text-primary break-all">{{blockchain.isPruned |
+                                                    yes}}</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="flex items-center">
+                                            <mat-icon class="icon-size-5 text-primary"
+                                                [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                            <div class="ml-2"> <span>Version: </span>
+                                                <span class="text-primary break-all">{{network.version}}</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="flex items-center">
+                                            <mat-icon class="icon-size-5 text-primary"
+                                                [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                            <div class="ml-2"> <span>Sub Version: </span>
+                                                <span class="text-primary break-all">{{network.subVersion}}</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="flex items-center">
+                                            <mat-icon class="icon-size-5 text-primary"
+                                                [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                            <div class="ml-2"> <span>Protocol Version: </span>
+                                                <span class="text-primary break-all">{{network.protocolVersion}}</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="flex items-center">
+                                            <mat-icon class="icon-size-5 text-primary"
+                                                [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                            <div class="ml-2"> <span>Connections: </span>
+                                                <span class="text-primary break-all">{{network.connections}}</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="flex items-center">
+                                            <mat-icon class="icon-size-5 text-primary"
+                                                [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                            <div class="ml-2"> <span>Relay Fee: </span>
+                                                <span class="text-primary break-all">{{network.relayFee}}</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="flex items-center">
+                                            <mat-icon class="icon-size-5 text-primary"
+                                                [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                            <div class="ml-2"> <span>Incremental Fee: </span>
+                                                <span class="text-primary break-all">{{network.incrementalFee}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </blockcore-block>
+                        </div>
                         <div *ngIf="info">
 
-                          <h2>Blockchain</h2>
+                            <app-progress *ngIf="!peers"></app-progress>
 
-                          <p>This information is read from the configuration file for the current chain.</p>
+                            <blockcore-block *ngIf="peers" class="flex flex-col lg:flex-row w-full">
 
-                          <div class="grid-label-value">
-                            <div>
-                              <span>Name</span>
-                              <span>{{info.name}}</span>
-                            </div>
-                            <div>
-                              <span>Description</span>
-                              <span>{{info.description}}</span>
-                            </div>
-                            <div>
-                              <span>Website</span>
-                              <span class="breakable"><a [href]="info.url">{{info.url}}</a></span>
-                            </div>
-                            <div>
-                              <span>Symbol</span>
-                              <span>{{info.symbol}}</span>
-                            </div>
-                            <div>
-                              <span>Blockheight</span>
-                              <span>{{info.blockHeight}}</span>
-                            </div>
-                          </div>
+                                <!-- Blockchain Details -->
+                                <div
+                                    class="flex flex-col items-center p-8 lg:px-10 lg:py-12 lg:w-80 bg-gray-100 dark:bg-black dark:bg-opacity-10">
+                                    <div class="flex items-center whitespace-nowrap">
+                                        <mat-icon class="icon-size-14 mr-6 text-blue-500"
+                                            [svgIcon]="'heroicons_outline:cube'">
+                                        </mat-icon>
+                                        <div class="text-4xl font-extrabold tracking-tight">Nodes</div>
+                                    </div>
+                                </div>
+                                <div class="p-6 sm:p-8 lg:p-10">
+                                    <div class="text-3xl font-bold">Nodes seen last 24 hours</div>
 
-                          <h2>Network</h2>
-
-                          <p>This information is retrieve directly from the indexing node.</p>
-
-                          <div *ngIf="node?.error">
-                            <span class="muted">Error from node:</span> {{node.error}}<br>
-                          </div>
-
-                          <div *ngIf="!node?.error">
-
-                             <div class="grid-label-value">
-                                <div>
-                                   <span>Chain</span>
-                                   <span>{{node.blockchain.chain}}</span>
-                                </div>
-                                <div>
-                                   <span>Sync Progress</span>
-                                   <span>{{node.progress}} (Indexed/Chain Tip - Remaining)</span>
-                                </div>
-                                <div>
-                                   <span>Transactions in pool (mempool)</span>
-                                   <span>{{node.transactionsInPool}}</span>
-                                </div>
-                                <div>
-                                   <span>Average Block Persist In Seconds</span>
-                                   <span>{{node.avgBlockPersistInSeconds}}</span>
-                                </div>
-                                <div>
-                                   <span>Average Block Size</span>
-                                   <span>{{node.avgBlockSizeKb | size}}</span>
-                                </div>
-                                <div>
-                                   <span>Best Block Hash</span>
-                                   <span class="breakable">{{blockchain.bestBlockHash}}</span>
-                                </div>
-                                <div>
-                                   <span>Difficulty</span>
-                                   <span class="breakable">{{blockchain.difficulty}}</span>
-                                </div>
-                                <div *ngIf="blockchain.networkWeight > 0">
-                                   <span>Total Network Staking Weight</span>
-                                   <span>{{blockchain.networkWeight | amount}} {{setup.Chain.Symbol}}</span>
-                                </div>
-                                <div>
-                                   <span>Is Initial Block Download</span>
-                                   <span>{{blockchain.isInitialBlockDownload | yes}}</span>
-                                </div>
-                                <div>
-                                   <span>Is Pruned</span>
-                                   <span>{{blockchain.isPruned | yes}}</span>
-                                </div>
-                                <div>
-                                   <span>Version</span>
-                                   <span>{{network.version}}</span>
-                                </div>
-                                <div>
-                                   <span>Sub Version</span>
-                                   <span>{{network.subVersion}}</span>
-                                </div>
-                                <div>
-                                   <span>Protocol Version</span>
-                                   <span>{{network.protocolVersion}}</span>
-                                </div>
-                                <div>
-                                   <span>Connections</span>
-                                   <span>{{network.connections}}</span>
-                                </div>
-                                <div>
-                                   <span>Relay Fee</span>
-                                   <span>{{network.relayFee}}</span>
-                                </div>
-                                <div>
-                                   <span>Incremental Fee</span>
-                                   <span>{{network.incrementalFee}}</span>
-                                </div>
-                             </div>
-                          </div>
-
-                          <h2>Nodes seen last 24 hours</h2>
-
-                          <app-progress class="centered" *ngIf="!peers"></app-progress>
-
-                          <div class="grid-label-value" *ngIf="peers">
-                            <div *ngFor="let item of peers">
-                              <span>{{item.version}} ({{item.peers.length}})</span>
-                              <span>
-                                <ng-template ngFor let-item [ngForOf]="item.peers">
-                                  {{item.addr}}<br>
-                                </ng-template>
-                              </span>
-                            </div>
-                          </div>
-
-                          <h2 *ngIf="configuration">Configuration (Consensus)</h2>
-
-                          <p *ngIf="configuration">This information is read from the network definition of the current chain. This might differ to the configuration
-                            of the indexing node.</p>
+                                    <!-- Details -->
+                                    <div class="grid grid-cols-1 lg:grid-cols-1 gap-y-4 mt-6">
 
 
-                          <div *ngIf="configuration" class="grid-label-value">
-                            <div>
-                              <span>Default Port</span>
-                              <span>{{configuration.defaultPort}}</span>
-                            </div>
-                            <div>
-                              <span>Default RPC Port</span>
-                              <span>{{configuration.defaultRPCPort}}</span>
-                            </div>
-                            <div>
-                              <span>Default API Port</span>
-                              <span>{{configuration.defaultAPIPort}}</span>
-                            </div>
-                            <div>
-                              <span>Default Web Socket Port</span>
-                              <span>{{configuration.defaultSignalRPort}}</span>
-                            </div>
-                            <div>
-                              <span>Fallback Fee</span>
-                              <span>{{configuration.fallbackFee}}</span>
-                            </div>
-                            <div>
-                              <span>Minimum Relay Tx Fee</span>
-                              <span>{{configuration.minRelayTxFee}}</span>
-                            </div>
-                            <div>
-                              <span>Minimum Tx Fee</span>
-                              <span>{{configuration.minTxFee}}</span>
-                            </div>
-                            <div>
-                              <span>Network Type</span>
-                              <span>{{configuration.networkType}}</span>
-                            </div>
-                            <div>
-                              <span>Name</span>
-                              <span>{{configuration.name}}</span>
-                            </div>
-                            <div>
-                              <span>Seed Nodes</span>
-                              <span class="small-little">
-                                  <div *ngFor="let seed of configuration.seedNodes">
-                                    {{seed}}
-                                  </div><br>
-                              </span>
-                            </div>
-                            <div>
-                              <span>DNS Seeds</span>
-                              <span class="small-little">
-                                  <div *ngFor="let seed of configuration.dnsSeeds">
-                                    {{seed}}
-                                  </div><br>
-                              </span>
-                            </div>
-                            <div>
-                              <span>Default Max Inbound Connections</span>
-                              <span>{{configuration.defaultMaxInboundConnections}}</span>
-                            </div>
-                            <div>
-                              <span>Default Max Outbound Connections</span>
-                              <span>{{configuration.defaultMaxOutboundConnections}}</span>
-                            </div>
-                            <div>
-                              <span>Genesis Date</span>
-                              <span>{{configuration.genesisDate}}</span>
-                            </div>
-                            <div>
-                              <span>Genesis Hash</span>
-                              <span class="breakable">{{configuration.genesisHash}}</span>
-                            </div>
-                            <div>
-                              <span>Coin Type</span>
-                              <span>{{consensus.coinType}}</span>
-                            </div>
-                            <div>
-                              <span>Coinbase Maturity</span>
-                              <span>{{consensus.coinbaseMaturity}}</span>
-                            </div>
-                            <div>
-                              <span>Is Proof-Of-Stake</span>
-                              <span>{{consensus.isProofOfStake | yes}}</span>
-                            </div>
-                            <div>
-                              <span>Maximum Money</span>
-                              <span class="breakable">{{consensus.maxMoney}}</span>
-                            </div>
-                            <div>
-                              <span>Last POW Block</span>
-                              <span>{{consensus.lastPOWBlock}}</span>
-                            </div>
-                            <div>
-                              <span>Premine Reward</span>
-                              <span>{{consensus.premineReward}}</span>
-                            </div>
-                            <div>
-                              <span>Proof-Of-Stake Reward</span>
-                              <span>{{consensus.proofOfStakeReward}}</span>
-                            </div>
-                            <div>
-                              <span>Proof-Of-Work Reward</span>
-                              <span>{{consensus.proofOfWorkReward}}</span>
-                            </div>
-                            <div>
-                              <span>Target Spacing</span>
-                              <span>{{consensus.targetSpacing}}</span>
-                            </div>
+                                        <div class="flex items-center" *ngFor="let item of peers">
 
-                          </div>
+                                            <div class="ml-2">
 
+                                                <span>{{item.version}} <span
+                                                        class="positive">({{item.peers.length}})</span> </span>
+                                                <span class="text-primary break-all">
+                                                    <ul>
+                                                        <ng-template ngFor let-item [ngForOf]="item.peers">
+                                                            <li>{{item.addr}}</li>
+                                                        </ng-template>
+                                                    </ul>
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+                            </blockcore-block>
+
+
+
+
+
+
+
+                            <blockcore-block *ngIf="configuration" class="flex flex-col lg:flex-row w-full">
+
+                                <!-- Blockchain Details -->
+                                <div
+                                    class="flex flex-col items-center p-8 lg:px-10 lg:py-12 lg:w-80 bg-gray-100 dark:bg-black dark:bg-opacity-10">
+                                    <div class="flex items-center whitespace-nowrap">
+                                        <mat-icon class="icon-size-14 mr-6 text-blue-500"
+                                            [svgIcon]="'heroicons_outline:cube'">
+                                        </mat-icon>
+                                        <div class="text-4xl font-extrabold tracking-tight">Configuration</div>
+                                    </div>
+                                </div>
+                                <div class="p-6 sm:p-8 lg:p-10">
+                                    <div class="text-3xl font-bold">Configuration (Consensus)</div>
+                                    <div class="mt-2 leading-relaxed text-secondary">
+                                        <p class="break-all">This information is read from the network definition of the
+                                            current chain. This might differ to the configuration of the indexing node.
+                                        </p>
+                                    </div>
+
+                                    <!-- Details -->
+                                    <div class="grid grid-cols-1 lg:grid-cols-1 gap-y-4 mt-6">
+                                        <div class="flex items-center">
+                                            <mat-icon class="icon-size-5 text-primary"
+                                                [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                            <div class="ml-2"> <span>Default Port: </span>
+                                                <span
+                                                    class="text-primary break-all">{{configuration.defaultPort}}</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="flex items-center">
+                                            <mat-icon class="icon-size-5 text-primary"
+                                                [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                            <div class="ml-2"> <span>Default RPC Port: </span>
+                                                <span
+                                                    class="text-primary break-all">{{configuration.defaultRPCPort}}</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="flex items-center">
+                                            <mat-icon class="icon-size-5 text-primary"
+                                                [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                            <div class="ml-2"> <span>Default API Port: </span>
+                                                <span
+                                                    class="text-primary break-all">{{configuration.defaultAPIPort}}</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="flex items-center">
+                                            <mat-icon class="icon-size-5 text-primary"
+                                                [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                            <div class="ml-2"> <span>Default Web Socket Port: </span>
+                                                <span
+                                                    class="text-primary break-all">{{configuration.defaultSignalRPort}}</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="flex items-center">
+                                            <mat-icon class="icon-size-5 text-primary"
+                                                [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                            <div class="ml-2"> <span>Fallback Fee: </span>
+                                                <span
+                                                    class="text-primary break-all">{{configuration.fallbackFee}}</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="flex items-center">
+                                            <mat-icon class="icon-size-5 text-primary"
+                                                [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                            <div class="ml-2"> <span>Minimum Relay Tx Fee: </span>
+                                                <span
+                                                    class="text-primary break-all">{{configuration.minRelayTxFee}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <mat-icon class="icon-size-5 text-primary"
+                                                [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                            <div class="ml-2"> <span>Minimum Tx Fee: </span>
+                                                <span class="text-primary break-all">{{configuration.minTxFee}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <mat-icon class="icon-size-5 text-primary"
+                                                [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                            <div class="ml-2"> <span>Network Type: </span>
+                                                <span
+                                                    class="text-primary break-all">{{configuration.networkType}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <mat-icon class="icon-size-5 text-primary"
+                                                [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                            <div class="ml-2"> <span>Name: </span>
+                                                <span class="text-primary break-all">{{configuration.name}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <mat-icon class="icon-size-5 text-primary"
+                                                [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                            <div class="ml-2"> <span>Seed Nodes: </span>
+                                                <span class="text-primary break-all">
+                                                    <ul>
+                                                        <li *ngFor="let seed of configuration.seedNodes">
+                                                            {{seed}}
+                                                        </li>
+                                                    </ul>
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="flex items-center">
+                                            <mat-icon class="icon-size-5 text-primary"
+                                                [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                            <div class="ml-2"> <span>DNS Seeds: </span>
+                                                <span class="text-primary break-all">
+                                                    <ul>
+                                                        <li *ngFor="let seed of configuration.dnsSeeds">
+                                                            {{seed}}
+                                                        </li>
+                                                    </ul>
+                                                </span>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="flex items-center">
+                                            <mat-icon class="icon-size-5 text-primary"
+                                                [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                            <div class="ml-2"> <span>Default Max Inbound Connections: </span>
+                                                <span
+                                                    class="text-primary break-all">{{configuration.defaultMaxInboundConnections}}</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="flex items-center">
+                                            <mat-icon class="icon-size-5 text-primary"
+                                                [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                            <div class="ml-2"> <span>Default Max Outbound Connections: </span>
+                                                <span
+                                                    class="text-primary break-all">{{configuration.defaultMaxOutboundConnections}}</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="flex items-center">
+                                            <mat-icon class="icon-size-5 text-primary"
+                                                [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                            <div class="ml-2"> <span>Genesis Date: </span>
+                                                <span
+                                                    class="text-primary break-all">{{configuration.genesisDate}}</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="flex items-center">
+                                            <mat-icon class="icon-size-5 text-primary"
+                                                [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                            <div class="ml-2"> <span>Genesis Hash: </span>
+                                                <span
+                                                    class="text-primary break-all">{{configuration.genesisHash}}</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="flex items-center">
+                                            <mat-icon class="icon-size-5 text-primary"
+                                                [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                            <div class="ml-2"> <span>Coin Type: </span>
+                                                <span class="text-primary break-all">{{consensus.coinType}}</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="flex items-center">
+                                            <mat-icon class="icon-size-5 text-primary"
+                                                [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                            <div class="ml-2"> <span>Coinbase Maturity: </span>
+                                                <span
+                                                    class="text-primary break-all">{{consensus.coinbaseMaturity}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <mat-icon class="icon-size-5 text-primary"
+                                                [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                            <div class="ml-2"> <span>Is Proof-Of-Stake: </span>
+                                                <span class="text-primary break-all">{{consensus.isProofOfStake |
+                                                    yes}}</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="flex items-center">
+                                            <mat-icon class="icon-size-5 text-primary"
+                                                [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                            <div class="ml-2"> <span>Maximum Money: </span>
+                                                <span class="text-primary break-all">{{consensus.maxMoney}}</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="flex items-center">
+                                            <mat-icon class="icon-size-5 text-primary"
+                                                [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                            <div class="ml-2"> <span>Last POW Block: </span>
+                                                <span class="text-primary break-all">{{consensus.lastPOWBlock}}</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="flex items-center">
+                                            <mat-icon class="icon-size-5 text-primary"
+                                                [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                            <div class="ml-2"> <span>Premine Reward: </span>
+                                                <span class="text-primary break-all">{{consensus.premineReward}}</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="flex items-center">
+                                            <mat-icon class="icon-size-5 text-primary"
+                                                [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                            <div class="ml-2"> <span>Proof-Of-Stake Reward: </span>
+                                                <span
+                                                    class="text-primary break-all">{{consensus.proofOfStakeReward}}</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="flex items-center">
+                                            <mat-icon class="icon-size-5 text-primary"
+                                                [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                            <div class="ml-2"> <span>Proof-Of-Work Reward: </span>
+                                                <span
+                                                    class="text-primary break-all">{{consensus.proofOfWorkReward}}</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="flex items-center">
+                                            <mat-icon class="icon-size-5 text-primary"
+                                                [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                            <div class="ml-2"> <span>Target Spacing: </span>
+                                                <span class="text-primary break-all">{{consensus.targetSpacing}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </blockcore-block>
 
                         </div>
 

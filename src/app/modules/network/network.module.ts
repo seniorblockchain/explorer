@@ -17,6 +17,8 @@ import { SharedModule } from 'app/shared/shared.module';
 import { NetworkComponent } from 'app/modules/network/network.component';
 import { networkRoutes } from 'app/modules/network/network.routing';
 import { PipeModule } from 'app/shared/pipe.module';
+import { ErrorModule } from '../error/loading.module';
+import { ProgressModule } from '../progress/progress.module';
 
 @NgModule({
     declarations: [
@@ -38,7 +40,9 @@ import { PipeModule } from 'app/shared/pipe.module';
         NgApexchartsModule,
         TranslocoModule,
         SharedModule,
-        PipeModule
+        PipeModule,
+        ProgressModule,
+        ErrorModule,
     ]
 })
 export class NetworkModule

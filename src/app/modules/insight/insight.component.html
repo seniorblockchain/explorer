@@ -223,7 +223,7 @@
                                 </div>
                             </div>
                             <!-- View All -->
-                            <div class="flex flex-col sm:flex-row items-end justify-between">
+                            <div *ngIf="richlist" class="flex flex-col sm:flex-row items-end justify-between">
                                 <div class="mt-3 sm:mt-0 sm:ml-2">
 
                                     <a [routerLink]="['richlist']">

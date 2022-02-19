@@ -18,6 +18,8 @@ import { HomeComponent } from 'app/modules/home/home.component';
 import { homeRoutes } from 'app/modules/home/home.routing';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
+import { ProgressModule } from '../progress/progress.module';
+import { ErrorModule } from '../error/loading.module';
 @NgModule({
     declarations: [
         HomeComponent
@@ -39,7 +41,9 @@ import { MatInputModule } from '@angular/material/input';
         TranslocoModule,
         SharedModule,
         MatSelectModule,
-        MatInputModule
+        MatInputModule,
+        ProgressModule,
+        ErrorModule,
     ]
 })
 export class HomeModule {

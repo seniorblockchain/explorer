@@ -1,6 +1,6 @@
 /* eslint-disable no-var */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy,ChangeDetectorRef, Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from 'app/services/api.service';
 import { SetupService } from 'app/services/setup.service';
@@ -23,7 +23,7 @@ export class NetworkComponent implements OnInit, OnDestroy {
     subscription: any;
     subscription2: any;
 
-    constructor(private api: ApiService, public setup: SetupService, private router: Router) {
+    constructor(private api: ApiService, public setup: SetupService, private router: Router,private cd: ChangeDetectorRef) {
 
       this.subscription = this.setup.currentChain$.subscribe(async (chain) => {
         await this.update();
@@ -48,6 +48,7 @@ export class NetworkComponent implements OnInit, OnDestroy {
       this.consensus = this.configuration?.consensus;
 
       this.peers = await this.getPeers();
+      this.cd.detectChanges();
     }
 
     async getPeers() {
