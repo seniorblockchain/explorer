@@ -14,21 +14,22 @@ import { AppComponent } from 'app/app.component';
 import { appRoutes } from 'app/app.routing';
 import { HttpClientModule } from '@angular/common/http';
 import { NgHttpLoaderModule } from 'ng-http-loader';
-
-  const routerConfig: ExtraOptions = {
-    preloadingStrategy       : PreloadAllModules,
-    scrollPositionRestoration: 'enabled'
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+const routerConfig: ExtraOptions = {
+    preloadingStrategy: PreloadAllModules,
+    scrollPositionRestoration: 'enabled',
 };
 
 @NgModule({
     declarations: [
         AppComponent
     ],
-    imports     : [
+    imports: [
         BrowserModule,
         BrowserAnimationsModule,
         RouterModule.forRoot(appRoutes, routerConfig),
-        RouterModule.forRoot(appRoutes, {onSameUrlNavigation: 'reload'}),
+        RouterModule.forRoot(appRoutes, { useHash: true }),
+        RouterModule.forRoot(appRoutes, { onSameUrlNavigation: 'reload' }),
         // blockcore, blockcoreConfig & blockcoreMockAPI
         blockcoreModule,
         blockcoreConfigModule.forRoot(appConfig),
@@ -48,11 +49,11 @@ import { NgHttpLoaderModule } from 'ng-http-loader';
 
 
     ],
-    exports: [RouterModule ],
-    bootstrap   : [
+    providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
+    exports: [RouterModule],
+    bootstrap: [
         AppComponent
     ]
 })
-export class AppModule
-{
+export class AppModule {
 }
