@@ -1,6 +1,6 @@
 /* eslint-disable no-var */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy,ChangeDetectorRef, Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { ApiService } from 'app/services/api.service';
 import { SetupService } from 'app/services/setup.service';
 
@@ -32,7 +32,7 @@ export class InsightComponent implements OnInit, OnDestroy {
     timerWallets: any;
     killed: boolean;
 
-    constructor(private api: ApiService, public setup: SetupService) {
+    constructor(private api: ApiService, public setup: SetupService , private cdr: ChangeDetectorRef) {
       this.subscription = this.setup.currentChain$.subscribe(async (chain) => {
         await this.updateSupply();
         await this.updateWallets();
@@ -67,8 +67,14 @@ export class InsightComponent implements OnInit, OnDestroy {
 
       this.timerWallets = setTimeout(async () => {
         await this.updateWallets();
+        this.cdr.detectChanges();
       }, 30000);
+      this.cdr.detectChanges();
     }
+
+    toggleAmountRendering() {
+        this.setup.toggleFormat();
+     }
 
     async updateSupply() {
       if (this.killed) {
@@ -84,7 +90,9 @@ export class InsightComponent implements OnInit, OnDestroy {
 
       this.timerSupply = setTimeout(async () => {
         await this.updateSupply();
+        this.cdr.detectChanges();
       }, 15000);
+      this.cdr.detectChanges();
     }
 
     async updateRichlist() {
@@ -102,6 +110,8 @@ export class InsightComponent implements OnInit, OnDestroy {
 
       this.timerRichlist = setTimeout(async () => {
         await this.updateRichlist();
+        this.cdr.detectChanges();
       }, 15000);
+      this.cdr.detectChanges();
     }
   }

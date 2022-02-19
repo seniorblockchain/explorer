@@ -7,7 +7,7 @@
                 <!-- Avatar and name -->
                 <div class="flex flex-auto items-center min-w-0">
                     <div class="flex-0 w-16 h-16 rounded-full overflow-hidden">
-                        <img class="w-full h-full" src= {{setup.Chain?.Icon}}>
+                        <img class="w-full h-full" src={{setup.Chain?.Icon}}>
                     </div>
                     <div class="flex flex-col min-w-0 ml-4">
                         <ng-container>
@@ -17,21 +17,20 @@
                             </div>
                         </ng-container>
                         <div *ngIf="setup.Chain?.Description" class="flex items-center">
-                            <mat-icon
-                                class="icon-size-5"
-                                [svgIcon]="'heroicons_solid:badge-check'"></mat-icon>
+                            <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:badge-check'"></mat-icon>
                             <div class="ml-1.5 leading-6 truncate text-secondary">{{setup.Chain?.Description}}</div>
                         </div>
                     </div>
                 </div>
                 <!-- Actions -->
-                <div class="flex items-center mt-6 sm:mt-0 sm:ml-2 space-x-3 hidden md:block">
-                    <a href="{{setup.Chain?.Url}}" target="_blank" target="_blank">
-                        <button class="blockcore-mat-button-rounded" mat-flat-button [color]="'primary'">
-                            <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:chevron-double-right'"></mat-icon>
-                            <span class="ml-2">Website</span>
+                <div class="flex items-center mt-6 sm:mt-0 sm:ml-2 space-x-3">
+                    <div class="flex items-center mt-auto">
+                        <button (click)="toggleAmountRendering()" title="Toggle Amount Format" class="mt-2"
+                            mat-stroked-button>
+                            <mat-icon class="icon-size-5 text-primary"
+                                [svgIcon]="'heroicons_solid:database'"></mat-icon>
                         </button>
-                    </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -41,145 +40,285 @@
     <div class="flex-auto border-t -mt-px pt-4 sm:pt-6">
         <div class="w-full max-w-screen-xl mx-auto">
             <!-- Tabs -->
-            <mat-tab-group
-                class="sm:px-2"
-                [animationDuration]="'0'">
+            <mat-tab-group class="sm:px-2" [animationDuration]="'0'">
 
                 <!-- Insight -->
-                <mat-tab label='Insight'>
+                <mat-tab label='Supply'>
                     <ng-template matTabContent>
 
+                        <app-progress class="centered" *ngIf="!supply"></app-progress>
 
-
-                        <h1>Insight</h1>
-
-                        <br>
-                        <br>
-
-                        <div class="box">
-                           <h2>Supply</h2>
-
-                           <app-progress class="centered" *ngIf="!supply"></app-progress>
-
-                           <div *ngIf="errorSupply">
-                              <span class="muted">Error from indexer:</span> <span class="negative">{{errorSupply}}</span><br>
-                           </div>
-
-                           <div *ngIf="supply">
-                              <div class="grid-label-value">
-                                 <div class="supply-line">
-                                    <span>Circulating</span>
-                                    <span class="number" [title]="supply.circulating">{{supply.circulating | number:'.0-0'}}</span>
-                                 </div>
-                                 <div class="supply-line">
-                                    <span>Total</span>
-                                    <span class="number">{{supply.total | number:'.0-0'}}</span>
-                                 </div>
-                                 <div class="supply-line">
-                                    <span>Max</span>
-                                    <span class="number">{{supply.max | number:'.0-0'}}</span>
-                                 </div>
-                                 <div class="supply-line">
-                                    <span>Rewards</span>
-                                    <span class="number">{{supply.rewards | number:'.0-0'}}</span>
-                                 </div>
-                                 <div class="supply-line">
-                                    <span>Height</span>
-                                    <span class="number">{{supply.height}}</span>
-                                 </div>
-                              </div>
-                              <br>
-                           </div>
-
-                           <div class="box">
-                              <h3>Richlist</h3>
-
-                              <app-progress class="centered" *ngIf="!richlist"></app-progress>
-
-                              <div *ngIf="errorRichlist">
-                                 <span class="muted">Error from indexer:</span> <span class="negative">{{errorRichlist}}</span><br>
-                              </div>
-
-                              <div *ngIf="richlist">
-
-                                 <div class="grid-header richlist">
-                                    <span class="hide-small">Rank</span>
-                                    <span>Address</span>
-                                    <span class="hide-small right">Balance</span>
-                                 </div>
-
-                                 <div class="grid grid-odd-line richlist" *ngFor="let item of richlist; index as i">
-                                    <span class="hide-small">{{i+1}}</span>
-                                    <span><a [routerLink]="['../explorer/address/', item.address]">{{item.address}}</a></span>
-                                    <span class="hide-small right number" [innerHTML]="item.balance | amountHtml"></span>
-                                 </div>
-
-                              </div>
-
-                              <br>
-                              <a [routerLink]="['richlist']">View all</a>
-                           </div>
-
-                           <h2>Wallets</h2>
-
-                           <app-progress class="centered" *ngIf="!wallets"></app-progress>
-
-                           <div *ngIf="errorWallets">
-                              <span class="muted">Error from indexer:</span> <span class="negative">{{errorWallets}}</span><br>
-                           </div>
-
-                           <div *ngIf="wallets">
-
-                              <div class="" *ngFor="let item of wallets; index as i">
-
-                                 <div class="box">
-
-                                    <img *ngIf="item.logo" [src]="item.logo" class="wallet-icon">
-
-                                    <h4>{{item.name}}</h4>
-
-                                    <div>
-                                       <div class="grid-label-value">
-                                          <div>
-                                             <span>Type</span>
-                                             <span>{{item.type}}</span>
-                                          </div>
-                                          <div *ngIf="item.url">
-                                             <span>url</span>
-                                             <span><a [href]="item.url">{{item.url}}</a></span>
-                                          </div>
-                                          <div *ngIf="item.initialAmount">
-                                             <span>Initial Amount</span>
-                                             <span class="right number">{{item.initialAmount * 100000000 | amount}}</span>
-                                          </div>
-                                          <div>
-                                             <span>Balance</span>
-                                             <span class="right number">{{item.balance | amount}}</span>
-                                          </div>
-                                          <div *ngIf="item.initialAmount">
-                                             <span>Spent Amount</span>
-                                             <span class="right number">{{(item.initialAmount * 100000000) - item.balance | amount}}</span>
-                                          </div>
-                                          <div *ngIf="item.address">
-                                             <span>Addresses</span>
-                                             <span class="wallet-address">
-                                                <div *ngFor="let address of item.address; index as i"><a
-                                                      [routerLink]="['../explorer/address/', address]">{{address}}</a><br></div>
-                                             </span>
-                                          </div>
-                                       </div>
-                                    </div>
-
-                                 </div>
-                              </div>
-
-                              <br>
-                              <p><em>Circulating supply is calculated by removing known locked/fund/burnt supply from the mined/staked/premined supply. The total is all coins in existence on the blockchain. Maximum is what the network has been configured to have maximum. The rewards is based upon a simple calculation and is an estimate.</em></p>
-                              <br>
-
-                           </div>
+                        <div *ngIf="errorSupply">
+                            <span class="muted">Error from indexer:</span> <span
+                                class="negative">{{errorSupply}}</span><br>
                         </div>
 
+
+                        <app-progress *ngIf="!supply"></app-progress>
+
+                        <!-- Supply -->
+
+                        <div *ngIf="supply" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 w-full mt-5">
+                            <!-- Circulating -->
+                            <div class="flex flex-col flex-auto bg-card shadow rounded-2xl overflow-hidden p-6">
+                                <div class="flex items-start justify-between">
+                                    <div class="text-lg font-medium tracking-tight leading-6 truncate">Circulating
+                                    </div>
+                                </div>
+                                <div class="mt-8">
+                                    <div class="-my-3 divide-y">
+                                        <ng-container>
+                                            <div class="grid grid-cols-3 py-3">
+                                                <div class="flex items-center">
+                                                    <div class="flex-0 w-2 h-2 rounded-full back-chain-color">
+                                                    </div>
+                                                    <div class="ml-3">{{supply.circulating |
+                                                        number:'.0-0'}}</div>
+                                                </div>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Total -->
+                            <div class="flex flex-col flex-auto bg-card shadow rounded-2xl overflow-hidden p-6">
+                                <div class="flex items-start justify-between">
+                                    <div class="text-lg font-medium tracking-tight leading-6 truncate">Total
+                                    </div>
+                                </div>
+                                <div class="mt-8">
+                                    <div class="-my-3 divide-y">
+                                        <ng-container>
+                                            <div class="grid grid-cols-3 py-3">
+                                                <div class="flex items-center">
+                                                    <div class="flex-0 w-2 h-2 rounded-full back-chain-color">
+                                                    </div>
+                                                    <div class="ml-3">{{supply.total | number:'.0-0'}}</div>
+                                                </div>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Max -->
+                            <div class="flex flex-col flex-auto bg-card shadow rounded-2xl overflow-hidden p-6">
+                                <div class="flex items-start justify-between">
+                                    <div class="text-lg font-medium tracking-tight leading-6 truncate">Max
+                                    </div>
+                                </div>
+                                <div class="mt-8">
+                                    <div class="-my-3 divide-y">
+                                        <ng-container>
+                                            <div class="grid grid-cols-3 py-3">
+                                                <div class="flex items-center">
+                                                    <div class="flex-0 w-2 h-2 rounded-full back-chain-color">
+                                                    </div>
+                                                    <div class="ml-3">{{supply.max | number:'.0-0'}}</div>
+                                                </div>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Rewards -->
+                            <div class="flex flex-col flex-auto bg-card shadow rounded-2xl overflow-hidden p-6">
+                                <div class="flex items-start justify-between">
+                                    <div class="text-lg font-medium tracking-tight leading-6 truncate">Rewards
+                                    </div>
+                                </div>
+                                <div class="mt-8">
+                                    <div class="-my-3 divide-y">
+                                        <ng-container>
+                                            <div class="grid grid-cols-3 py-3">
+                                                <div class="flex items-center">
+                                                    <div class="flex-0 w-2 h-2 rounded-full back-chain-color">
+                                                    </div>
+                                                    <div class="ml-3">{{supply.rewards | number:'.0-0'}}</div>
+                                                </div>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Height -->
+                            <div class="flex flex-col flex-auto bg-card shadow rounded-2xl overflow-hidden p-6">
+                                <div class="flex items-start justify-between">
+                                    <div class="text-lg font-medium tracking-tight leading-6 truncate">Height
+                                    </div>
+                                </div>
+                                <div class="mt-8">
+                                    <div class="-my-3 divide-y">
+                                        <ng-container>
+                                            <div class="grid grid-cols-3 py-3">
+                                                <div class="flex items-center">
+                                                    <div class="flex-0 w-2 h-2 rounded-full back-chain-color">
+                                                    </div>
+                                                    <div class="ml-3">{{supply.height}}</div>
+                                                </div>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </ng-template>
+                </mat-tab>
+
+                <mat-tab label='Richlist'>
+                    <ng-template matTabContent>
+
+                        <app-progress *ngIf="!richlist"></app-progress>
+
+                        <div *ngIf="errorRichlist">
+                            <span class="muted">Error from indexer:</span> <span
+                                class="negative">{{errorRichlist}}</span><br>
+                        </div>
+
+                        <!-- Richlist -->
+
+
+                        <div *ngIf="richlist"
+                            class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-4 gap-6 w-full min-w-0 mt-5">
+
+                            <!-- richlist -->
+                            <div
+                                class="sm:col-span-4 md:col-span-4 lg:col-span-4 flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
+                                <div class="flex flex-col mt-2 divide-y">
+                                    <ng-container *ngFor="let item of richlist; index as i">
+                                        <div class="flex flex-row items-center justify-between py-4 px-0.5">
+                                            <div class="flex flex-col">
+                                                <div class="font-medium text-primary">
+                                                    <a
+                                                        [routerLink]="['../explorer/address/', item.address]">{{item.address}}</a>
+                                                </div>
+                                                <div
+                                                    class="flex flex-col sm:flex-row sm:items-center -ml-0.5 mt-2 sm:mt-1 space-y-1 sm:space-y-0 sm:space-x-3">
+                                                    <ng-container>
+                                                        <div class="flex items-center">
+                                                            <mat-icon class="icon-size-5 text-hint"
+                                                                [svgIcon]="'heroicons_solid:database'"></mat-icon>
+                                                            <div class="ml-1.5 text-md text-secondary"> <span
+                                                                    class="hide-small right number"
+                                                                    [innerHTML]="item.balance | amountHtml"></span>
+                                                            </div>
+                                                        </div>
+                                                    </ng-container>
+
+                                                </div>
+                                            </div>
+                                            <a [routerLink]="['../explorer/address/', item.address]">
+                                                <button mat-icon-button>
+                                                    <mat-icon [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                                                </button></a>
+
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                            <!-- View All -->
+                            <div class="flex flex-col sm:flex-row items-end justify-between">
+                                <div class="mt-3 sm:mt-0 sm:ml-2">
+
+                                    <a [routerLink]="['richlist']">
+                                        <button class="blockcore-mat-button-rounded" mat-flat-button
+                                            [color]="'primary'">
+                                            <span class="text-lg">View All</span>
+                                        </button>
+                                    </a>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </ng-template>
+                </mat-tab>
+
+
+                <mat-tab label='Wallets'>
+                    <ng-template matTabContent>
+
+                        <app-progress *ngIf="!wallets"></app-progress>
+                        <div *ngIf="wallets">
+                            <blockcore-block class="flex flex-col lg:flex-row w-full"
+                                *ngFor="let item of wallets; index as i">
+
+                                <!-- Wallets Details -->
+                                <div
+                                    class="flex flex-col items-center p-8 lg:px-10 lg:py-12 lg:min-w-80 bg-gray-100 dark:bg-black dark:bg-opacity-10">
+                                    <div class="whitespace-nowrap">
+                                        <img *ngIf="item.logo" [src]="item.logo" class="w-60">
+                                    </div>
+
+                                </div>
+                                <div class="p-6 sm:p-8 lg:p-10">
+                                    <div class="text-3xl font-bold">{{item.name}}</div>
+
+                                    <!-- Details -->
+                                    <div class="grid grid-cols-1 lg:grid-cols-1 gap-y-4 mt-6">
+
+                                        <div class="flex items-center">
+
+                                            <div class="ml-2"> <span>Type: </span>
+                                                <span class="text-primary break-all">{{item.type}}</span>
+                                            </div>
+                                        </div>
+
+                                        <div *ngIf="item.url" class="flex items-center">
+                                            <div class="ml-2"> <span>url: </span>
+                                                <span class="text-primary break-all"><a
+                                                        [href]="item.url">{{item.url}}</a></span>
+                                            </div>
+                                        </div>
+
+                                        <div *ngIf="item.initialAmount" class="flex items-center">
+
+                                            <div class="ml-2"> <span>Initial Amount: </span>
+                                                <span class="text-primary break-all">{{item.initialAmount * 100000000 |
+                                                    amount}}</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="flex items-center">
+
+                                            <div class="ml-2"> <span>Balance: </span>
+                                                <span class="text-primary break-all">{{item.balance | amount}}</span>
+                                            </div>
+                                        </div>
+
+                                        <div *ngIf="item.initialAmount" class="flex items-center">
+
+                                            <div class="ml-2"> <span>Spent Amount: </span>
+                                                <span class="text-primary break-all">{{(item.initialAmount * 100000000)
+                                                    -
+                                                    item.balance | amount}}</span>
+                                            </div>
+                                        </div>
+
+                                        <div *ngIf="item.address" class="flex items-center">
+
+                                            <div class="ml-2"> <span>Addresses: </span>
+                                                <span class="text-primary break-all">
+                                                    <ul>
+                                                        <li *ngFor="let address of item.address; index as i">
+                                                            <a
+                                                                [routerLink]="['../explorer/address/', address]" class="ml-5">{{address}}</a>
+                                                        </li>
+                                                    </ul>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </blockcore-block>
+                        </div>
                     </ng-template>
                 </mat-tab>
 

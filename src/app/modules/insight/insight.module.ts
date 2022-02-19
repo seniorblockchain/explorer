@@ -16,6 +16,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { SharedModule } from 'app/shared/shared.module';
 import { InsightComponent } from 'app/modules/insight/insight.component';
 import { insightRoutes } from 'app/modules/insight/insight.routing';
+import { PipeModule } from 'app/shared/pipe.module';
 
 @NgModule({
     declarations: [
@@ -36,7 +37,8 @@ import { insightRoutes } from 'app/modules/insight/insight.routing';
         MatTabsModule,
         NgApexchartsModule,
         TranslocoModule,
-        SharedModule
+        SharedModule,
+        PipeModule
     ]
 })
 export class InsightModule

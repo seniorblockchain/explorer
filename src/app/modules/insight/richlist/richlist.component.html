@@ -1,24 +1,96 @@
-<div class="box">
-   <h3>Richlist</h3>
+<div class="flex flex-col flex-auto min-w-0">
 
-   <app-progress class="centered" *ngIf="!addresses">Loading richlist...</app-progress>
-   <div *ngIf="addresses">
-      <div class="grid-header richlist">
-         <span>Rank</span>
-         <span>Address</span>
-         <span class="right">Balance</span>
-      </div>
+    <!-- Header -->
+    <div class="bg-card">
+        <div class="flex flex-col w-full max-w-screen-xl mx-auto px-6 sm:px-8">
+            <div class="flex flex-col sm:flex-row flex-auto sm:items-center min-w-0 my-8 sm:my-12">
+                <!-- Avatar and name -->
+                <div class="flex flex-auto items-center min-w-0">
+                    <div class="flex-0 w-16 h-16 rounded-full overflow-hidden">
+                        <img class="w-full h-full" src={{setup.Chain?.Icon}}>
+                    </div>
+                    <div class="flex flex-col min-w-0 ml-4">
+                        <ng-container>
+                            <div
+                                class="text-2xl md:text-5xl font-semibold tracking-tight leading-7 md:leading-snug truncate">
+                                {{setup.Chain?.Symbol}}
+                            </div>
+                        </ng-container>
+                        <div *ngIf="setup.Chain?.Description" class="flex items-center">
+                            <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:badge-check'"></mat-icon>
+                            <div class="ml-1.5 leading-6 truncate text-secondary">{{setup.Chain?.Description}}</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Actions -->
+                <div class="flex items-center mt-6 sm:mt-0 sm:ml-2 space-x-3">
+                    <div class="flex items-center mt-auto">
+                        <button (click)="toggleAmountRendering()" title="Toggle Amount Format" class="mt-2"
+                            mat-stroked-button>
+                            <mat-icon class="icon-size-5 text-primary"
+                                [svgIcon]="'heroicons_solid:database'"></mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
 
-      <div class="scrollable" appDetectScroll (onScroll)="onScroll($event)" [bottomOffset]="400" [topOffset]="400">
-         <div class="grid grid-odd-line richlist" *ngFor="let item of addresses; index as i">
-            <span class="center">{{i+1}}<!--<span><i class="fas fa-info-circle"></i></span>--></span>
-            <span class><a [routerLink]="['../../explorer/address/', item.address]">{{item.address}}</a>
-            </span>
-            <span class="right number" [innerHTML]="item.balance | amountHtml"></span>
-         </div>
-         <br>
-         <app-progress class="centered" *ngIf="loading">Loading richlist...</app-progress>
-      </div>
-   </div>
+        </div>
+    </div>
+
+    <!-- Main -->
+    <div class="flex-auto border-t -mt-px pt-4 sm:pt-6">
+        <div class="w-full max-w-screen-xl mx-auto">
+            <div class="flex flex-col flex-auto w-full">
+                <div class="w-full p-6 md:p-8">
+
+
+                    <app-progress *ngIf="!addresses"></app-progress>
+
+                    <blockcore-block *ngIf="addresses" class="flex items-center w-full p-6 filter-info">
+                        <mat-icon class="icon-size-22 mr-6 text-blue-500" [svgIcon]="'heroicons_outline:database'">
+                        </mat-icon>
+
+                        <div class="flex flex-col">
+                            <div class="text-2xl font-semibold leading-tight break-all"><span>Addresses</span>
+                            </div>
+                        </div>
+                    </blockcore-block>
+
+                    <div *ngIf="addresses">
+                        <div appDetectScroll (onScroll)="onScroll($event)" [bottomOffset]="400" [topOffset]="400">
+                            <blockcore-block class="flex items-center w-full p-6 filter-info justify-between"
+                                *ngFor="let item of addresses; index as i">
+                                <mat-icon class="icon-size-12 mr-6" [svgIcon]="'heroicons_outline:database'">
+                                </mat-icon>
+                                <div class="flex flex-col w-full">
+                                    <div class="text-1xl font-semibold leading-tight text-primary break-all">
+                                        <a [routerLink]="['../../explorer/address/', item.address]">{{item.address}}</a>
+                                    </div>
+                                    <div class="text-1xl text-secondary mt-2"><span
+                                            [innerHTML]="item.balance | amountHtml"></span></div>
+                                </div>
+                                <div class="flex flex-col">
+
+                                    <div class="text-1xl font-semibold leading-tight">
+                                        <ng-container>
+                                            <div
+                                                class="font-semibold tracking-tight leading-7 md:leading-snug truncate inline-flex  mat-flat-button">
+                                                <div class="inline-flex text-primary" matTooltip="Rank">{{i+1}}</div>
+
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                                <div class="flex">
+                                </div>
+                            </blockcore-block>
+                            <app-progress *ngIf="loading"></app-progress>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>

@@ -16,6 +16,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { SharedModule } from 'app/shared/shared.module';
 import { NetworkComponent } from 'app/modules/network/network.component';
 import { networkRoutes } from 'app/modules/network/network.routing';
+import { PipeModule } from 'app/shared/pipe.module';
 
 @NgModule({
     declarations: [
@@ -36,7 +37,8 @@ import { networkRoutes } from 'app/modules/network/network.routing';
         MatTabsModule,
         NgApexchartsModule,
         TranslocoModule,
-        SharedModule
+        SharedModule,
+        PipeModule
     ]
 })
 export class NetworkModule

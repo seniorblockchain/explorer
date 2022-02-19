@@ -54,9 +54,7 @@ import { appRoutes } from 'app/app.routing';
         SearchModule,
         ProgressModule,
         ErrorModule,
-        // [RouterModule.forRoot(appRoutes, {onSameUrlNavigation: 'reload'})]
     ],exports:[
-        // RouterModule
     ]
 
 })
