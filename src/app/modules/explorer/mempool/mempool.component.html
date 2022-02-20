@@ -63,13 +63,12 @@
                         [topOffset]="400">
                         <blockcore-block class="flex items-center w-full p-6 filter-info justify-between"
                             *ngFor="let item of transactions">
-                            <mat-icon class="icon-size-12 mr-6" [svgIcon]="'heroicons_outline:document-text'"
-                                matTooltip="size: {{(item.size / 1024).toFixed(2)}}">
+                            <mat-icon class="icon-size-12 mr-6" [svgIcon]="'heroicons_outline:document-text'">
                             </mat-icon>
                             <div class="flex flex-col w-full">
                                 <div class="text-2xl font-semibold leading-tight text-primary break-all">
                                     <a
-                                        [routerLink]="['../../transaction', item.transactionHash]">{{item.transactionHash}}</a>
+                                        [routerLink]="['../../transaction', item.transactionId]">{{item.transactionId}}</a>
                                 </div>
                             </div>
 
