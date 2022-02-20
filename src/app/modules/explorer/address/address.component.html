@@ -218,26 +218,25 @@
                                             </mat-icon>
                                         </div>
                                         <div class="flex-auto ml-4 leading-none">
-                                            <div class="text-sm font-medium text-secondary"><a class="number"
-                                                    [routerLink]="['../../block', item.blockIndex]">Block Index:
-                                                    {{item.blockIndex}}</a></div>
+                                            <div class="text-sm font-medium text-secondary">
+                                                <div class="text-sm leading-none"><span>{{item.value | amount}} </span>
+                                                    <span class="text-primary"> {{setup.Chain.Symbol}}</span>
+                                                </div>
+                                            </div>
                                             <div class="flex mt-2 font-medium text-sm break-all">
-
                                                 <div>
                                                     <a class="break-all"
                                                         [routerLink]="['../../transaction', item.transactionHash]">{{item.transactionHash}}</a>
                                                 </div>
-
-
                                             </div>
                                             <mat-progress-bar class="mt-3 rounded-full" [mode]="'determinate'"
                                                 [value]="100"></mat-progress-bar>
 
                                         </div>
                                         <div class="flex items-end justify-end min-w-18 mt-auto ml-6">
-                                            <div class="text-sm leading-none"><span>{{item.value | amount}} </span>
-                                                <span class="text-primary"> {{setup.Chain.Symbol}}</span>
-                                            </div>
+                                            <a [routerLink]="['../../block', item.blockIndex]">
+                                                Index:
+                                                {{item.blockIndex}}</a>
                                         </div>
                                     </blockcore-block>
 
