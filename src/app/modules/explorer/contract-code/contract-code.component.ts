@@ -47,8 +47,6 @@ export class ContractCodeComponent implements OnInit, OnDestroy {
 
       this.activatedRoute.paramMap.subscribe(async (params) => {
          const id: any = params.get('address');
-         console.log('Address:', id);
-
          this.transactions = null;
          this.address = id;
 

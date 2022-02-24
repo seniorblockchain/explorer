@@ -39,8 +39,6 @@ export class ContractTransactionComponent implements OnInit, OnDestroy {
 
     this.activatedRoute.paramMap.subscribe(async params => {
       const id: any = params.get('transaction');
-      console.log('Transaction ID:', id);
-
       try {
          this.transaction = await this.api.getContractTransaction(id);
 
@@ -48,8 +46,6 @@ export class ContractTransactionComponent implements OnInit, OnDestroy {
       } catch (e) {
         this.error = e;
       }
-
-      console.log(this.transaction);
     });
   }
 

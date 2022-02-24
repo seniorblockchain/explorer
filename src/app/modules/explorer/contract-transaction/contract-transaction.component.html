@@ -58,14 +58,6 @@
 
                     <blockcore-block *ngIf="transaction" class="flex flex-col lg:flex-row w-full">
 
-                        <!-- transaction Details -->
-                        <div
-                            class="flex flex-col items-center p-8 lg:px-10 lg:py-12 lg:min-w-80 bg-gray-100 dark:bg-black dark:bg-opacity-10">
-                            <div class="flex items-center whitespace-nowrap">
-
-                                <div class="text-4xl font-extrabold tracking-tight">Transaction Details</div>
-                            </div>
-                        </div>
                         <div class="p-6 sm:p-8 lg:p-10">
                             <div class="text-3xl font-bold">Smart Contract Transaction Details</div>
                             <div class="mt-2 leading-relaxed text-secondary">
@@ -166,18 +158,21 @@
                     </blockcore-block>
 
                     <div *ngIf="transaction">
-                        <blockcore-block *ngIf="transaction.logs" class="flex flex-col lg:flex-row w-full">
-                            <!-- Transaction Logs -->
-                            <div class="p-6 sm:p-8 lg:p-10">
-                                <div class="text-3xl font-bold">Transaction Logs</div>
-                                <!-- logs -->
-                                <div class="prose">
-                                    <textarea blockcore-highlight lang="json">
-                                              {{transaction.logs | json}}
-                                    </textarea>
+                        <blockcore-block class="flex items-center w-full p-6 filter-info ">
+                            <mat-icon class="icon-size-16 mr-6 text-blue-500" [svgIcon]="'heroicons_outline:clipboard-list'">
+                            </mat-icon>
+
+                            <div class="flex flex-col">
+                                <div class="text-2xl font-semibold leading-tight break-all"><span>Transaction Logs:
+                                    </span>
                                 </div>
                             </div>
                         </blockcore-block>
+                        <div *ngIf="transaction.logs" class="prose max-w-full">
+                            <textarea blockcore-highlight lang="json">
+                                {{transaction.logs | json}}
+                            </textarea>
+                        </div>
                     </div>
                 </div>
             </div>
