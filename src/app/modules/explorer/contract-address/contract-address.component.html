@@ -45,117 +45,222 @@
 
                     <app-search></app-search>
 
+                    <app-progress *ngIf="!transaction"></app-progress>
+                    <blockcore-block *ngIf="transaction" class="flex items-center w-full p-6 filter-info ">
+                        <mat-icon class="icon-size-16 mr-6 text-blue-500" [svgIcon]="'heroicons_outline:document-text'">
+                        </mat-icon>
 
-                    <div class="box">
-                        <div *ngIf="transaction">
-                           <div class="grid-hash">
-                              <div>
-                                 <span class="grid-hash-left"><i class="fas fa-hashtag"></i></span>
-                                 <span class="grid-hash-middle breakable">{{transaction.transactionId}}</span>
-                                 <span class="grid-hash-right">
-                                    <div class="grid-double">
+                        <div class="flex flex-col">
+                            <div class="text-2xl font-semibold leading-tight break-all"><span>Transaction Id:
+                                </span><span class=" text-primary ">{{transaction.transactionId}}</span>
+                            </div>
+                        </div>
+                    </blockcore-block>
+
+                    <app-error [error]="error"></app-error>
+
+                    <blockcore-block *ngIf="transaction" class="flex flex-col lg:flex-row w-full">
+
+                        <!-- Block Details -->
+                        <div
+                            class="flex flex-col items-center p-8 lg:px-10 lg:py-12 lg:min-w-80 bg-gray-100 dark:bg-black dark:bg-opacity-10">
+                            <div class="flex items-center whitespace-nowrap">
+                                <mat-icon class="icon-size-14 mr-6 text-blue-500" [svgIcon]="'heroicons_outline:cube'">
+                                </mat-icon>
+                                <div class="text-4xl font-extrabold tracking-tight">Smart Contract</div>
+                            </div>
+
+                        </div>
+                        <div class="p-6 sm:p-8 lg:p-10">
+                            <div class="text-3xl font-bold">Smart Contract Details</div>
+                            <div class="mt-2 leading-relaxed text-secondary">
+                                <p class="break-all">Transaction Id: {{transaction.transactionId}}</p>
+                            </div>
+
+                            <!-- Details -->
+                            <div class="grid grid-cols-1 lg:grid-cols-1 gap-y-4 mt-6">
+
+                                <div class="flex items-center">
+                                    <mat-icon class="icon-size-5 text-primary"
+                                        [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                    <div class="ml-2"> <span>Contract Type: </span>
+                                        <span class="text-primary break-all">{{transaction.contractCodeType}}</span>
                                     </div>
-                                 </span>
-                              </div>
-                           </div>
+                                </div>
+
+                                <div class="flex items-center">
+                                    <mat-icon class="icon-size-5 text-primary"
+                                        [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                    <div class="ml-2"> <span>Block: </span>
+                                        <span class="text-primary break-all"><a
+                                                [routerLink]="['../../block', transaction.blockIndex]">{{transaction.blockIndex}}</a></span>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-center">
+                                    <mat-icon class="icon-size-5 text-primary"
+                                        [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                    <div class="ml-2"> <span>Status: </span>
+                                        <span class="text-primary break-all">{{transaction.success | success}}</span>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-center">
+                                    <mat-icon class="icon-size-5 text-primary"
+                                        [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                    <div class="ml-2"> <span>Gas Used: </span>
+                                        <span class="text-primary break-all">{{transaction.gasUsed }}</span>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-center">
+                                    <mat-icon class="icon-size-5 text-primary"
+                                        [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                    <div class="ml-2"> <span>From Address: </span>
+                                        <span class="text-primary break-all">{{transaction.fromAddress}}</span>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-center">
+                                    <mat-icon class="icon-size-5 text-primary"
+                                        [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                    <div class="ml-2"> <span>Contract Address: </span>
+                                        <span class="text-primary break-all">{{transaction.contractAddress}}</span>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-center">
+                                    <mat-icon class="icon-size-5 text-primary"
+                                        [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                    <div class="ml-2"> <span>View Smart Contract: </span>
+                                        <span class="text-primary break-all"><a
+                                                [routerLink]="['../../','contract-transaction', transaction.transactionId]">{{transaction.transactionId
+                                                | slice:0:20}}</a></span>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-center">
+                                    <mat-icon class="icon-size-5 text-primary"
+                                        [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                    <div class="ml-2"> <span>Smart Contract Code: </span>
+                                        <span class="text-primary break-all"><a
+                                                [routerLink]="['../../','contract-code', transaction.contractAddress]">View
+                                                Source Code</a></span>
+                                    </div>
+                                </div>
+
+                                <div *ngIf="transaction.error" class="flex items-center">
+                                    <mat-icon class="icon-size-5 text-primary"
+                                        [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                    <div class="ml-2"> <span>Contract Address: </span>
+                                        <span class="text-primary break-all">{{transaction.error}}</span>
+                                    </div>
+                                </div>
+
+                            </div>
+
                         </div>
-                     </div>
+                    </blockcore-block>
 
-                     <div class="box">
 
-                        <!--<a class="link block-details-toggle" (click)="toggleDetails()"><span *ngIf="!detailsVisible">View</span><span
-                              *ngIf="detailsVisible">Hide</span>
-                           details</a>-->
 
-                        <h3><i class="fas fa-receipt"></i>&nbsp;&nbsp;Smart Contract Details</h3>
 
-                        <app-progress class="centered" *ngIf="!transaction"></app-progress>
-                        <app-error class="centered" [error]="error"></app-error>
+                    <app-progress *ngIf="!transactions">Loading transactions...</app-progress>
 
-                        <div class="grid-label-value" *ngIf="transaction">
-                           <div>
-                              <span>Contract Type</span>
-                              <span>{{transaction.contractCodeType}}</span>
-                           </div>
-                           <div>
-                              <span>Block</span>
-                              <span><a [routerLink]="['../../block', transaction.blockIndex]">{{transaction.blockIndex}}</a></span>
-                           </div>
-                           <div>
-                              <span>Status</span>
-                              <span>{{transaction.success | success}}</span>
-                           </div>
-                           <div>
-                              <span>Gas Used</span>
-                              <span>{{transaction.gasUsed }}</span>
-                           </div>
-                           <div>
-                              <span>From Address</span>
-                              <span>{{transaction.fromAddress}}</span>
-                           </div>
+                    <div *ngIf="errorTransactions">
+                        <span class="muted">Error: </span> <span
+                            class="negative">{{errorTransactions.title}}</span><br><br>
+                        {{errorTransactions.errors | json}}
+                    </div>
 
-                           <div>
-                              <span>Contract Address</span>
-                              <span>{{transaction.contractAddress}}</span>
-                           </div>
-                           <div>
-                              <span>View Smart Contract</span>
-                              <span><a [routerLink]="['../../','contract-transaction', transaction.transactionId]">{{transaction.transactionId | slice:0:20}}</a></span>
-                           </div>
-                           <div>
-                              <span>Smart Contract Code</span>
-                              <span><a [routerLink]="['../../','contract-code', transaction.contractAddress]">View Source Code</a></span>
-                           </div>
-                           <div *ngIf="transaction.error">
-                              <span>Error</span>
-                              <span>{{transaction.error}}</span>
-                           </div>
+                    <div *ngIf="transactions" class="grid grid-cols-1 xl:grid-cols-1 gap-8 w-full mt-8">
 
+
+                        <div class="flex flex-col flex-auto">
+                            <div class="flex items-center">
+                                <blockcore-block *ngIf="address" class="flex items-center w-full p-6 filter-info">
+                                    <mat-icon class="icon-size-16 mr-6 text-blue-500"
+                                        [svgIcon]="'heroicons_outline:document-text'">
+                                    </mat-icon>
+
+                                    <div class="flex flex-col">
+                                        <div class="text-2xl font-semibold leading-tight break-all">
+                                            <span>Transactions:
+                                            </span><span class=" text-primary "> {{total}}</span>
+                                        </div>
+                                    </div>
+                                </blockcore-block>
+
+                            </div>
+
+
+                            <div appDetectScroll (onScroll)="onScroll($event)" [bottomOffset]="400" [topOffset]="400">
+                                <blockcore-block *ngFor="let item of transactions"
+                                    class="flex items-center w-full p-3 filter-info">
+
+
+                                    <div *ngIf="item.success" matTooltip='{{item.success | success}}'
+                                        class="flex items-center justify-center min-w-14 min-h-14 rounded bg-teal-100 text-teal-800 dark:bg-teal-600 dark:text-teal-50">
+                                        <mat-icon class="text-current" [svgIcon]="'heroicons_outline:check'">
+                                        </mat-icon>
+                                    </div>
+
+                                    <div *ngIf="!item.success" matTooltip='{{item.success | success}}'
+                                        class="flex items-center justify-center min-w-14 min-h-14 rounded bg-red-100 text-red-800 dark:bg-red-600 dark:text-red-50">
+                                        <mat-icon class="text-current" [svgIcon]="'heroicons_outline:x'">
+                                        </mat-icon>
+                                    </div>
+
+                                    <div class="flex-auto ml-4 leading-none">
+                                        <div class="text-sm font-medium text-secondary">
+                                            <div class="text-sm leading-none">Gas Used:
+                                                <span class="text-primary"> {{item.gasUsed | amount}} {{setup.Chain.Symbol}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="text-sm font-medium text-secondary mt-2">
+                                            <div class="text-sm leading-none">Method Name: <span class="text-primary">{{item.methodName}}</span>
+
+                                             </div>
+                                        </div>
+                                        <div class="text-sm font-medium text-secondary mt-2">
+                                            <div class="text-sm leading-none">From Address: <span class="text-primary" tippy tippyType="address">{{item.fromAddress}}</span>
+
+                                             </div>
+                                        </div>
+                                        <div class="flex mt-2 font-medium text-sm break-all">
+                                            <div>
+                                                Transaction Id: <a class=" number"
+                                                    [routerLink]="['../../','contract-transaction', item.transactionId]">{{item.transactionId}}</a>
+                                            </div>
+                                        </div>
+                                        <mat-progress-bar class="mt-3 rounded-full" [mode]="'determinate'"
+                                            [value]="100"></mat-progress-bar>
+
+                                    </div>
+                                    <div class="flex items-end justify-end min-w-18 mt-auto ml-6">
+                                        <a [routerLink]="['../../block', item.blockIndex]">
+                                            Index:
+                                            {{item.blockIndex}}</a>
+                                    </div>
+                                </blockcore-block>
+
+                            </div>
+
+                            <app-progress *ngIf="loading"></app-progress>
+
+
+                            <div class="flex items-center mt-auto">
+                                <button (click)="toggleAmountRendering()" title="Toggle Amount Format" class="mt-2"
+                                    mat-stroked-button>
+                                    <mat-icon class="icon-size-5 text-primary" [svgIcon]="'heroicons_solid:database'">
+                                    </mat-icon>
+                                </button>
+                            </div>
                         </div>
-                     </div>
-
-                     <div class="box">
-                        <h3>Transactions ({{total}})</h3>
-
-                        <app-progress class="centered" *ngIf="!transactions">Loading transactions...</app-progress>
-
-                        <div *ngIf="errorTransactions">
-                           <span class="muted">Error: </span> <span class="negative">{{errorTransactions.title}}</span><br><br>
-                           {{errorTransactions.errors | json}}
-                        </div>
-
-                        <div *ngIf="transactions">
-                           <!-- <div class="grid-list-transactions">
-                              <span></span>
-                              <span>Transaction ID</span>
-                              <span>Height</span>
-                              <span></span>
-                              <span>Amount</span>
-                           </div> -->
-
-                           <div class="scrollable address-transactions-scrollable" appDetectScroll (onScroll)="onScroll($event)" [bottomOffset]="400" [topOffset]="400">
-                              <div class="grid-list-contract-address" *ngFor="let item of transactions">
-
-
-                                 <span class="left"><a class=" number" [routerLink]="['../../','contract-transaction', item.transactionId]">{{item.transactionId | slice:0:20}}</a></span>
-                                 <span class="left">{{item.success | success}}</span>
-                                 <span class="left">{{item.methodName}}</span>
-                                 <span class="left"> <a class="number" [routerLink]="['../../block', item.blockIndex]">{{item.blockIndex}}</a></span>
-                                 <span class="address left" tippy tippyType="address">{{item.fromAddress}}</span>
-                                 <span class="number left">{{item.gasUsed | amount}} {{setup.Chain.Symbol}}</span>
-                              </div>
-                              <br>
-                              <app-progress class="centered" *ngIf="loading">Loading more transactions...</app-progress>
-                           </div>
-                        </div>
-
-                     </div>
-
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
 </div>
-
-

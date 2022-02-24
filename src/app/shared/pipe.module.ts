@@ -7,13 +7,14 @@ import { AmountMarkdownPipe, AmountPipe } from './amount';
 import { ScrollDirective } from './scroll.directive';
 import { YesPipe } from './yes.pipe';
 import { TippyDirective } from './tippy.directive';
+import { SuccessPipe } from './success.pipe';
 
 
 @NgModule({
-  declarations: [SizePipe,AgoPipe,TimestampPipe ,AmountPipe,AmountMarkdownPipe,ScrollDirective,YesPipe,TippyDirective],
+  declarations: [SuccessPipe,SizePipe,AgoPipe,TimestampPipe ,AmountPipe,AmountMarkdownPipe,ScrollDirective,YesPipe,TippyDirective],
   imports: [
     CommonModule
   ]
-  ,exports: [SizePipe,AgoPipe ,TimestampPipe ,AmountPipe,AmountMarkdownPipe,ScrollDirective,YesPipe,TippyDirective],
+  ,exports: [SuccessPipe,SizePipe,AgoPipe ,TimestampPipe ,AmountPipe,AmountMarkdownPipe,ScrollDirective,YesPipe,TippyDirective],
 })
 export class PipeModule { }
