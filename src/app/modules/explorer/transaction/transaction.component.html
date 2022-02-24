@@ -206,7 +206,7 @@
                                             <span class="text-primary break-all">{{transaction.hasWitness | yes}}</span>
                                         </div>
                                     </div>
-                                    <div *ngIf="detailsVisible" class="flex items-center">
+                                    <div *ngIf="transaction.hasContract && detailsVisible" class="flex items-center">
                                         <mat-icon class="icon-size-5 text-primary"
                                             [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
                                         <div class="ml-2"> <span>View Smart Contract: </span>
