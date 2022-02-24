@@ -41,10 +41,7 @@
         <div class="w-full max-w-screen-xl mx-auto">
             <div *ngIf="setup.chains" class="flex flex-col flex-auto w-full">
                 <div class="w-full max-w-screen-xl mx-auto p-6 md:p-8">
-
-
                     <app-search></app-search>
-
                     <app-progress *ngIf="!transaction"></app-progress>
                     <blockcore-block *ngIf="transaction" class="flex items-center w-full p-6 filter-info ">
                         <mat-icon class="icon-size-16 mr-6 text-blue-500" [svgIcon]="'heroicons_outline:document-text'">
@@ -56,11 +53,8 @@
                             </div>
                         </div>
                     </blockcore-block>
-
                     <app-error [error]="error"></app-error>
-
                     <blockcore-block *ngIf="transaction" class="flex flex-col lg:flex-row w-full">
-
                         <!-- Block Details -->
                         <div
                             class="flex flex-col items-center p-8 lg:px-10 lg:py-12 lg:min-w-80 bg-gray-100 dark:bg-black dark:bg-opacity-10">
@@ -69,14 +63,12 @@
                                 </mat-icon>
                                 <div class="text-4xl font-extrabold tracking-tight">Smart Contract</div>
                             </div>
-
                         </div>
                         <div class="p-6 sm:p-8 lg:p-10">
                             <div class="text-3xl font-bold">Smart Contract Details</div>
                             <div class="mt-2 leading-relaxed text-secondary">
                                 <p class="break-all">Transaction Id: {{transaction.transactionId}}</p>
                             </div>
-
                             <!-- Details -->
                             <div class="grid grid-cols-1 lg:grid-cols-1 gap-y-4 mt-6">
 
@@ -134,8 +126,7 @@
                                         [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
                                     <div class="ml-2"> <span>View Smart Contract: </span>
                                         <span class="text-primary break-all"><a
-                                                [routerLink]="['../../','contract-transaction', transaction.transactionId]">{{transaction.transactionId
-                                                | slice:0:20}}</a></span>
+                                                [routerLink]="['../../','contract-transaction', transaction.transactionId]">{{transaction.transactionId}}</a></span>
                                     </div>
                                 </div>
 
@@ -162,9 +153,6 @@
                         </div>
                     </blockcore-block>
 
-
-
-
                     <app-progress *ngIf="!transactions">Loading transactions...</app-progress>
 
                     <div *ngIf="errorTransactions">
@@ -174,8 +162,6 @@
                     </div>
 
                     <div *ngIf="transactions" class="grid grid-cols-1 xl:grid-cols-1 gap-8 w-full mt-8">
-
-
                         <div class="flex flex-col flex-auto">
                             <div class="flex items-center">
                                 <blockcore-block *ngIf="address" class="flex items-center w-full p-6 filter-info">
@@ -190,10 +176,7 @@
                                         </div>
                                     </div>
                                 </blockcore-block>
-
                             </div>
-
-
                             <div appDetectScroll (onScroll)="onScroll($event)" [bottomOffset]="400" [topOffset]="400">
                                 <blockcore-block *ngFor="let item of transactions"
                                     class="flex items-center w-full p-3 filter-info">
@@ -212,26 +195,30 @@
                                     </div>
 
                                     <div class="flex-auto ml-4 leading-none">
-                                            <div class="text-sm font-medium text-secondary">
-                                                <div class="text-sm leading-none">Index:
-                                                    <span class="text-primary"> <a [routerLink]="['../../block', item.blockIndex]">
+                                        <div class="text-sm font-medium text-secondary">
+                                            <div class="text-sm leading-none">Index:
+                                                <span class="text-primary"> <a
+                                                        [routerLink]="['../../block', item.blockIndex]">
                                                         {{item.blockIndex}}</a></span>
-                                                </div>
                                             </div>
-                                            <div class="text-sm font-medium text-secondary mt-2">
+                                        </div>
+                                        <div class="text-sm font-medium text-secondary mt-2">
                                             <div class="text-sm leading-none">Gas Used:
-                                                <span class="text-primary"> {{item.gasUsed | amount}} {{setup.Chain.Symbol}}</span>
+                                                <span class="text-primary"> {{item.gasUsed | amount}}
+                                                    {{setup.Chain.Symbol}}</span>
                                             </div>
                                         </div>
                                         <div class="text-sm font-medium text-secondary mt-2">
-                                            <div class="text-sm leading-none">Method Name: <span class="text-primary">{{item.methodName}}</span>
+                                            <div class="text-sm leading-none">Method Name: <span
+                                                    class="text-primary">{{item.methodName}}</span>
 
-                                             </div>
+                                            </div>
                                         </div>
                                         <div class="text-sm font-medium text-secondary mt-2">
-                                            <div class="text-sm leading-none">From Address: <span class="text-primary" tippy tippyType="address">{{item.fromAddress}}</span>
+                                            <div class="text-sm leading-none">From Address: <span class="text-primary"
+                                                    tippy tippyType="address">{{item.fromAddress}}</span>
 
-                                             </div>
+                                            </div>
                                         </div>
                                         <div class="flex mt-2 font-medium text-sm break-all">
                                             <div>
@@ -239,7 +226,6 @@
                                                     [routerLink]="['../../','contract-transaction', item.transactionId]">{{item.transactionId}}</a>
                                             </div>
                                         </div>
-
 
                                     </div>
 
@@ -262,5 +248,4 @@
             </div>
         </div>
     </div>
-
 </div>

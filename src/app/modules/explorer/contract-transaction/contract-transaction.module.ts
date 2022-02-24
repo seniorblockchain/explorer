@@ -25,6 +25,7 @@ import { ProgressModule } from 'app/modules/progress/progress.module';
 import { ContractTransactionComponent } from './contract-transaction.component';
 import { ErrorModule } from 'app/modules/error/loading.module';
 import { contracttransactionRoutes } from './contract-transaction.routing';
+import { blockcoreHighlightModule } from '@blockcore/components/highlight';
 @NgModule({
     declarations: [
         ContractTransactionComponent
@@ -52,7 +53,8 @@ import { contracttransactionRoutes } from './contract-transaction.routing';
         MatSnackBarModule,
         SearchModule,
         ProgressModule,
-        ErrorModule
+        ErrorModule,
+        blockcoreHighlightModule
      ]
 })
 export class ContractTransactionModule {
