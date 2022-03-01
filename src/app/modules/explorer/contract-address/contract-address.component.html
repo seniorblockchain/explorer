@@ -99,6 +99,22 @@
                                 <div class="flex items-center">
                                     <mat-icon class="icon-size-5 text-primary"
                                         [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                    <div class="ml-2"> <span>Gas Price: </span>
+                                        <span class="text-primary break-all">{{transaction.gasPrice }}</span>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-center">
+                                    <mat-icon class="icon-size-5 text-primary"
+                                        [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                    <div class="ml-2"> <span>Amount: </span>
+                                        <span class="text-primary break-all">{{transaction.amount | amount}}</span>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-center">
+                                    <mat-icon class="icon-size-5 text-primary"
+                                        [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
                                     <div class="ml-2"> <span>From Address: </span>
                                         <span class="text-primary break-all">{{transaction.fromAddress}}</span>
                                     </div>
@@ -195,7 +211,7 @@
                                         </div>
                                         <div class="text-sm font-medium text-secondary mt-2">
                                             <div class="text-sm leading-none">Gas Used:
-                                                <span class="text-primary"> {{item.gasUsed | amount}}
+                                                <span class="text-primary"> {{item.amount | amount}}
                                                     {{setup.Chain.Symbol}}</span>
                                             </div>
                                         </div>
