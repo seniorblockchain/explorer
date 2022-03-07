@@ -74,7 +74,7 @@
                                     <div class="flex flex-col items-center mt-2">
                                         <div
                                             class="text-5xl sm:text-6xl font-bold tracking-tight leading-none chaincolor">
-                                            {{item.blockIndex}}</div>
+                                            <a [routerLink]="['block', item.blockIndex]">{{item.blockIndex}}</a></div>
                                         <div class="text-lg font-medium text-blue-600 dark:text-blue-500 mt-3">Size:
                                             {{item.blockSize | size}}
                                         </div>
@@ -87,16 +87,31 @@
 
                             </div>
                         </div>
-                        <!-- View All Blocks -->
-                        <div *ngIf="blocks" class="py-10 sm:py-12 sm:px-16 text-on-primary-600">
-                            <div class="flex flex-col items-center w-full max-w-7xl mx-auto text-center">
+                        <!-- View Blocks -->
+
+                        <div *ngIf="blocks" class="flex flex-col sm:flex-row items-end justify-between mt-8">
+                            <div class="mt-3 sm:mt-0">
+
                                 <a [routerLink]="['blocks']">
-                                    <button class="blockcore-mat-button-rounded" mat-flat-button [color]="'primary'">
-                                        <span class="text-lg">View All Blocks</span>
+                                    <button class="blockcore-mat-button-rounded" mat-flat-button
+                                        [color]="'primary'">
+                                        <span class="text-lg">All Blocks</span>
                                     </button>
                                 </a>
+
+                            </div>
+                            <div class="mt-3 sm:mt-0">
+
+                                <a [routerLink]="['orphans']">
+                                    <button class="blockcore-mat-button-rounded" mat-flat-button
+                                        [color]="'accent'">
+                                        <span class="text-lg">Orphans Blocks</span>
+                                    </button>
+                                </a>
+
                             </div>
                         </div>
+
                     </ng-template>
 
 
