@@ -158,24 +158,16 @@ export class ContractAddressComponent implements OnInit, OnDestroy {
     }
 
     async onScroll(event: ScrollEvent) {
-       console.log('scroll occurred', event);
-
        if (event.isReachingBottom) {
-          console.log('the user is reaching the bottom');
-
           this.loading = true;
-
           setTimeout(async () => {
              await this.updateTransactions(this.link);
              this.loading = false;
           });
-
        }
        if (event.isReachingTop) {
-          console.log('the user is reaching the top');
        }
        if (event.isWindowEvent) {
-          console.log('This event is fired on Window not on an element.');
        }
     }
  }

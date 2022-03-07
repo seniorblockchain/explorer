@@ -11,6 +11,7 @@ import { ScrollEvent } from 'app/shared/scroll.directive';
     selector: 'app-orphans-component',
     templateUrl: './orphans.component.html'
 })
+
 export class OrphansComponent implements OnInit, OnDestroy {
     @HostBinding('class.content-centered-top') hostClass = true;
 
@@ -36,7 +37,6 @@ export class OrphansComponent implements OnInit, OnDestroy {
 
     @HostListener('scroll', ['$event'])
     scrollHandler(event) {
-        console.log('Scroll Event');
     }
 
     constructor(public api: ApiService, public setup: SetupService) {
@@ -56,9 +56,6 @@ export class OrphansComponent implements OnInit, OnDestroy {
     }
 
     async updateBlocks(url) {
-
-        console.log('url: ', url);
-
         if (!url) {
             return;
         }
@@ -106,12 +103,10 @@ export class OrphansComponent implements OnInit, OnDestroy {
         this.displayBlock = await response.json();
     }
 
+
     async onScroll(event: ScrollEvent) {
-        console.log('scroll occurred', event);
 
         if (event.isReachingBottom) {
-            console.log(`the user is reaching the bottom`);
-
             this.loading = true;
 
             setTimeout(async () => {
@@ -121,10 +116,8 @@ export class OrphansComponent implements OnInit, OnDestroy {
 
         }
         if (event.isReachingTop) {
-            console.log(`the user is reaching the top`);
         }
         if (event.isWindowEvent) {
-            console.log(`This event is fired on Window not on an element.`);
         }
     }
 }

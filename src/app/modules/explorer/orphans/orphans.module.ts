@@ -25,6 +25,7 @@ import { ProgressModule } from 'app/modules/progress/progress.module';
 import { OrphansComponent } from './orphans.component';
 import { ErrorModule } from 'app/modules/error/loading.module';
 import { orphansRoutes } from './orphans.routing';
+import { blockcoreHighlightModule } from '@blockcore/components/highlight';
 @NgModule({
     declarations: [
         OrphansComponent
@@ -52,7 +53,8 @@ import { orphansRoutes } from './orphans.routing';
         MatSnackBarModule,
         SearchModule,
         ProgressModule,
-        ErrorModule
+        ErrorModule,
+        blockcoreHighlightModule
      ]
 })
 export class OrphansModule {
