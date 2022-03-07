@@ -124,18 +124,27 @@
                                     </div>
                                 </div>
 
-                                <div class="flex items-center">
+                                <div *ngIf="transaction.newContractAddress" class="flex items-center">
                                     <mat-icon class="icon-size-5 text-primary"
                                         [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
                                     <div class="ml-2"> <span>From Address: </span>
-                                        <span class="text-primary break-all">{{transaction.fromAddress}}</span>
+                                        <span class="text-primary break-all"><a [routerLink]="['../../contract-address', transaction.newContractAddress, transaction.fromAddress ]">{{transaction.fromAddress}}</a></span>
+                                    </div>
+                                </div>
+
+
+                                <div *ngIf="transaction.toAddress" class="flex items-center">
+                                    <mat-icon class="icon-size-5 text-primary"
+                                        [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                    <div class="ml-2"> <span>From Address: </span>
+                                        <span class="text-primary break-all"><a [routerLink]="['../../contract-address', transaction.toAddress, transaction.fromAddress ]">{{transaction.fromAddress}}</a></span>
                                     </div>
                                 </div>
 
                                 <div *ngIf="transaction.toAddress" class="flex items-center">
                                     <mat-icon class="icon-size-5 text-primary"
                                         [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
-                                    <div class="ml-2"> <span>To Addresss: </span>
+                                    <div class="ml-2"> <span>Contract Addresss: </span>
                                         <span class="text-primary break-all"><a
                                                 [routerLink]="['../../contract-address', transaction.toAddress]">{{transaction.toAddress}}</a></span>
                                     </div>

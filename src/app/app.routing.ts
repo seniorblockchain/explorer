@@ -83,8 +83,6 @@ export const appRoutes: Route[] = [
             { path: ':chain/explorer/transaction/:transaction', loadChildren: () => import('app/modules/explorer/transaction/transaction.module').then(m => m.TransactionModule) },
         ]
     },
-
-
     {
         path: '',
         component: LayoutComponent,
@@ -93,6 +91,17 @@ export const appRoutes: Route[] = [
         },
         children: [
             { path: ':chain/explorer/address/:address', loadChildren: () => import('app/modules/explorer/address/address.module').then(m => m.AddressModule) },
+        ]
+    },
+
+    {
+        path: '',
+        component: LayoutComponent,
+        resolve: {
+            chain: InitialDataResolver,
+        },
+        children: [
+            { path: ':chain/explorer/address/:address/:filterAddress', loadChildren: () => import('app/modules/explorer/address/address.module').then(m => m.AddressModule) },
         ]
     },
     {
@@ -106,6 +115,16 @@ export const appRoutes: Route[] = [
         ]
     },
 
+    {
+        path: '',
+        component: LayoutComponent,
+        resolve: {
+            chain: InitialDataResolver,
+        },
+        children: [
+            { path: ':chain/explorer/orphans', loadChildren: () => import('app/modules/explorer/orphans/orphans.module').then(m => m.OrphansModule) },
+        ]
+    },
 
     {
         path: '',

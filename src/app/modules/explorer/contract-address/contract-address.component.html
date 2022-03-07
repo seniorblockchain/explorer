@@ -76,15 +76,18 @@
                                         [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
                                     <div class="ml-2"> <span>Block: </span>
                                         <span class="text-primary break-all"><a
-                                                [routerLink]="['../../block', transaction.blockIndex]">{{transaction.blockIndex}}</a></span>
+                                                [routerLink]="[navPath,'block', transaction.blockIndex]">{{transaction.blockIndex}}</a></span>
+
                                     </div>
                                 </div>
+
 
                                 <div class="flex items-center">
                                     <mat-icon class="icon-size-5 text-primary"
                                         [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
                                     <div class="ml-2"> <span>Status: </span>
-                                        <span class="text-primary break-all">{{transaction.success | success}}</span>
+                                        <span class="text-primary break-all">{{transaction.success |
+                                            success}}</span>
                                     </div>
                                 </div>
 
@@ -132,8 +135,11 @@
                                     <mat-icon class="icon-size-5 text-primary"
                                         [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
                                     <div class="ml-2"> <span>View Smart Contract: </span>
+
                                         <span class="text-primary break-all"><a
-                                                [routerLink]="['../../','contract-transaction', transaction.transactionId]">{{transaction.transactionId}}</a></span>
+                                                [routerLink]="[navPath,'contract-transaction', transaction.transactionId]">{{transaction.transactionId}}</a></span>
+
+
                                     </div>
                                 </div>
 
@@ -141,8 +147,9 @@
                                     <mat-icon class="icon-size-5 text-primary"
                                         [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
                                     <div class="ml-2"> <span>Smart Contract Code: </span>
+
                                         <span class="text-primary break-all"><a
-                                                [routerLink]="['../../','contract-code', transaction.contractAddress]">View
+                                                [routerLink]="[navPath,'contract-code', transaction.contractAddress]">View
                                                 Source Code</a></span>
                                     </div>
                                 </div>
@@ -167,11 +174,21 @@
                             class="negative">{{errorTransactions.title}}</span><br><br>
                         {{errorTransactions.errors | json}}
                     </div>
+                    <blockcore-block *ngIf="filterAddress" class="flex items-center w-full p-6 filter-info ">
+                        <mat-icon class="icon-size-16 mr-6 text-blue-500" [svgIcon]="'heroicons_outline:document-text'">
+                        </mat-icon>
 
+                        <div class="flex flex-col">
+                            <div class="text-2xl font-semibold leading-tight break-all"><span>Filter by:
+                                </span><span class=" text-primary ">{{filterAddress}}</span>
+                            </div>
+                        </div>
+                    </blockcore-block>
                     <div *ngIf="transactions" class="grid grid-cols-1 xl:grid-cols-1 gap-8 w-full mt-8">
                         <div class="flex flex-col flex-auto">
                             <div class="flex items-center">
-                                <blockcore-block *ngIf="address" class="flex items-center w-full p-6 filter-info">
+
+                                <blockcore-block *ngIf="address" class="flex items-center w-full p-6 filter-info mt-8">
                                     <mat-icon class="icon-size-16 mr-6 text-blue-500"
                                         [svgIcon]="'heroicons_outline:document-text'">
                                     </mat-icon>
@@ -204,9 +221,10 @@
                                     <div class="flex-auto ml-4 leading-none">
                                         <div class="text-sm font-medium text-secondary">
                                             <div class="text-sm leading-none">Index:
-                                                <span class="text-primary"> <a
-                                                        [routerLink]="['../../block', item.blockIndex]">
-                                                        {{item.blockIndex}}</a></span>
+                                                <span class="text-primary">
+                                                    <a [routerLink]="[navPath,'block', item.blockIndex]">
+                                                        {{item.blockIndex}}</a>
+                                                </span>
                                             </div>
                                         </div>
                                         <div class="text-sm font-medium text-secondary mt-2">
@@ -230,9 +248,9 @@
                                         <div class="flex mt-2 font-medium text-sm break-all">
                                             <div>
                                                 Transaction Id: <a class="text-primary"
-                                                    [routerLink]="['../../','contract-transaction', item.transactionId]">{{item.transactionId}}</a>
+                                                    [routerLink]="[navPath,'contract-transaction', item.transactionId]">{{item.transactionId}}</a>
                                             </div>
-                                        </div>
+                                      </div>
 
                                     </div>
 
