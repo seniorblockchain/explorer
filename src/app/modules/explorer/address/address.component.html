@@ -107,7 +107,7 @@
                                     <div *ngIf="balance.totalStake > 0" class="flex items-center">
                                         <mat-icon class="icon-size-5 text-primary"
                                             [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
-                                        <div class="ml-2"><span>Total Stake: </span>
+                                        <div class="ml-2"><span>Total Staked: </span>
                                             <span class="text-primary break-all">{{balance.totalStake | amount}}</span>
                                             <span class="break-all ml-3">#{{balance.totalStakeCount | number}}</span>
                                         </div>
@@ -116,7 +116,7 @@
                                     <div *ngIf="balance.totalMine > 0" class="flex items-center">
                                         <mat-icon class="icon-size-5 text-primary"
                                             [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
-                                        <div class="ml-2"><span>Total Mine: </span>
+                                        <div class="ml-2"><span>Total Mined: </span>
                                             <span class="text-primary break-all">{{balance.totalMine | amount}}</span>
                                             <span class="break-all ml-3">#{{balance.totalMineCount | number}}</span>
                                         </div>
