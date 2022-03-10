@@ -4,6 +4,7 @@ import { ActivatedRoute, Route, Router } from '@angular/router';
 import { ApiService, HttpError } from 'app/services/api.service';
 import { SetupService } from 'app/services/setup.service';
 import { ScrollEvent } from 'app/shared/scroll.directive';
+import { AngularCsv } from 'angular-csv-ext/dist/Angular-csv';
 
 @Component({
     selector: 'app-address-component',
@@ -92,6 +93,26 @@ export class AddressComponent implements OnInit, OnDestroy {
 
     ngOnDestroy(): void {
 
+    }
+
+    async exportCSV() {
+        const options = {
+            fieldSeparator: ',',
+            quoteStrings: '"',
+            decimalseparator: '.',
+            showLabels: true,
+            showTitle: true,
+            title: 'Transactions',
+            useBom: true,
+            headers: ['entryType',
+                'transactionHash',
+                'value',
+                'blockIndex',
+                'confirmations'],
+            useHeader: false,
+            nullToEmptyString: true,
+        };
+        new AngularCsv(this.transactions, 'Address-Transactions', options);
     }
 
     async updateTransactions(url) {
