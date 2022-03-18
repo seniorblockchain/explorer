@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     tickers: any ;
     selectNetwork: string = 'Select Network';
     subscription: any;
-    optionValue: string = 'STRAX';
+    optionValue: string = 'SBC';
     private _unsubscribeAll: Subject<any> = new Subject<any>();
 
     constructor(
