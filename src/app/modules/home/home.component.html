@@ -12,7 +12,7 @@
                         <ng-container *transloco="let t">
                             <div
                                 class="text-2xl md:text-5xl font-semibold tracking-tight leading-7 md:leading-snug truncate">
-                               Blockcore Explorer</div>
+                                Blockcore Explorer</div>
                         </ng-container>
                     </div>
                 </div>
@@ -48,27 +48,27 @@
                         <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
                             <div class="w-full max-w-screen-xl mx-auto">
 
-                                    <div
-                                        class="flex flex-col sm:flex-row items-center justify-between w-full max-w-full sm:max-w-none">
-                                        <mat-form-field class="blockcore-mat-no-subscript w-full sm:w-36">
-                                            <mat-select [(ngModel)]="optionValue">
-                                                <ng-container *ngFor="let chain of setup.chains;">
-                                                    <mat-option [selected]="chain.symbol === optionValue"
-                                                        [value]="chain.symbol">{{chain.name}}
-                                                    </mat-option>
-                                                </ng-container>
-                                            </mat-select>
-                                        </mat-form-field>
-                                        <mat-form-field
-                                            class="blockcore-mat-no-subscript w-full sm:w-full mt-6 sm:mt-6 mb-6 sm:mb-6 sm:ml-4"
-                                            [floatLabel]="'always'">
-                                            <mat-icon matPrefix class="icon-size-5"
-                                                [svgIcon]="'heroicons_solid:search'"></mat-icon>
-                                            <input type="search" (keyup.enter)="search()" [(ngModel)]="searchTerm"
-                                                placeholder="Search for address, transaction or block."
-                                                autocomplete="off" matInput #query>
-                                        </mat-form-field>
-                                    </div>
+                                <div
+                                    class="flex flex-col sm:flex-row items-center justify-between w-full max-w-full sm:max-w-none">
+                                    <mat-form-field class="blockcore-mat-no-subscript w-full sm:w-36">
+                                        <mat-select [(ngModel)]="optionValue">
+                                            <ng-container *ngFor="let chain of setup.chains;">
+                                                <mat-option [selected]="chain.symbol === optionValue"
+                                                    [value]="chain.symbol">{{chain.name}}
+                                                </mat-option>
+                                            </ng-container>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        class="blockcore-mat-no-subscript w-full sm:w-full mt-6 sm:mt-6 mb-6 sm:mb-6 sm:ml-4"
+                                        [floatLabel]="'always'">
+                                        <mat-icon matPrefix class="icon-size-5" [svgIcon]="'heroicons_solid:search'">
+                                        </mat-icon>
+                                        <input type="search" (keyup.enter)="search()" [(ngModel)]="searchTerm"
+                                            placeholder="Search for address, transaction or block." autocomplete="off"
+                                            matInput #query>
+                                    </mat-form-field>
+                                </div>
 
                             </div>
                         </div>
@@ -88,16 +88,14 @@
                                         <div class="text-secondary">{{chain.symbol}}</div>
                                     </a>
                                 </div>
-                                <div class="flex items-center w-full border-t divide-x"
-                                    *ngIf="tickers && chain.coin">
-                                    <a class="flex flex-auto items-center justify-center py-4 hover:bg-hover"
-                                        [href]="">
+                                <div class="flex items-center w-full border-t divide-x" *ngIf="(tickers && chain.coin)">
+
+                                    <a class="flex flex-auto items-center justify-center py-4 hover:bg-hover" [href]="">
 
                                         <span class="ml-2"> {{ tickers[chain.coin].usd.toFixed(8) }} <span
                                                 class="btccolor">USDT</span></span>
                                     </a>
-                                    <a class="flex flex-auto items-center justify-center py-4 hover:bg-hover"
-                                        [href]="">
+                                    <a class="flex flex-auto items-center justify-center py-4 hover:bg-hover" [href]="">
 
                                         <span class="ml-2">
                                             <span *ngIf="tickers[chain.coin].usd_24h_change === 0"
@@ -110,7 +108,35 @@
                                     </a>
                                 </div>
 
+                                <div class="flex items-center w-full border-t divide-x" *ngIf="chain.symbol === 'RSC'">
 
+                                    <a class="flex flex-auto items-center justify-center py-4 hover:bg-hover" [href]="">
+
+                                        <span class="ml-2">1.01000000 <span class="btccolor">USDT</span></span>
+                                    </a>
+                                    <a class="flex flex-auto items-center justify-center py-4 hover:bg-hover" [href]="">
+
+                                        <span class="ml-2">
+                                            <span class="chain-home-ticker-change positive">ICO Price</span>
+
+                                        </span>
+                                    </a>
+                                </div>
+
+                                <div class="flex items-center w-full border-t divide-x" *ngIf="chain.symbol === 'SBC'">
+
+                                    <a class="flex flex-auto items-center justify-center py-4 hover:bg-hover" [href]="">
+
+                                        <span class="ml-2">0.08000000 <span class="btccolor">USDT</span></span>
+                                    </a>
+                                    <a class="flex flex-auto items-center justify-center py-4 hover:bg-hover" [href]="">
+
+                                        <span class="ml-2">
+                                            <span class="chain-home-ticker-change positive">ICO Price</span>
+
+                                        </span>
+                                    </a>
+                                </div>
                             </div>
                         </ng-container>
 
