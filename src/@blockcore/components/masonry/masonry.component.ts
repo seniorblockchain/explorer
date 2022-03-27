@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { AfterViewInit, Component, Input, OnChanges, SimpleChanges, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { blockcoreAnimations } from '@blockcore/animations';
 import { blockcoreMediaWatcherService } from '@blockcore/services/media-watcher';

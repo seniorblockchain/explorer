@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { IsActiveMatchOptions } from '@angular/router';
 
 export interface blockcoreNavigationItem

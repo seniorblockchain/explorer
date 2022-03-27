@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 export class blockcoreAnimationCurves
 {
     static standard = 'cubic-bezier(0.4, 0.0, 0.2, 1)';

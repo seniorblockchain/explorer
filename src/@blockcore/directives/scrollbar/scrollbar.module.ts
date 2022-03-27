@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { NgModule } from '@angular/core';
 import { blockcoreScrollbarDirective } from '@blockcore/directives/scrollbar/scrollbar.directive';
 

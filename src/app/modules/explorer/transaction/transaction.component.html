@@ -1,3 +1,4 @@
+/* eslint-disable @angular-eslint/template/eqeqeq */
 <div class="flex flex-col flex-auto min-w-0">
 
     <!-- Header -->
@@ -234,7 +235,7 @@
                                 <div class="my-8 space-y-8">
                                     <div class="flex flex-col" *ngFor="let item of transaction.inputs">
                                         <div class="flex items-center">
-                                            <div *ngIf="item.inputTransactionId != '0000000000000000000000000000000000000000000000000000000000000000'"
+                                            <div *ngIf="item.inputTransactionId !== '0000000000000000000000000000000000000000000000000000000000000000'"
                                                 class="flex items-center justify-center min-w-14 min-h-14 rounded bg-indigo-100 text-indigo-800 dark:bg-indigo-600 dark:text-indigo-50">
                                                 <a [routerLink]="['../../transaction', item.inputTransactionId]"
                                                     title="Previous output">
@@ -242,7 +243,7 @@
                                                         [svgIcon]="'heroicons_outline:receipt-refund'"></mat-icon>
                                                 </a>
                                             </div>
-                                            <div *ngIf="item.inputTransactionId == '0000000000000000000000000000000000000000000000000000000000000000'"
+                                            <div *ngIf="item.inputTransactionId === '0000000000000000000000000000000000000000000000000000000000000000'"
                                                 class="flex items-center justify-center min-w-14 min-h-14 rounded bg-indigo-100 text-indigo-800 dark:bg-indigo-600 dark:text-indigo-50">
                                                 <mat-icon class="text-current" [svgIcon]="'heroicons_outline:puzzle'">
                                                 </mat-icon>
@@ -254,16 +255,16 @@
                                                         class="text-primary"> {{setup.Chain.Symbol}}</span></div>
                                                 </div>
                                                 <div class="flex mt-2 font-medium text-sm break-all">
-                                                    <div *ngIf="item.inputAddress != null">
+                                                    <div *ngIf="item.inputAddress !== null">
                                                         <a class="address" tippy tippyType="address"
                                                             [routerLink]="['../../address', item.inputAddress]">{{item.inputAddress}}</a>
                                                     </div>
 
-                                                    <div *ngIf="item.inputAddress == null && transaction.isCoinbase">
+                                                    <div *ngIf="item.inputAddress === null && transaction.isCoinbase">
                                                         No inputs (newly generated coins)
                                                     </div>
 
-                                                    <div *ngIf="item.inputAddress == null && !transaction.isCoinbase">
+                                                    <div *ngIf="item.inputAddress === null && !transaction.isCoinbase">
                                                         Nonstandard</div>
 
                                                 </div>
@@ -277,7 +278,7 @@
 
                                         <blockcore-block *ngIf="detailsVisible" class="mt-5 p-5 pb-8">
                                             <div class="grid grid-cols-1 lg:grid-cols-1 gap-y-4 mt-4">
-                                                <div *ngIf="item.witScript != ''" class="flex items-center">
+                                                <div *ngIf="item.witScript !== ''" class="flex items-center">
                                                     <div class="ml-2"> <span>Witness: </span>
                                                         <span class="text-primary break-all">{{item.witScript}}</span>
                                                     </div>
@@ -298,7 +299,7 @@
                                                         <span class="text-primary break-all">{{item.scriptSig}}</span>
                                                     </div>
                                                 </div>
-                                                <div *ngIf="item.inputTransactionId != '0000000000000000000000000000000000000000000000000000000000000000'"
+                                                <div *ngIf="item.inputTransactionId !== '0000000000000000000000000000000000000000000000000000000000000000'"
                                                     class="flex items-center">
                                                     <div class="ml-2"> <span>Input TX ID: </span>
                                                         <span
@@ -338,7 +339,7 @@
                                     <div class="flex flex-col" *ngFor="let item of transaction.outputs">
                                         <div class="flex items-center">
 
-                                            <div *ngIf="item.spentInTransaction != null"
+                                            <div *ngIf="item.spentInTransaction !== null"
                                                 class="flex items-center justify-center min-w-14 min-h-14 rounded bg-indigo-100 text-indigo-800 dark:bg-indigo-600 dark:text-indigo-50">
                                                 <a [routerLink]="['../../transaction', item.spentInTransaction]"
                                                     title="Spent">
@@ -347,7 +348,7 @@
                                                 </a>
                                             </div>
 
-                                            <div *ngIf="item.spentInTransaction == null"
+                                            <div *ngIf="item.spentInTransaction === null"
                                                 class="flex items-center justify-center min-w-14 min-h-14 rounded bg-indigo-100 text-indigo-800 dark:bg-indigo-600 dark:text-indigo-50">
                                                 <mat-icon class="text-current" [svgIcon]="'heroicons_outline:puzzle'">
                                                 </mat-icon>
@@ -361,16 +362,16 @@
                                                 </div>
                                                 <div class="flex mt-2 font-medium text-sm break-all">
 
-                                                    <div *ngIf="item.address != null"><a class="address" tippy
+                                                    <div *ngIf="item.address !== null"><a class="address" tippy
                                                             tippyType="address"
                                                             [routerLink]="['../../address', item.address]">{{item.address}}</a>
                                                     </div>
-                                                    <div *ngIf="item.address == null && transaction.isCoinbase">Coinbase
+                                                    <div *ngIf="item.address === null && transaction.isCoinbase">Coinbase
                                                         TX</div>
-                                                    <div *ngIf="item.address == null && transaction.isCoinstake">
+                                                    <div *ngIf="item.address === null && transaction.isCoinstake">
                                                         Coinstake TX</div>
                                                     <div
-                                                        *ngIf="item.address == null && !transaction.isCoinbase && !transaction.isCoinstake">
+                                                        *ngIf="item.address === null && !transaction.isCoinbase && !transaction.isCoinstake">
                                                         Nonstandard</div>
 
                                                 </div>
@@ -385,19 +386,19 @@
 
                                         <blockcore-block *ngIf="detailsVisible" class="mt-5 p-5 pb-8">
                                             <div class="grid grid-cols-1 lg:grid-cols-1 gap-y-4 mt-4">
-                                                <div *ngIf="item.outputType != null" class="flex items-center">
+                                                <div *ngIf="item.outputType !== null" class="flex items-center">
                                                     <div class="ml-2"> <span>Type: </span>
                                                         <span class="text-primary break-all">{{item.outputType}}</span>
                                                     </div>
                                                 </div>
 
-                                                <div *ngIf="item.scriptPubKeyAsm != ''" class="flex items-center">
+                                                <div *ngIf="item.scriptPubKeyAsm !== ''" class="flex items-center">
                                                     <div class="ml-2"> <span>ScriptPubKey (ASM): </span>
                                                         <span
                                                             class="text-primary break-all">{{item.scriptPubKeyAsm}}</span>
                                                     </div>
                                                 </div>
-                                                <div *ngIf="item.scriptPubKey != ''" class="flex items-center">
+                                                <div *ngIf="item.scriptPubKey !== ''" class="flex items-center">
                                                     <div class="ml-2"> <span>ScriptPubKey (HEX): </span>
                                                         <span
                                                             class="text-primary break-all">{{item.scriptPubKey}}</span>
@@ -408,8 +409,8 @@
                                                          <span class="mr-1">Spending TX: </span>
                                                         <span class=" text-primary break-all">
 
-                                                            <div *ngIf="item.spentInTransaction == null"> Unspent</div>
-                                                            <div *ngIf="item.spentInTransaction != null"> Spent by <a
+                                                            <div *ngIf="item.spentInTransaction === null"> Unspent</div>
+                                                            <div *ngIf="item.spentInTransaction !== null"> Spent by <a
                                                                     [routerLink]="['../../transaction', item.spentInTransaction]"
                                                                     title="Spent"> {{item.spentInTransaction}}</a></div>
 

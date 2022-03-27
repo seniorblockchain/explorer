@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { NgModule } from '@angular/core';
 import { blockcoreFindByKeyPipe } from '@blockcore/pipes/find-by-key/find-by-key.pipe';
 

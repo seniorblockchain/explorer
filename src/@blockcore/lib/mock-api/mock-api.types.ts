@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
 

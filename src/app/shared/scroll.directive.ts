@@ -1,12 +1,17 @@
+/* eslint-disable @typescript-eslint/consistent-type-assertions */
+/* eslint-disable @typescript-eslint/member-ordering */
+/* eslint-disable @angular-eslint/no-output-on-prefix */
+/* eslint-disable prefer-arrow/prefer-arrow-functions */
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Directive, HostListener, Output, EventEmitter, Input } from '@angular/core';
 
 export function debounce(delay: number = 300): MethodDecorator {
-   return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
+   return function(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
 
       const original = descriptor.value;
       const key = `__timeout__${propertyKey}`;
 
-      descriptor.value = function (...args) {
+      descriptor.value = function(...args) {
          clearTimeout(this[key]);
          this[key] = setTimeout(() => original.apply(this, args), delay);
       };
@@ -36,7 +41,7 @@ export class ScrollDirective {
 
    throttle(fn, wait) {
       let time = Date.now();
-      return function () {
+      return function() {
          if ((time + wait - Date.now()) < 0) {
             fn();
             time = Date.now();

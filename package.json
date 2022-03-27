@@ -23,7 +23,14 @@
         "build": "ng build",
         "watch": "ng build --watch --configuration development",
         "test": "ng test",
-        "lint": "ng lint"
+        "lint": "ng lint",
+        "blockcore-start": "npm run blockcore-build && npm run blockcore-browser",
+        "blockcore-setup": "npm install -g cordova && cd blockcore && cordova platform add android && cordova platform add ios && cordova platform add browser && cordova platform add electron && cd ..",
+        "blockcore-build": "ng lint && ng build --outputPath=./blockcore/www",
+        "blockcore-android": "cd blockcore && cordova run android && cd ..",
+        "blockcore-ios": "cd blockcore && cordova run ios && cd ..",
+        "blockcore-browser": "cd blockcore && cordova run browser && cd ..",
+        "blockcore-electron": "cd blockcore && cordova run electron && cd .."
     },
     "dependencies": {
         "@angular/animations": "13.2.0",
@@ -42,6 +49,9 @@
         "angular-csv-ext": "^1.0.5",
         "apexcharts": "3.33.0",
         "crypto-js": "4.1.1",
+        "electron": "^17.2.0",
+        "electron-builder": "22.14.13",
+        "electron-reload": "2.0.0-alpha.1",
         "highlight.js": "11.4.0",
         "lodash-es": "4.17.21",
         "moment": "2.29.1",

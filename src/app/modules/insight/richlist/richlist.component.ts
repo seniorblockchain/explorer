@@ -71,7 +71,7 @@ export class RichlistComponent implements OnInit {
       this.addresses = [...this.addresses, ...list];
       this.count++;
     }
-    
+
     toggleAmountRendering() {
         this.setup.toggleFormat();
      }

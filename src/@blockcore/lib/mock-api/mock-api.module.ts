@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { APP_INITIALIZER, ModuleWithProviders, NgModule } from '@angular/core';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { blockcore_MOCK_API_DEFAULT_DELAY } from '@blockcore/lib/mock-api/mock-api.constants';

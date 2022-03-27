@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { Injectable } from '@angular/core';
 import { blockcoreNavigationItem } from '@blockcore/components/navigation/navigation.types';
 

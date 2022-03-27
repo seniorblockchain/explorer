@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
 export class blockcoreValidators

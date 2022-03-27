@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { Injectable } from '@angular/core';
 import { blockcoreDrawerComponent } from '@blockcore/components/drawer/drawer.component';
 

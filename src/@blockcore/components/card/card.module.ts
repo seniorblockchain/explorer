@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { blockcoreCardComponent } from '@blockcore/components/card/card.component';

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { NgModule } from '@angular/core';
 import { blockcoreSplashScreenService } from '@blockcore/services/splash-screen/splash-screen.service';
 
