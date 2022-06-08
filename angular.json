@@ -5,7 +5,8 @@
         "defaultCollection": "@angular-eslint/schematics",
         "cache": {
             "enabled": false
-        }
+        },
+        "analytics": false
     },
     "newProjectRoot": "projects",
     "projects": {
@@ -34,18 +35,20 @@
                             "highlight.js",
                             "crypto-js/enc-utf8",
                             "crypto-js/hmac-sha256",
-                            "crypto-js/enc-base64"
+                            "crypto-js/enc-base64",
+                            "satcomma"
                         ],
                         "assets": [
-                            "src/404.html",
-                            "src/favicon-16x16.png",
-                            "src/favicon-32x32.png",
-                            "src/assets",
-                            {
-                                "glob": "_redirects",
-                                "input": "src",
-                                "output": "/"
-                            }
+                          "src/404.html",
+                          "src/favicon-16x16.png",
+                          "src/favicon-32x32.png",
+                          "src/assets",
+                          {
+                            "glob": "_redirects",
+                            "input": "src",
+                            "output": "/"
+                          },
+                          "src/manifest.webmanifest"
                         ],
                         "stylePreprocessorOptions": {
                             "includePaths": [
@@ -62,7 +65,9 @@
                             "node_modules/tippy.js/dist/tippy.css",
                             "node_modules/tippy.js/themes/light.css"
                         ],
-                        "scripts": []
+                        "scripts": [],
+                        "serviceWorker": true,
+                        "ngswConfigPath": "ngsw-config.json"
                     },
                     "configurations": {
                         "production": {
@@ -125,9 +130,10 @@
                         "karmaConfig": "karma.conf.js",
                         "inlineStyleLanguage": "scss",
                         "assets": [
-                            "src/favicon-16x16.png",
-                            "src/favicon-32x32.png",
-                            "src/assets"
+                          "src/favicon-16x16.png",
+                          "src/favicon-32x32.png",
+                          "src/assets",
+                          "src/manifest.webmanifest"
                         ],
                         "styles": [
                             "src/styles/styles.scss"
