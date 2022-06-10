@@ -118,22 +118,6 @@
             <div class="text-md font-semibold text-secondary">LAYOUT</div>
             <div class="grid grid-cols-3 gap-3 mt-6">
 
-                <!-- Empty -->
-                <div
-                    class="flex flex-col cursor-pointer"
-                    (click)="setLayout('empty')">
-                    <div
-                        class="flex flex-col h-20 rounded-md overflow-hidden border-2 hover:opacity-80"
-                        [class.border-primary]="config.layout === 'empty'">
-                        <div class="flex flex-col flex-auto bg-gray-50 dark:bg-gray-900"></div>
-                    </div>
-                    <div
-                        class="mt-2 text-md font-medium text-center text-secondary"
-                        [class.text-primary]="config.layout === 'empty'">
-                        Empty
-                    </div>
-                </div>
-
                 <!-- Classic -->
                 <div
                     class="flex flex-col cursor-pointer"
@@ -271,40 +255,6 @@
                     </div>
                 </div>
 
-                <!-- Futuristic -->
-                <div
-                    class="flex flex-col cursor-pointer"
-                    (click)="setLayout('futuristic')">
-                    <div
-                        class="flex h-20 rounded-md overflow-hidden border-2 hover:opacity-80"
-                        [class.border-primary]="config.layout === 'futuristic'">
-                        <div class="w-8 bg-gray-100 dark:bg-gray-800">
-                            <div class="flex flex-col flex-auto h-full py-3 px-1.5 space-y-1">
-                                <div class="h-1 rounded-sm bg-gray-300 dark:bg-gray-700"></div>
-                                <div class="h-1 rounded-sm bg-gray-300 dark:bg-gray-700"></div>
-                                <div class="h-1 rounded-sm bg-gray-300 dark:bg-gray-700"></div>
-                                <div class="flex-auto"></div>
-                                <div class="h-1 rounded-sm bg-gray-300 dark:bg-gray-700"></div>
-                            </div>
-                        </div>
-                        <div class="flex flex-col flex-auto border-l">
-                            <div class="h-3 bg-gray-100 dark:bg-gray-800">
-                                <div class="flex items-center justify-end h-full mr-1.5">
-                                    <div class="w-1 h-1 ml-1 rounded-full bg-gray-300 dark:bg-gray-700"></div>
-                                    <div class="w-1 h-1 ml-1 rounded-full bg-gray-300 dark:bg-gray-700"></div>
-                                    <div class="w-1 h-1 ml-1 rounded-full bg-gray-300 dark:bg-gray-700"></div>
-                                </div>
-                            </div>
-                            <div class="flex flex-auto border-t bg-gray-50 dark:bg-gray-900"></div>
-                        </div>
-                    </div>
-                    <div
-                        class="mt-2 text-md font-medium text-center text-secondary"
-                        [class.text-primary]="config.layout === 'futuristic'">
-                        Futuristic
-                    </div>
-                </div>
-
                 <!-- Thin -->
                 <div
                     class="flex flex-col cursor-pointer"
@@ -339,9 +289,7 @@
                         Thin
                     </div>
                 </div>
-
-                <div class="col-span-2"></div>
-
+                
                 <!-- Centered -->
                 <div
                     class="flex flex-col cursor-pointer"
