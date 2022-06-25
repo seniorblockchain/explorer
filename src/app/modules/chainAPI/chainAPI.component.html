@@ -45,6 +45,7 @@
 
 
                     <div class="flex flex-col flex-auto p-6 bg-card rounded-2xl shadow">
+
                         <div class="flex items-center">
                             <div class="flex flex-col">
                                 <div class="mr-4 text-lg font-medium tracking-tight leading-6 truncate">API
@@ -64,13 +65,97 @@
                             </div>
                         </div>
                         <div class="flex items-center mt-auto">
-                            <a *ngIf="setup.Explorer?.Indexer?.DocUrl" class="link" target="_blank"
-                                [href]="setup.Explorer.Indexer.DocUrl">
+                            <a *ngIf="docUrl" class="link" target="_blank" [href]="docUrl">
                                 <button class="mt-2" mat-stroked-button>
-                                    {{setup.Explorer.Indexer.DocUrl}}
+                                    {{docUrl}}
                                 </button>
                             </a>
                         </div>
+
+
+
+
+                        <div class="flex items-center mt-10">
+                            <div class="flex flex-col">
+                                <div class="mr-4 text-lg font-medium tracking-tight leading-6 truncate">Configure API
+                                </div>
+                            </div>
+                        </div>
+                        <div class="my-8 space-y-8">
+                            <div class="flex flex-col">
+                                <p>
+                                    For better privacy or in case the default api is offline you can specify a different
+                                    api url for the indexer.
+                                    <Br>
+                                    Or alternatively discover an indexer from the list of supported blockcore DNS
+                                    servers.
+                                </p>
+
+                            </div>
+                        </div>
+
+
+                        <mat-form-field class="blockcore-mat-no-subscript w-full" [floatLabel]="'always'">
+                            <mat-icon matPrefix class="icon-size-5" [svgIcon]="'heroicons_solid:database'">
+                            </mat-icon>
+                            <input (keyup.enter)="save()" [(ngModel)]="inputUrl" placeholder="api endpoint."
+                                autocomplete="off" matInput #query>
+                        </mat-form-field>
+
+                        <div class="flex items-center mt-auto">
+                            <a class="link" (click)="discover()">
+                                <button class="m-2" mat-stroked-button>
+                                    Discover
+                                </button>
+                            </a>
+
+                            <a class="link" (click)="reset()">
+                                <button class="m-2" mat-stroked-button>
+                                    Reset
+                                </button>
+                            </a>
+
+                            <a class="link" (click)="save()">
+                                <button class="m-2" mat-stroked-button>
+                                    Save
+                                </button>
+                            </a>
+                        </div>
+
+
+
+
+
+                        <div *ngIf="errorMessage">
+                            <span class="muted">Error: </span> <span
+                                class="negative">{{errorMessage.title}}</span><br><br>
+                            {{errorMessage.errors | json}}
+                        </div>
+
+                        <div *ngIf="endpoints">
+                            <h4>Discovered Indexers</h4>
+                            <div class="scrollable" appDetectScroll (onScroll)="onScroll($event)" [bottomOffset]="400"
+                                [topOffset]="400">
+                                <div class="grid-list-configure-api" *ngFor="let items of endpoints">
+                                    <span class=""><strong>{{items.Source}}</strong></span>
+                                    <div class="grid-list-configure-api-inner" *ngFor="let item of items">
+                                        <a (click)="savedomain($event, item)">
+
+                                            <button class="blockcore-mat-button-rounded" mat-flat-button
+                                                [color]="'primary'">
+                                                    <span *ngIf="item.online === true" class=""><div class="flex-0 w-2 h-2 rounded-full" style="background-color: rgb(10, 247, 50);"></div></span>
+                                                    <span *ngIf="item.online !== true" class=""><div class="flex-0 w-2 h-2 rounded-full" style="background-color: rgb(247, 10, 10);"></div></span>
+
+                                                    <span class="ml-2">{{item.domain}}</span>
+                                            </button>
+                                        </a>
+
+                                    </div>
+                                </div>
+                                <app-progress class="centered" *ngIf="loading">Loading more domains...</app-progress>
+                            </div>
+                        </div>
+
                     </div>
 
                 </div>

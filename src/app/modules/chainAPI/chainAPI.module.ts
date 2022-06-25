@@ -16,6 +16,8 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { SharedModule } from 'app/shared/shared.module';
 import { ChainAPIComponent } from 'app/modules/chainAPI/chainAPI.component';
 import { chainAPIRoutes } from 'app/modules/chainAPI/chainAPI.routing';
+import { MatInputModule } from '@angular/material/input';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
     declarations: [
@@ -36,7 +38,9 @@ import { chainAPIRoutes } from 'app/modules/chainAPI/chainAPI.routing';
         MatTabsModule,
         NgApexchartsModule,
         TranslocoModule,
-        SharedModule
+        SharedModule,
+        MatInputModule,
+        MatSnackBarModule,
     ]
 })
 export class ChainAPIModule
