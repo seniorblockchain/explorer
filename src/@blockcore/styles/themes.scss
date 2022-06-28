@@ -83,8 +83,8 @@ body .light {
                 icon: #64748B, /* slate.500 */
                 icons: #64748B, /* slate.500 */
                 mat-icon: #64748B, /* slate.500 */
-                text: #1E293B, /* slate.800 */
-                slider-min: #1E293B, /* slate.800 */
+                text: #303030, /* slate.800 */
+                slider-min: #303030, /* slate.800 */
                 slider-off: #CBD5E1, /* slate.300 */
                 slider-off-active: #94A3B8 /* slate.400 */
             ),
@@ -103,7 +103,7 @@ body .light {
                 disabled-button-toggle: #CBD5E1, /* slate.300 */
                 unselected-chip: #E2E8F0, /* slate.200 */
                 disabled-list-option: #CBD5E1, /* slate.300 */
-                tooltip: #1E293B /* slate.800 */
+                tooltip: #303030 /* slate.800 */
             )
         )
     );
@@ -129,7 +129,7 @@ body .dark {
                 divider: rgba(241, 245, 249, 0.12), /* slate.100 + opacity */
                 dividers: rgba(241, 245, 249, 0.12), /* slate.100 + opacity */
                 disabled: #475569, /* slate.600 */
-                disabled-button: #1E293B, /* slate.800 */
+                disabled-button: #303030, /* slate.800 */
                 disabled-text: #475569, /* slate.600 */
                 elevation: #000000,
                 hint-text: #64748B, /* slate.500 */
@@ -143,18 +143,18 @@ body .dark {
                 slider-off-active: #94A3B8 /* slate.400 */
             ),
             background: (
-                status-bar: #0F172A, /* slate.900 */
-                app-bar: #0F172A, /* slate.900 */
-                background: #0F172A, /* slate.900 */
+                status-bar: #303030, /* slate.900 */
+                app-bar: #303030, /* slate.900 */
+                background: #303030, /* slate.900 */
                 hover: rgba(255, 255, 255, 0.05),
-                card: #1E293B, /* slate.800 */
-                dialog: #1E293B, /* slate.800 */
-                disabled-button: rgba(15, 23, 42, 0.38), /* slate.900 + opacity */
-                raised-button: #0F172A, /* slate.900 */
+                card: #303030, /* slate.800 */
+                dialog: #303030, /* slate.800 */
+                disabled-button: rgba(48, 48, 48, 0.38), /* slate.900 + opacity */
+                raised-button: #303030, /* slate.900 */
                 focused-button: #E2E8F0, /* slate.200 */
                 selected-button: rgba(255, 255, 255, 0.05),
-                selected-disabled-button: #1E293B, /* slate.800 */
-                disabled-button-toggle: #0F172A, /* slate.900 */
+                selected-disabled-button: #303030, /* slate.800 */
+                disabled-button-toggle: #303030, /* slate.900 */
                 unselected-chip: #475569, /* slate.600 */
                 disabled-list-option: #E2E8F0, /* slate.200 */
                 tooltip: #64748B /* slate.500 */

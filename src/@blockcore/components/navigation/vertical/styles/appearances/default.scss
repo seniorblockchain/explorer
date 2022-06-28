@@ -507,7 +507,7 @@ blockcore-vertical-navigation-collapsable-item {
 
                 &.blockcore-vertical-navigation-item-active,
                 &.blockcore-vertical-navigation-item-active-forced {
-                    @apply bg-gray-800 bg-opacity-5 dark:bg-white dark:bg-opacity-12;
+                    @apply bg-neutral-800 bg-opacity-5 dark:bg-white dark:bg-opacity-12;
 
                     .blockcore-vertical-navigation-item-icon {
                         @apply opacity-100;
@@ -527,7 +527,7 @@ blockcore-vertical-navigation-collapsable-item {
             &:not(.blockcore-vertical-navigation-item-active-forced):not(.blockcore-vertical-navigation-item-active):not(.blockcore-vertical-navigation-item-disabled) {
 
                 &:hover {
-                    @apply bg-gray-800 bg-opacity-5 dark:bg-white dark:bg-opacity-12;
+                    @apply bg-neutral-800 bg-opacity-5 dark:bg-white dark:bg-opacity-12;
 
                     .blockcore-vertical-navigation-item-icon {
                         @apply opacity-100;

@@ -1,11 +1,11 @@
 <div class="flex flex-col flex-auto min-w-0">
     <!-- Header -->
-    <div class="bg-card">
+    <div>
         <div class="flex flex-col w-full max-w-screen-xl mx-auto px-6 sm:px-8">
             <div class="flex flex-col sm:flex-row flex-auto sm:items-center min-w-0 my-8 sm:my-12">
                 <!-- Logo and name -->
                 <div class="flex flex-auto items-center min-w-0">
-                    <div class="flex-0 w-16 h-16 rounded-full overflow-hidden">
+                    <div class="flex-0 w-16 h-16 rounded-md overflow-hidden">
                         <img class="w-full h-full" src="assets/images/logo/logo.svg">
                     </div>
                     <div class="flex flex-col min-w-0 ml-4">
@@ -88,7 +88,7 @@
                                         <div class="text-secondary">{{chain.symbol}}</div>
                                     </a>
                                 </div>
-                                <div class="flex items-center w-full border-t divide-x" *ngIf="(tickers && chain.coin)">
+                                <!-- <div class="flex items-center w-full border-t divide-x" *ngIf="(tickers && chain.coin)">
 
                                     <a class="flex flex-auto items-center justify-center py-4 hover:bg-hover" [href]="">
 
@@ -136,7 +136,7 @@
 
                                         </span>
                                     </a>
-                                </div>
+                                </div> -->
                             </div>
                         </ng-container>
 

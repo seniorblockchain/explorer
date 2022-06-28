@@ -1,6 +1,6 @@
 <!-- Navigation -->
 <blockcore-vertical-navigation
-    class="dark bg-gray-900 print:hidden"
+    class="dark bg-neutral-900 print:hidden"
     [mode]="isScreenSmall ? 'over' : 'side'"
     [name]="'mainNavigation'"
     [navigation]="navigation.default"
@@ -12,7 +12,7 @@
         <div class="flex flex-col items-center w-full p-4">
             <div class="relative w-24 h-24">
                 <img
-                    class="w-full h-full rounded-full mode-aware"
+                    class="w-full h-full rounded-md mode-aware"
                     *ngIf="setup.Chain?.Icon"
                     [src]="setup.Chain?.Icon"
                     alt="Coin logo">
