@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router, ActivatedRoute, RouterModule } from '@angular/router';
 import { ApiService } from 'app/services/api.service';
 import { SetupService } from 'app/services/setup.service';
+import { AppUpdateService } from './services/AppUpdateService';
 
 @Component({
     selector   : 'app-root',
@@ -13,7 +14,7 @@ export class AppComponent
     title = 'app';
 
   constructor(private router: Router , private api: ApiService,
-    private setup: SetupService, private activatedRoute: ActivatedRoute) {
+    private setup: SetupService, private activatedRoute: ActivatedRoute , public appUpdateService: AppUpdateService,) {
     const path = localStorage.getItem('path');
     if (path) {
       localStorage.removeItem('path');
