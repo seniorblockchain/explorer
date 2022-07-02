@@ -18,6 +18,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { AppUpdateService } from './services/AppUpdateService';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 const routerConfig: ExtraOptions = {
     preloadingStrategy: PreloadAllModules,
     scrollPositionRestoration: 'enabled',
@@ -28,6 +29,7 @@ const routerConfig: ExtraOptions = {
         AppComponent
     ],
     imports: [
+        MatSnackBarModule,
         BrowserModule,
         BrowserAnimationsModule,
         RouterModule.forRoot(appRoutes, routerConfig),
