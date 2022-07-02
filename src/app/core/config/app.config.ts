@@ -15,7 +15,7 @@ export interface AppConfig {
 }
 
 export const appConfig: AppConfig = JSON.parse(localStorage.getItem('config')) ?? {
-    layout: 'modern',
+    layout: 'enterprise',
     scheme: 'dark',
     screens: {
         sm: '600px',
