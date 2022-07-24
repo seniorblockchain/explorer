@@ -17,7 +17,7 @@ import { NgHttpLoaderModule } from 'ng-http-loader';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { AppUpdateService } from './services/AppUpdateService';
+import { AppUpdateService } from './services/update.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 const routerConfig: ExtraOptions = {
     preloadingStrategy: PreloadAllModules,

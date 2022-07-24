@@ -2,13 +2,10 @@
 /* eslint-disable @typescript-eslint/member-ordering */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { ApiService } from './api.service';
 import { BehaviorSubject } from 'rxjs';
-import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
 import * as satcomma from 'satcomma';
-import { NavigationService } from 'app/core/navigation/navigation.service';
 
 @Injectable({
     providedIn: 'root'
@@ -68,10 +65,7 @@ export class SetupService {
     }
 
     constructor(
-        private _navigationService: NavigationService,
-        private http: HttpClient,
         private api: ApiService,
-        private router: Router
     ) {
 
     }

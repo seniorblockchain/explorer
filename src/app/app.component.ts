@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router, ActivatedRoute, RouterModule } from '@angular/router';
 import { ApiService } from 'app/services/api.service';
 import { SetupService } from 'app/services/setup.service';
-import { AppUpdateService } from './services/AppUpdateService';
+import { AppUpdateService } from './services/update.service';
 
 @Component({
     selector   : 'app-root',
