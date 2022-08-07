@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1658661893968,
+  "timestamp": 1659903558470,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -40,7 +40,7 @@
         "/manifest.webmanifest",
         "/polyfills.811a4b6acb51e998.js",
         "/runtime.574e0e648158c3ef.js",
-        "/styles.53db5edf35986239.css"
+        "/styles.7304681ce047c9cc.css"
       ],
       "patterns": []
     },
@@ -180,12 +180,12 @@
     "/assets/images/logos/btc.jpg": "9c6fe9b5f3dfb8d949e81c1c8ad2482bfdba3987",
     "/assets/styles/splash-screen.css": "d9dd2b940a21d9494d76a4e3b7acc78a86d90f96",
     "/common.1a693a343dbaf7bc.js": "180d353a2669d51a9b196f27ce13103f2350b22c",
-    "/index.html": "9aaca7167acc6261f5345bb11cb4aff4498a60e7",
+    "/index.html": "b6fdf0e33954ad08da27c7a14642e4a5bd0eb125",
     "/main.d903471192c6ab46.js": "83c0e1998a846f94e0e531b28139b2557917af10",
     "/manifest.webmanifest": "23daeb5ca359bff686a52bf59535d5111e99745c",
     "/polyfills.811a4b6acb51e998.js": "47a4a286f58fe15431d5aeff9a21ed98ceceb332",
     "/runtime.574e0e648158c3ef.js": "f9d2affd4f1f15c2333d2b99d8e67cf1a3788a1b",
-    "/styles.53db5edf35986239.css": "a3a66e66c58550ed4c25e6d54f2c8531d5927a0c"
+    "/styles.7304681ce047c9cc.css": "1da0fe2046d678aee08f0cac0791709b6fe83007"
   },
   "navigationUrls": [
     {
