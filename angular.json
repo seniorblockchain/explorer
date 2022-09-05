@@ -36,7 +36,8 @@
                             "crypto-js/enc-utf8",
                             "crypto-js/hmac-sha256",
                             "crypto-js/enc-base64",
-                            "satcomma"
+                            "satcomma",
+                            "moment"
                         ],
                         "assets": [
                           "src/404.html",
