@@ -1,6 +1,6 @@
 <p align="center">
   <p align="center">
-    <img src="https://raw.githubusercontent.com/seniorblockchain/blockcore-explorer2/acc013918265bc78208f49952deb94bf6c496b30/src/assets/images/logo/logo.svg" height="100" alt="Blockcore" />
+    <img src="https://avatars3.githubusercontent.com/u/53176002?s=200&v=4" height="100" alt="Blockcore" />
   </p>
   <h3 align="center">
     About Blockcore Explorer
